@@ -1,0 +1,46 @@
+.primary-c {
+    color: #586548;
+}
+
+.primary-bg {
+    background-color: #586548;
+}
+
+.primary-btn{
+    background-color: #586548;
+    color: #fff;
+    border-radius: 500px;
+    padding: 10px;
+    border: none;
+}
+
+.border-30 {
+    border-radius: 30px;
+}
+
+.foot-branch {
+    background-color: #ffffff40;
+    padding: 3px 8px;
+    width: 160px;
+    color: #fff;
+    margin: 20px 0
+}
+
+.f-link {
+    color: #ffffff90;
+    border-bottom: 1px solid #ffffff90;
+    padding-bottom: 30px;
+}
+
+.column-3 {
+    column-count: 3;
+}
+
+#footer {
+    color: #ffffff80 !important;
+    font-weight: 500;
+}
+
+.border-none {
+    border: none;
+}
