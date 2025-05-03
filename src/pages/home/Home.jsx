@@ -227,7 +227,6 @@ const Home = () => {
 
         {/* Truth */}
         <div className="container my-4 primary-bg rounded-4 p-5" id='truth' style={{
-          background: "#333C29",
           background: "linear-gradient(90deg, rgba(51, 60, 41, 1) 0%, rgba(82, 94, 70, 1) 50%, rgba(80, 91, 69, 1) 100%)"
         }}>
           <h2 className='text-white fs-1 mt-5'>The Bald Truth.</h2>
