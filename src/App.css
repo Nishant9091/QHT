@@ -6,7 +6,7 @@
     background-color: #586548;
 }
 
-.primary-btn{
+.primary-btn {
     background-color: #586548;
     color: #fff;
     border-radius: 500px;
@@ -22,8 +22,9 @@
     background-color: #ffffff40;
     padding: 3px 8px;
     width: 160px;
-    color: #fff;
-    margin: 20px 0
+    color: #fff !important;
+    margin: 20px 0;
+
 }
 
 .f-link {
@@ -36,11 +37,66 @@
     column-count: 3;
 }
 
-#footer {
-    color: #ffffff80 !important;
-    font-weight: 500;
+#footer p {
+    color: #fff;
+}
+
+#footer h6 {
+    color: #A2AC99;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+#footer ul li {
+    color: #A2AC99 !important;
+    font-weight: 400;
+    padding: 2px 0;
 }
 
 .border-none {
     border: none;
+}
+
+.sec-pad {
+    padding: 80px 0;
+}
+
+#test .swiper {
+    padding-top: 100px;
+    margin-top: -100px;
+}
+
+#test .swiper-button-next,
+#test .swiper-button-prev {
+    top: 10%;
+}
+
+#test .swiper-button-prev {
+    top: 10%;
+    left: 90%;
+}
+
+#test .swiper-button-next {
+    top: 10%!important;
+}
+
+.p-head{
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.fw-500{
+    font-weight: 500;
+}
+
+.fw-600{
+    font-weight: 600;
+}
+
+.h-120{
+    height: 120px!important;
+}
+
+.h-500{
+    height: 500px;
 }

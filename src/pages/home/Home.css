@@ -66,6 +66,10 @@
     content: '-';
 }
 
+#faq .accordion-button:not(.collapsed) {
+    background-color: #ffffff00;
+}
+
 #faq .accordion-item {
     border: none;
     border-bottom: 1px solid #e0e0e0;
@@ -203,11 +207,11 @@
 }
 
 #process {
-    border-radius: 40px 40px 0 0 ;
+    border-radius: 40px 40px 0 0;
     background: linear-gradient(180deg, rgba(239, 245, 241, 1) 0%, rgba(239, 245, 241, 1) 50%, rgba(239, 245, 241, 1) 100%);
 }
 
-.icons img{
+.icons img {
     background-color: #EFF5F1;
     height: 70px;
     width: 70px;
@@ -217,7 +221,8 @@
     border-radius: 500px;
     transition: .3s ease-in-out;
 }
-.icons img:hover{
+
+.icons img:hover {
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -242,10 +247,163 @@
 #truth .swiper-button-prev {
     margin-left: 1100px;
 }
+
 #truth .swiper-button-next {
     margin-left: 1160px;
     margin-top: -50px;
 }
-#truth .swiper-wrapper{
+
+#truth .swiper-wrapper {
     margin-bottom: 100px;
+}
+
+/* In App.css or your component's CSS file */
+.gallery-model {
+    max-width: 80% !important;
+    width: 80% !important;
+}
+
+.gallery-model .modal-content {
+    border-radius: 30px !important;
+    background-color: #EFF5F1;
+}
+
+.gallery-model .close {
+    background-color: #586548 !important;
+    color: #fff !important;
+    padding: 10px !important;
+}
+
+.gallery-model .btn-close {
+    --bs-btn-close-color: #fff;
+    --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3e%3c/svg%3e");
+    --bs-btn-close-opacity: 1;
+    --bs-btn-close-hover-opacity: 1;
+    padding: 1em !important;
+}
+
+
+@keyframes floatBook {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-book {
+    animation: floatBook 3s ease-in-out infinite;
+}
+
+#process img {
+    width: 100% !important;
+    height: 300px;
+    object-fit: contain;
+}
+
+.text-af {
+    color: #AFAFAF;
+}
+
+.tag-box {
+    display: inline-block;
+    position: relative;
+    background-color: #5c6e4a;
+    /* same green color */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+.tag-box::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    /* move below the box */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #5c6e4a;
+    /* same color as background */
+}
+
+.comparison-bar {
+    position: relative;
+    height: 6px;
+    background-color: #e2e6de;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.fill-line {
+    height: 6px;
+    background-color: #5c6e4a;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.smiley {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+    padding: 6px;
+    font-size: 20px;
+    z-index: 2;
+    transition: left 0.1s;
+}
+
+.comparison-bar input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 30px;
+    background: transparent;
+    position: absolute;
+    top: -12px;
+    left: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.comparison-bar input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 0;
+    width: 0;
+    background: transparent;
+    border: none;
+}
+
+.emoji:nth-child(3) {
+    border-bottom: none !important;
+}
+
+.tooltip-inner {
+    background-color: #586548 !important;
+    /* Bootstrap green */
+    color: white;
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before,
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before,
+.tooltip.bs-tooltip-start .tooltip-arrow::before,
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-top-color: #586548 !important;
+   
 }

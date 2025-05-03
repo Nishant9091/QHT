@@ -12,12 +12,12 @@ const Footer = () => {
                             <a className="navbar-brand" href="#"><img src={logo} width="200" alt="" /></a>
                         </div>
                         <div>
-                            <h6 className='foot-branch'>North India Branch</h6>
+                            <h6 className='foot-branch text-white'>North India Branch</h6>
                             <h6 className='f-link'>QHT Clinic,521, Model Colony, Haridwar, Uttrakhand</h6>
                             <h6 className='f-link pt-2'>D-15, Outer Ring Rd, Prashant Vihar, Sectore 14, Rohini, New Delhi, Delhi, 110085</h6>
                         </div>
                         <div>
-                            <h6 className='foot-branch'>South India Branch</h6>
+                            <h6 className='foot-branch text-white'>South India Branch</h6>
                             <h6 className='f-link'>QHT Clinic Opposite Hotel Park Hyatt Road No. 2 Banjara Hills, Hyderabad, Telangana</h6>
                         </div>
                         <div className='py-2'>
@@ -92,9 +92,9 @@ const Footer = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className='border-top mt-3 pt-3'>
+                    <div className='border-top mt-3 pb-2 pt-4'>
                         <p>
-                        © 2025 QHT Regrow Hair  l  Privacy Policy  l  Terms & Conditions
+                        © 2025 QHT Regrow Hair &nbsp; l &nbsp; Privacy Policy &nbsp; l &nbsp; Terms & Conditions
                         </p>
                     </div>
                 </div>
