@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/Header';
+import './Home.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Kapil from '../../assets/kapil.png';
 import Anil from '../../assets/anil.png';
 import surgery from '../../assets/surgery.png';
@@ -27,9 +27,6 @@ import i3 from '../../assets/icon/3.png';
 import i4 from '../../assets/icon/4.png';
 import i5 from '../../assets/icon/5.png';
 import or from '../../assets/or.png';
-import './Home.css'
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const testimonialsData = [
@@ -226,8 +223,7 @@ const Home = () => {
         </div>
 
         {/* Truth */}
-        <div className="container my-4 primary-bg rounded-4 p-5" id='truth' style={{
-          background: "linear-gradient(90deg, rgba(51, 60, 41, 1) 0%, rgba(82, 94, 70, 1) 50%, rgba(80, 91, 69, 1) 100%)"
+        <div className="container my-4 primary-bg rounded-4 p-5 g-gradient" id='truth' style={{
         }}>
           <h2 className='text-white fs-1 mt-5'>The Bald Truth.</h2>
           <h6 className='text-white mb-5 fw-normal'>Most transplant fail - beacuse no one tells you what really matters.</h6>

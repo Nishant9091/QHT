@@ -1,0 +1,89 @@
+#location .box {
+    height: 190px;
+    width: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid #838E76;
+}
+
+#insights .swiper-button-next,
+#insights .swiper-button-prev {
+    color: #fff;
+    border-radius: 500px;
+    border: 1px solid #586548;
+    background-color: #586548;
+    padding: 20px 21px;
+    font-size: 10px;
+}
+
+#insights .swiper-button-prev:after,
+#insights .swiper-button-next:after {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#insights .swiper {
+    padding-top: 100px;
+    margin-top: -100px;
+}
+
+#insights .swiper-button-next,
+#insights .swiper-button-prev {
+    top: 10%;
+}
+
+#insights .swiper-button-prev {
+    top: 10%;
+    left: 92%;
+}
+
+#insights .swiper-button-next {
+    top: 10% !important;
+}
+
+
+#faq .accordion-button::after {
+    background-image: none;
+    content: '+';
+    font-size: 24px;
+    margin-left: auto;
+}
+
+#faq .accordion-button.collapsed::after {
+    content: '+';
+}
+
+#faq .accordion-button:not(.collapsed)::after {
+    content: '-';
+}
+
+#faq .accordion-button:not(.collapsed) {
+    background-color: #ffffff00;
+}
+
+#faq .accordion-item {
+    border: none;
+    border-bottom: 1px solid #919191;
+}
+
+#faq .accordion-button {
+    padding-left: 0;
+    padding-right: 0;
+    font-weight: 500;
+    color: #000;
+    margin: 15px 0;
+    font-size: 20px;
+}
+
+#faq .accordion-button:focus {
+    box-shadow: none;
+}
+
+#faq .faq-number {
+    margin-right: 15px;
+    font-weight: 600;
+    color: #666;
+}

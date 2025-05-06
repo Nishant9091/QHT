@@ -407,3 +407,22 @@
     border-top-color: #586548 !important;
    
 }
+
+#test .swiper {
+    padding-top: 100px;
+    margin-top: -100px;
+}
+
+#test .swiper-button-next,
+#test .swiper-button-prev {
+    top: 10%;
+}
+
+#test .swiper-button-prev {
+    top: 10%;
+    left: 90%;
+}
+
+#test .swiper-button-next {
+    top: 10% !important;
+}
