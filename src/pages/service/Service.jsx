@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Modal } from 'react-bootstrap';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import after from '../../assets/after.png';
 import Testimonials from '../../components/Testimonials.jsx';
 import Booknow from '../../components/Booknow.jsx';
 import Bangalore from "../../assets/city/bangalore.png"
@@ -28,6 +30,7 @@ import S1 from "../../assets/s1.png"
 import S2 from "../../assets/s2.png"
 import S3 from "../../assets/s3.png"
 import Llogo from "../../assets/llogo.png"
+import Glogo from "../../assets/glogo.png"
 import Booked from "../../assets/booked.png"
 import Men from "../../assets/men.png"
 import Psurgery from "../../assets/psurgery.png"
@@ -47,6 +50,11 @@ import V3 from "../../assets/video-thumbnail/3.png"
 import V4 from "../../assets/video-thumbnail/4.png"
 import V5 from "../../assets/video-thumbnail/5.png"
 import V6 from "../../assets/video-thumbnail/6.png"
+import GoogleRating from "../../assets/GoogleRating.png"
+import TwoFace from "../../assets/twoface.png"
+import Banner from "../../assets/banner.png"
+import D1 from "../../assets/d1.png"
+import D2 from "../../assets/d2.png"
 
 const cities = [
   { name: "Bangalore", img: Bangalore },
@@ -131,6 +139,219 @@ const Service = () => {
     <>
       {/* Float Button */}
       <Booknow />
+
+      {/* Banner */}
+      <div className='sec-pad sec-bg'>
+        <div className="container">
+          <div className="row">
+            <div id="dottedCarousel" className="carousel slide" data-bs-ride="carousel">
+              {/* Carousel items */}
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img src={Banner} className="d-block w-100" alt="Slide 1" />
+                </div>
+                <div className="carousel-item">
+                  <img src={Banner} className="d-block w-100" alt="Slide 2" />
+                </div>
+                <div className="carousel-item">
+                  <img src={Banner} className="d-block w-100" alt="Slide 3" />
+                </div>
+                <div className="carousel-item">
+                  <img src={Banner} className="d-block w-100" alt="Slide 3" />
+                </div>
+              </div>
+
+              {/* Indicators (dots) */}
+              <div className="carousel-indicators position-static m-0 justify-content-start">
+                <button type="button" data-bs-target="#dottedCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#dottedCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#dottedCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#dottedCarousel" data-bs-slide-to="3" aria-label="Slide 3"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Form */}
+      <div className="position-relative" id='Form'>
+        <div className="primary-bg py-5 rounded-4 my-4 container d-flex align-items-center justify-content-around">
+          <form className="row g-2 align-items-center w-100 w-md-auto flex-grow-1">
+            <h4 className="col-md-3 just-align-center text-white fw-light">Request a callback</h4>
+            <div className="col-md-2 px-2">
+              <input type="text" className="form-control input-underline" placeholder="First Name" />
+            </div>
+            <div className="col-md-2 px-2 just-align-center">
+              <input type="text" className="form-control input-underline" placeholder="Last Name" />
+            </div>
+            <div className="col-md-2 px-2 just-align-center">
+              <input type="tel" className="form-control input-underline" placeholder="Mobile" />
+            </div>
+            <div className="col-md-2 px-2 just-align-center">
+              <input type="email" className="form-control input-underline" placeholder="Email Address" />
+            </div>
+            <div className="col-md-1 just-align-center">
+              <button type="submit" className="primary-btn bg-white px-4 fw-500">
+                <span className="primary-c">Submit</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* Description */}
+      <div className='sec-pad'>
+        <div className="container mt-5 sec-c">
+          <div className="row">
+            <div className="col-md-6 just-align-center flex-column align-items-start">
+              <h2 className='p-head text-black m-0'>What is a Hair Transplant?</h2>
+              <h3 className='fw-normal text-black my-3'>Restore your hairline naturally with expert transplant solutions.</h3>
+              <p>A hair transplant is a surgical procedure in which hair follicles are moved from the back or sides of the scalp to the thinning or balding areas. This process helps restore your natural receding hairline and adds density  to areas affected by hair loss.</p>
+              <p>It’s a popular solution for men looking to regain their confidence and achieve a fuller head of hair. The results are natural-looking and permanent. This makes it a reliable choice for hair replacement treatment for men.</p>
+            </div>
+            <div className="col-md-6 just-align-center">
+              <img src={D1} className='w-75 rounded-4' alt="" />
+            </div>
+          </div>
+          <div className="row mt-5">
+            <div className="col-md-6 just-align-center">
+              <img src={D2} className='w-75 rounded-4' alt="" />
+            </div>
+            <div className="col-md-6 just-align-center flex-column align-items-start">
+              <h2 className='p-head text-black'>Hair Transplant In India?</h2>
+              <p>Hair loss is a common issue among men, with over 60% experiencing significant hair loss by age 50. If you’re seeking an effective way to address this problem, a hair transplant for men in India might be your solution.</p>
+              <p>At QHT Hair Transplant Clinic in India, we understand the emotional and psychological impact of hair loss. Our team of dedicated hair transplant professionals offers comprehensive hair treatment for men, using advanced techniques to ensure natural-looking results.</p>
+              <p className='fw-bold'>Now, let’s have a quick overview of hair transplantation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Results */}
+      <div className='g-gradient sec-pad'>
+        <div className="container">
+          <div className="row align-items-center justify-content-between mb-5">
+            <div className="col-md-9">
+              <h2 className="p-head text-white">
+                Results of Hair Transplant.
+              </h2>
+              <p className="mt-3 text-white fw-light">
+                At QHT Hair Transplant Clinic in India, we understand the emotional and psychological impact of hair loss. Our team of dedicated hair transplant professionals offers comprehensive hair treatment for men, using advanced techniques to ensure natural-looking results.
+              </p>
+            </div>
+            <div className="col-md-3 text-md-end">
+              <img src={Glogo} alt="Google Rating" className="img-fluid w-50" />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-4 mb-4">
+              <ReactCompareSlider
+                style={{ borderRadius: "20px" }}
+                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
+                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+              />
+            </div>
+            <div className="col-md-4 mb-4">
+              <ReactCompareSlider
+                style={{ borderRadius: "20px" }}
+                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
+                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+              />
+            </div>
+            <div className="col-md-4 mb-4">
+              <ReactCompareSlider
+                style={{ borderRadius: "20px" }}
+                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
+                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+              />
+            </div>
+            <div className="col-md-4 mb-4">
+              <ReactCompareSlider
+                style={{ borderRadius: "20px" }}
+                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
+                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+              />
+            </div>
+            <div className="col-md-4 mb-4">
+              <ReactCompareSlider
+                style={{ borderRadius: "20px" }}
+                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
+                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+              />
+            </div>
+            <div className="col-md-4 mb-4">
+              <ReactCompareSlider
+                style={{ borderRadius: "20px" }}
+                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
+                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="d-flex justify-content-center align-items-center mt-5">
+              <div className='line'></div>
+              <div>
+                <button
+                  className="btn bg-white text-black rounded-pill px-4 py-2"
+                >
+                  Explore More Results + 
+                </button>
+              </div>
+              <div className='line'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Why we are */}
+      <section className="primary-bg sec-pad text-white">
+        <div className="container">
+          <div className="row align-items-center mb-5">
+            <div className="col-md-8">
+              <h2 className="p-head">
+                Why we are amongst the most trusted <br />
+                hair transplant clinic in india
+              </h2>
+              <p className="mt-3 text-white">
+                Learn about the recovery timeline and essential aftercare tips following a hair transplant
+                to ensure proper healing, optimal results, and long-lasting, healthy hair growth.
+              </p>
+            </div>
+            <div className="col-md-4 text-md-end">
+              <img src={GoogleRating} alt="Google Rating" className="img-fluid w-75" />
+            </div>
+          </div>
+
+          <div className="row align-items-center mb-5">
+            <div className="col-md-6 text-center flex-column d-flex">
+              <img src={TwoFace} alt="Transplant illustration" className="img-fluid" style={{ maxWidth: '350px' }} />
+              <button className="btn btn-light rounded-pill mt-5 px-4 py-2 fw-medium w-50">
+                Book Free Consultation
+              </button>
+            </div>
+            <div className="col-md-6 mt-5 mt-md-0">
+              <div className="row g-4">
+                {[
+                  { value: "325+", label: "Transplant Completed" },
+                  { value: "100%", label: "Client Satisfaction" },
+                  { value: "05+", label: "Clinics All Over India" },
+                  { value: "200+", label: "Experts Workforces" },
+                ].map((item, index) => (
+                  <div className="col-sm-6" key={index}>
+                    <h3 className="peacock fw-500 fs-2">{item.value}</h3>
+                    <h4 className="fw-normal fs-4">{item.label}</h4>
+                    <p className="text-white small">
+                      Over 325 successful transplants completed with expert care and precision.
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Video */}
       <div className='sec-pad'>
