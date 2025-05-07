@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Service.css'
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { Modal } from 'react-bootstrap';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import Testimonials from '../../components/Testimonials.jsx';
+import Booknow from '../../components/Booknow.jsx';
 import Bangalore from "../../assets/city/bangalore.png"
 import Ahmedabad from "../../assets/city/ahmedabad.png"
 import Chandigarh from "../../assets/city/chandigarh.png"
@@ -28,9 +31,22 @@ import Llogo from "../../assets/llogo.png"
 import Booked from "../../assets/booked.png"
 import Men from "../../assets/men.png"
 import Psurgery from "../../assets/psurgery.png"
-import Blog from "../../assets/blog.png"
-import Testimonials from '../../components/Testimonials.jsx';
-import Booknow from '../../components/Booknow.jsx';
+import Natural from "../../assets/natural.png"
+import Care from "../../assets/care.png"
+import Expert from "../../assets/expert.png"
+import Facility from "../../assets/facility.png"
+import Celeb from "../../assets/celeb.png"
+import Age from "../../assets/icon/age.png"
+import Alopecia from "../../assets/icon/alopecia.png"
+import Genetics from "../../assets/icon/genetics.png"
+import Hormonal from "../../assets/icon/hormonal.png"
+import Scarring from "../../assets/icon/scarring.png"
+import V1 from "../../assets/video-thumbnail/1.png"
+import V2 from "../../assets/video-thumbnail/2.png"
+import V3 from "../../assets/video-thumbnail/3.png"
+import V4 from "../../assets/video-thumbnail/4.png"
+import V5 from "../../assets/video-thumbnail/5.png"
+import V6 from "../../assets/video-thumbnail/6.png"
 
 const cities = [
   { name: "Bangalore", img: Bangalore },
@@ -55,45 +71,150 @@ const clinicsData = [
     title: "Celebrity Clinic",
     description:
       "QHT is a celebrity hair transplant clinic in India with a proven track record of delivering exceptional results.",
-    bg: Blog,
+    bg: Celeb,
   },
   {
-    title: "Elite Service",
+    title: "Expertise",
     description:
-      "Trusted by top personalities for reliable and consistent hair transplant treatments.",
-    bg: Blog,
+      "With years of experience and expertise in hair transplantation, our hair transplant surgeon ensures that each patient receives personalized care and the best possible outcome.",
+    bg: Expert,
   },
   {
-    title: "Premium Care",
+    title: "Natural Looking Results",
     description:
-      "Delivering personalized care with world-class infrastructure and equipment.",
-    bg: Blog,
+      "Our skilled surgeon’s artistic approach and attention to detail result in natural-looking hairlines and fuller, thicker hair.",
+    bg: Natural,
   },
   {
-    title: "Premium Care",
+    title: "State of the Art Facility",
     description:
-      "Delivering personalized care with world-class infrastructure and equipment.",
-    bg: Blog,
+      "Our clinic is equipped with cutting-edge technology and modern facilities to provide patients with a comfortable and seamless experience throughout their hair transplant journey.",
+    bg: Facility,
   },
   {
-    title: "Premium Care",
+    title: "Comprehensive Care",
     description:
-      "Delivering personalized care with world-class infrastructure and equipment.",
-    bg: Blog,
+      "From the initial consultation to post-transplant follow-up, our team at QHT Clinic is dedicated to providing extensive care and support.",
+    bg: Care,
   },
   {
-    title: "Premium Care",
-    description:
-      "Delivering personalized care with world-class infrastructure and equipment.",
-    bg: Blog,
-  },
+    title: "",
+    description: "",
+    bg: Care,
+  }
+];
+
+const videoData = [
+  { thumbnail: V1, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
+  { thumbnail: V6, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
+  { thumbnail: V5, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
+  { thumbnail: V2, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
+  { thumbnail: V3, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
+  { thumbnail: V4, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
 ];
 
 const Service = () => {
+  const [show, setShow] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState('');
+
+  const handleShow = (url) => {
+    setSelectedVideo(url);
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    setSelectedVideo('');
+  };
+
   return (
     <>
       {/* Float Button */}
       <Booknow />
+
+      {/* Video */}
+      <div className='sec-pad'>
+        <div className="container">
+          <div className="row">
+            <h2 className='p-head w-50'>Watch the incredible journey & transformation.</h2>
+          </div>
+          <div className="row">
+            {videoData.map((video, index) => (
+              <div className="col-md-4" key={index}>
+                <img
+                  src={video.thumbnail}
+                  alt=""
+                  className="m-3 w-100"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleShow(video.videoUrl)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bootstrap Modal */}
+        <Modal show={show} onHide={handleClose} centered size="lg">
+          <Modal.Body className="p-0">
+            <div className="ratio ratio-16x9">
+              <iframe
+                src={selectedVideo}
+                title="Video"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </Modal.Body>
+        </Modal>
+      </div>
+
+      {/* Cause */}
+      <div className='sec-pad pt-0'>
+        <div className="container pt-5 border-grey border-top">
+          <div className="row">
+            <div className="col-md-4 just-align-center flex-column">
+              <h2 className='p-head'>Cause of Early Hair Loss.</h2>
+              <h5 className='sec-c fw-normal my-3'>Understanding the causes of beard hair loss can help you choose the proper treatment. Several factors contribute to thinning or patchy beard hair:</h5>
+            </div>
+            <div className="col-md-4 p-3">
+              <div className='p-5 sec-bg rounded-4 h-350'>
+                <img src={Genetics} className='mb-5' alt="" />
+                <h4>Genetics</h4>
+                <h6 className='sec-c fw-normal'>Just like scalp hair, the density and pattern of your beard are primarily determined by your genetic makeup. If your family has a history of sparse beards, you might experience the same.</h6>
+              </div>
+            </div>
+            <div className="col-md-4 p-3">
+              <div className='p-5 sec-bg rounded-4 h-350'>
+                <img src={Hormonal} className='mb-5' alt="" />
+                <h4>Hormonal Imbalances</h4>
+                <h6 className='sec-c fw-normal'>Low levels of certain hormones, such as testosterone, can lead to patchy beard growth.</h6>
+              </div>
+            </div>
+            <div className="col-md-4 p-3">
+              <div className='p-5 sec-bg rounded-4 h-350'>
+                <img src={Age} className='mb-5' alt="" />
+                <h4>Age</h4>
+                <h6 className='sec-c fw-normal'>As you age, beard growth can slow down, resulting in a thinner beard over time.</h6>
+              </div>
+            </div>
+            <div className="col-md-4 p-3">
+              <div className='p-5 sec-bg rounded-4 h-350'>
+                <img src={Alopecia} className='mb-5' alt="" />
+                <h4>Alopecia Areata</h4>
+                <h6 className='sec-c fw-normal'>This autoimmune condition can cause hair loss in various areas, including the beard.</h6>
+              </div>
+            </div>
+            <div className="col-md-4 p-3">
+              <div className='p-5 sec-bg rounded-4 h-350'>
+                <img src={Scarring} className='mb-5' alt="" />
+                <h4>Scarring or Injury</h4>
+                <h6 className='sec-c fw-normal'>Trauma to the face can damage hair follicles, leading to patchy growth.</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Why Choose Us */}
       <div className='sec-pad g-gradient'>
@@ -108,21 +229,57 @@ const Service = () => {
           </div>
           <div className="row">
             {clinicsData.map((clinic, index) => (
-              <div className="col-md-4">
-                <div
-                  className="text-white p-4 mb-3 d-flex justify-content-end align-items-start flex-column"
-                  key={index}
-                  style={{
-                    background: `url(${clinic.bg}) center center/cover no-repeat`,
-                    minHeight: "400px", // optional
-                    borderRadius: "12px", // optional
-                  }}>
-                  <h4>{clinic.title}</h4>
-                  <p>{clinic.description}</p>
-                </div>
+              <div className="col-md-4" key={index}>
+                {index === 5 ? (
+                  // ✅ Sixth box custom design
+                  <div
+                    className="text-dark p-5 mb-4 d-flex flex-column justify-content-between"
+                    style={{
+                      backgroundColor: "#C5ED82", // Light green
+                      minHeight: "400px",
+                      borderRadius: "12px",
+                      color: "#000",
+                    }}
+                  >
+                    <div>
+                      <div className="d-flex align-items-center mb-3">
+                        <img src={Booked} alt="" className="object-fit-cover" height="80" width="185" style={{ objectPosition: "left" }} />
+                      </div>
+                      <h4 className="fw-500">4,700 satisfied patients</h4>
+                      <h4 className='fw-light'>achieved lasting results with a 100% success rate.</h4>
+                    </div>
+                    <div>
+                      <button className="primary-btn px-5">Book Now</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="text-white p-4 mb-4 d-flex justify-content-end align-items-start flex-column"
+                    style={{
+                      background: `
+              linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0) 42.06%,
+                rgba(0, 0, 0, 0.28) 59.86%,
+                rgba(0, 0, 0, 0.514) 76.66%,
+                #000000 104.98%
+              ),
+              url(${clinic.bg}) center center / cover no-repeat
+            `,
+                      minHeight: "400px",
+                      borderRadius: "12px",
+                    }}
+                  >
+                    <div className='h-150 mb-2'>
+                      <h4>{clinic.title}</h4>
+                      <p className='fw-light'>{clinic.description}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
+
         </div>
       </div>
 
