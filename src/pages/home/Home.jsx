@@ -16,8 +16,6 @@ import book from '../../assets/book.png';
 import after from '../../assets/after.png';
 import jhat from '../../assets/jhat.png';
 import ban from '../../assets/ban.png';
-import test from '../../assets/test.png';
-import quote from '../../assets/quotes.png';
 import Process from '../../assets/process.png';
 import Process1 from '../../assets/Process1.png';
 import Process2 from '../../assets/Process2.png';
@@ -26,63 +24,8 @@ import i2 from '../../assets/icon/2.png';
 import i3 from '../../assets/icon/3.png';
 import i4 from '../../assets/icon/4.png';
 import i5 from '../../assets/icon/5.png';
-import or from '../../assets/or.png';
-
-
-const testimonialsData = [
-  {
-    id: 1,
-    name: "Priyanka Das",
-    age: 26,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-  {
-    id: 2,
-    name: "Abhishek Kumar",
-    age: 22,
-    location: "India",
-    rating: 3,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade II",
-  },
-  {
-    id: 3,
-    name: "Amardeep Singh",
-    age: 45,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-  {
-    id: 4,
-    name: "Amardeep Singh",
-    age: 45,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-  {
-    id: 5,
-    name: "Amardeep Singh",
-    age: 45,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-];
-
-const grades = ["Grade I", "Grade II", "Grade III", "Grade IV", "Grade V", "Grade VI", "Grade VII"];
+import Testimonials from '../../components/Testimonials';
+import Booknow from '../../components/Booknow';
 
 const tabs = [
   { id: 0, label: "Who Performs your surgery?" },
@@ -93,15 +36,6 @@ const tabs = [
 ];
 
 const Home = () => {
-  const [selectedGrade, setSelectedGrade] = useState("Grade III");
-
-  const filteredTestimonials = testimonialsData.filter((item) => item.grade === selectedGrade);
-
-  const handleGradeClick = (grade) => {
-    setSelectedGrade(grade);
-  };
-
-  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     // Initialize Bootstrap tooltips
@@ -109,17 +43,6 @@ const Home = () => {
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
       new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
-  }, []);
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 100);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const stages = [
@@ -159,27 +82,7 @@ const Home = () => {
         background: "linear-gradient(180deg, rgba(240, 246, 242, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%)", overflowX: "hidden"
       }}>
         {/* Fixed button */}
-        <div
-          className={`d-flex justify-content-center align-items-center gap-3 bg-white px-3 rounded-pill position-fixed shadow`}
-          style={{
-            left: "36%",
-            bottom: isVisible ? "5%" : "0%", // this moves it
-            opacity: isVisible ? 1 : 0,
-            transition: 'all 0.6s ease',
-            zIndex: "9999",
-            height: "70px"
-          }}
-        >
-          <div>
-            <button className='primary-btn'>Book an Appointment</button>
-          </div>
-          <div>
-            <img src={or} alt="" style={{ width: "40px", height: "40px", objectFit: "contain" }} />
-          </div>
-          <div>
-            <button className='primary-btn'>Live Chat &nbsp;&nbsp;&nbsp;&nbsp;💬</button>
-          </div>
-        </div>
+        <Booknow />
 
         {/* Banner */}
         <div className='container pt-4'>
@@ -935,106 +838,7 @@ const Home = () => {
         </div>
 
         {/* Testimonials */}
-        <div className="sec-pad" id="test">
-          <div className="container py-5">
-            <div className="d-flex justify-content-between align-items-center border-bottom flex-wrap">
-              <div className="mb-4">
-                <h2 className='p-head'>Testimonials</h2>
-              </div>
-
-              {/* Grade Filter */}
-              <div className="d-flex flex-wrap justify-content-center gap-1 mb-4 bg-white p-2 rounded">
-                {grades.map((grade) => (
-                  <button
-                    key={grade}
-                    onClick={() => handleGradeClick(grade)}
-                    className="btn rounded px-3"
-                    style={{
-                      backgroundColor: selectedGrade === grade ? "#627251" : "#fff",
-                      color: selectedGrade === grade ? "#fff" : "#627251",
-                    }}
-                  >
-                    {grade}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <h4 className="my-4">
-              What our community says about their journey <br /> and experiences with us so far.
-            </h4>
-
-            {/* Swiper Testimonials */}
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
-              navigation
-              spaceBetween={30}
-              breakpoints={{
-                640: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
-              }}
-              autoplay={{
-                delay: 2000,
-                disableOnInteraction: false,
-              }}
-            >
-              {filteredTestimonials.length > 0 ? (
-                filteredTestimonials.map((testimonial) => (
-                  <SwiperSlide key={testimonial.id}>
-                    <div className="p-4 bg-white border rounded-4 d-flex flex-column justify-content-between h-100">
-                      <div>
-                        <div className='d-flex justify-content-between mb-3 align-items-center'>
-                          <div className="mb-2 fs-4 primary-c">
-                            {Array.from({ length: 5 }, (_, i) => (
-                              <span key={i}>{i < testimonial.rating ? "★" : "☆"}</span>
-                            ))}
-                          </div>
-                          <div>
-                            <img src={quote} alt="" />
-                          </div>
-                        </div>
-                        <h5>Exceptional Service & Results!</h5>
-                        <p className="text-muted">{testimonial.text}</p>
-                      </div>
-                      <div className="d-flex align-items-center border-top pt-4 mt-4">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="rounded-circle me-3"
-                          width="40"
-                          height="40"
-                        />
-                        <div>
-                          <div>{testimonial.name}</div>
-                          <small className="text-muted">
-                            Age {testimonial.age}, {testimonial.location}
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))
-              ) : (
-                <p className="text-center">No testimonials available for this grade.</p>
-              )}
-            </Swiper>
-
-            {/* View All Button */}
-            <div className="d-flex justify-content-center gap-4  align-items-center mt-5">
-              <div className='line'></div>
-              <div>
-                <button
-                  className="btn text-white rounded-pill px-4 py-2"
-                  style={{ backgroundColor: "#627251" }}
-                >
-                  View All Testimonials
-                </button>
-              </div>
-              <div className='line'></div>
-            </div>
-          </div>
-        </div>
+        <Testimonials />
 
         {/* FAQ's */}
         <div id='faq' className='sec-pad'>

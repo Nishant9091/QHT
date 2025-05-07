@@ -40,6 +40,10 @@ span {
     background-color: #EFF5F1;
 }
 
+.ter-bg{
+    background-color: #3D4536;
+}
+
 .primary-btn {
     background-color: #586548;
     color: #fff;
@@ -126,4 +130,26 @@ span {
 
 .h-500 {
     height: 500px;
+}
+
+.border-x{
+    border-left:1px solid #000;
+    border-right:1px solid #000;
+}
+.border-y{
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
+}
+
+.border-lgrey{
+    border-color: #D9D9D9;
+}
+.h-100px{
+    height: 100px;
+}
+
+.just-align-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
