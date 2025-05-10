@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Results.css";
 import {
   ReactCompareSlider,
@@ -12,6 +12,8 @@ import lr from "../../assets/icon/lr.png";
 import katori from "../../assets/icon/katori.png";
 import wow from "../../assets/icon/wow.png";
 import after from "../../assets/after.png";
+import jhat from "../../assets/jhat.png";
+import promo from "../../assets/promo.png";
 
 const features = [
   "Real Results",
@@ -26,89 +28,150 @@ const transformations = [
   {
     name: "Vicky",
     grafts: 3000,
-    area: "Crown",
+    age: 54,
+    area: "Crown + Hairline",
     grade: "5/6",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Personalized treatment tailored to the patient's hair loss pattern & age.",
+      "Grafts strategically placed to ensure natural density and hairline design.",
+      "Continued progress expected up to 12 months with proper care and follow-up.",
+    ],
   },
   {
     name: "Ankit",
     grafts: 2500,
+    age: null,
     area: "Front",
     grade: "4/5",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Custom hairline reconstruction based on facial symmetry.",
+      "Improved appearance within 6 months of consistent follow-up.",
+    ],
   },
   {
     name: "Aman",
     grafts: 3200,
+    age: null,
     area: "Full",
     grade: "6",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Full scalp restoration using high-density graft implantation.",
+      "6-month visible growth with expectations for more improvement.",
+    ],
   },
   {
     name: "Rohit",
     grafts: 2800,
+    age: null,
     area: "Front",
     grade: "4/5",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Frontal hairline reshaped for youthful appearance.",
+      "Hair growth observed within 6 months post procedure.",
+    ],
   },
   {
     name: "Ravi",
     grafts: 3600,
+    age: null,
     area: "Full",
     grade: "6/7",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Extensive graft coverage for full baldness correction.",
+      "Natural design with denser look achieved by 6 months.",
+    ],
   },
-  { promo: true },
+  // Skipping promo and video entries
+  {
+    promo: true,
+    type: "consultation",
+    title: "Want Similar Results?",
+    description: "Tailored strategies for success, book free consultation.",
+    phone: "+91-9084726916",
+    img: jhat, // path to green image background you uploaded
+  },
   {
     video: true,
-    result: "06 Months",
-    beforeImage: after,
-    afterImage: after,
+    type: "video",
+    videoUrl: "https://example.com/video.mp4", // Replace with actual video link
+    img: promo, // path to video thumbnail you uploaded
+    cta: "Book Free Consultation",
   },
   {
     name: "Kunal",
     grafts: 3100,
+    age: null,
     area: "Crown",
     grade: "5",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Crown area rejuvenated with carefully angled grafts.",
+      "Great improvement in volume and scalp coverage.",
+    ],
   },
   {
     name: "Alok",
     grafts: 2900,
+    age: null,
     area: "Full",
     grade: "6",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Combination of crown and front grafts for full coverage.",
+      "Noticeable change in hair texture and volume by 6 months.",
+    ],
   },
   {
     name: "Rakesh",
     grafts: 3400,
+    age: null,
     area: "Front",
     grade: "6",
-    result: "06 Months",
+    resultTime: "06 Months",
     beforeImage: after,
     afterImage: after,
+    doctorNotes: [
+      "Improved forehead framing through hairline reconstruction.",
+      "Denser and more youthful appearance after 6 months.",
+    ],
   },
 ];
 
 const Results = () => {
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const openModal = (patient) => {
+    setSelectedPatient(patient);
+  };
+
+  const closeModal = () => {
+    setSelectedPatient(null);
+  };
+
   return (
     <>
       {/* Banner */}
-      <div className="sec-pad sec-bg">
+      <div className="sec-pad sec-bg pt-0">
         <div className="container">
           <img src={ResultBan} className="w-100" alt="" />
         </div>
@@ -157,35 +220,117 @@ const Results = () => {
             <div className="col-md-2 border-end">
               <select className="form-select border-white">
                 <option>Baldness Grade</option>
+                <option>Grade 1</option>
+                <option>Grade 2</option>
+                <option>Grade 3</option>
+                <option>Grade 4</option>
+                <option>Grade 5</option>
+                <option>Grade 6</option>
+                <option>Grade 7</option>
               </select>
             </div>
             <div className="col-md-2 border-end">
               <select className="form-select border-white">
                 <option>Area Treated</option>
+                <option>Full</option>
+                <option>Front</option>
+                <option>Crown</option>
+                <option>Hairline</option>
               </select>
             </div>
             <div className="col-md-2 border-end">
               <select className="form-select border-white">
                 <option>Grafts Range</option>
+                <option>0 - 1000</option>
+                <option>1000 - 2000</option>
+                <option>2000 - 3000</option>
+                <option>3000 - 4000</option>
+                <option>4000 - 5000</option>
               </select>
             </div>
             <div className="col-md-2 border-end">
               <select className="form-select border-white">
                 <option>First-Time Surgery</option>
+                <option>Second-Time Surgery</option>
               </select>
             </div>
             <div className="col-md-2 border-end">
               <select className="form-select border-white">
                 <option>Age Group</option>
+                <option>23 - 30</option>
+                <option>30 - 40</option>
+                <option>40 - 60</option>
+                <option>50 - 70</option>
               </select>
             </div>
           </div>
 
           {/* Cards */}
           <div className="row g-3 py-5">
-            {transformations.map(
-              (t, index) =>
-                t.name && (
+            {transformations.slice(0, visibleCount).map((t, index) => {
+              // {transformations.map((t, index) => {
+              // 6th card - Promo
+              if (t.promo && index === 5) {
+                return (
+                  <div className="col-md-4 p-3" key={index}>
+                    <div
+                      className="card h-100 rounded-4 text-white text-start primary-bg"
+                      style={{ backgroundColor: "#586548", padding: "40px" }}
+                    >
+                      <img
+                        src={t.img}
+                        alt="Promo Art"
+                        className="mx-auto mb-4 w-100 h-100 object-fit-contain"
+                        style={{ filter: "invert(1)" }}
+                      />
+                      <h3 className="fw-500">Want Similar Results?</h3>
+                      <h5 className="fw-light">
+                        Tailored strategies for success, book free consultation.
+                      </h5>
+                      <a
+                        href={`tel:${t.phone}`}
+                        className="btn bg-light primary-c rounded-pill mt-3"
+                        style={{ filter: "grayscale(1)" }}
+                      >
+                        📞 {t.phone}
+                      </a>
+                    </div>
+                  </div>
+                );
+              }
+
+              // 7th card - Video
+              if (t.video && index === 6) {
+                return (
+                  <div className="col-md-4 p-3" key={index}>
+                    <div className="card h-100 py-3 bg-black rounded-4 position-relative overflow-hidden promo">
+                      <button
+                        className="btn btn-light primary-c rounded-circle position-absolute top-50 start-50 translate-middle"
+                        style={{
+                          width: "60px",
+                          height: "60px",
+                          fontSize: "24px",
+                        }}
+                        onClick={() => console.log("Play Video")}
+                      >
+                        ▶
+                      </button>
+                      <div className="card-body text-center d-flex justify-content-center align-items-end">
+                        <a
+                          href="/book-consultation"
+                          className="btn btn-light px-4 py-2 primary-c fs-5 fw-500 rounded-pill mt-3"
+                        >
+                          Book Free Consultation
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              // Normal transformation cards
+              if (t.name) {
+                return (
                   <div className="col-md-4 p-3" key={index}>
                     <div className="card h-100 rounded-4">
                       {/* Before-After Slider */}
@@ -208,49 +353,129 @@ const Results = () => {
                       </div>
                       <div className="card-body p-4">
                         <div className="row">
-                          <div className="col-md-4 border-bottom py-3 sec-c">
-                            <p className="card-text ">
-                              Grafts :{" "}
+                          <div className="col-md-6 border-bottom py-3 sec-c">
+                            <p className="card-text">
+                              Grafts : &nbsp;
                               <span className="text-black">{t.grafts}</span>
                             </p>
                           </div>
-                          <div className="col-md-8 border-bottom py-3 sec-c">
-                            <p className="card-text ">
-                              Grade :{" "}
+                          <div className="col-md-6 border-bottom py-3 sec-c">
+                            <p className="card-text">
+                              Grade : &nbsp;
                               <span className="text-black">{t.grade}</span>
                             </p>
                           </div>
                           <div>
-                            <p className="card-text  border-bottom py-3 sec-c">
-                              Area :{" "}
+                            <p className="card-text border-bottom py-3 sec-c">
+                              Area : &nbsp;
                               <span className="text-black">{t.area}</span>
                             </p>
                           </div>
                           <div>
                             <p className="card-text py-3 sec-c">
-                              Result :{" "}
-                              <span className="text-black">{t.result}</span>
+                              Result : &nbsp;
+                              <span className="text-black">{t.resultTime}</span>
                             </p>
                           </div>
                         </div>
-                        <button className="btn btn-outline-dark rounded-pill w-100 mt-2 fs-6">
+                        <button
+                          className="btn btn-outline-dark rounded-pill w-100 mt-2 fs-6"
+                          onClick={() => openModal(t)}
+                        >
                           → &nbsp;&nbsp;&nbsp;Click to see full growth timeline
                         </button>
                       </div>
                     </div>
                   </div>
-                )
-            )}
+                );
+              }
+
+              return null;
+            })}
           </div>
 
-          {/* Load More */}
-          <div className="d-flex justify-content-center gap-4  align-items-center mt-5">
-            <div className="line"></div>
-            <div>
-              <button className="primary-btn px-5">Load More</button>
+          {/* Modal */}
+          {selectedPatient && (
+            <div className="modal-backdrop show" onClick={closeModal}>
+              <div
+                className="modal-content p-5"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="row mb-4">
+                  <div className="col-md-3 border-end">
+                    <h3>{selectedPatient.name}</h3>
+                    <p>Age: {selectedPatient.age} Years</p>
+                  </div>
+                  <div className="col-md-3 border-end justify-content-center d-flex flex-column align-content-center">
+                    <p className="sec-c mb-2 fw-light">Number of Grafts </p>
+                    <p className="fw-500">{selectedPatient.grafts}</p>
+                  </div>
+                  <div className="col-md-2 border-end justify-content-center d-flex flex-column align-content-center">
+                    <p className="sec-c mb-2 fw-light">Grade</p>
+                    <p className="fw-500"> {selectedPatient.grade}</p>
+                  </div>
+                  <div className="col-md-2 border-end justify-content-center d-flex flex-column align-content-center">
+                    <p className="sec-c mb-2 fw-light">Treated areas</p>
+                    <p className="fw-500">{selectedPatient.area}</p>
+                  </div>
+                  <div className="col-md-2 border-end justify-content-center d-flex flex-column align-content-center">
+                    <p className="sec-c mb-2 fw-light">Results</p>
+                    <p className="fw-500">{selectedPatient.resultTime}</p>
+                  </div>
+                </div>
+
+                <div className="d-flex gap-4">
+                  <div>
+                    <img
+                      src={selectedPatient.beforeImage}
+                      alt="Before"
+                      className="img-fluid rounded-3"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={selectedPatient.afterImage}
+                      alt="After"
+                      className="img-fluid rounded-3"
+                    />
+                  </div>
+                </div>
+
+                <div className="row mt-3">
+                  <div className="col-md-8">
+                    <h5 className="mt-4">Doctor Notes</h5>
+                    <ul className="ps-3 fs-6 sec-c lh-lg">
+                      {selectedPatient.doctorNotes.map((note, i) => (
+                        <li key={i}>{note}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="col-md-4 just-align-center flex-column align-items-start">
+                    <p className="mb-4">Want similar results?</p>
+                    <button className="btn primary-btn px-4">
+                      Book Free Consultation
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="line"></div>
-          </div>
+          )}
+
+          {/* Load More */}
+          {visibleCount < transformations.length && (
+            <div className="d-flex justify-content-center gap-4 align-items-center mt-5">
+              <div className="line"></div>
+              <div>
+                <button
+                  className="primary-btn px-5"
+                  onClick={() => setVisibleCount((prev) => prev + 6)}
+                >
+                  Load More
+                </button>
+              </div>
+              <div className="line"></div>
+            </div>
+          )}
         </div>
       </div>
 
