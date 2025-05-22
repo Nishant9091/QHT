@@ -15,8 +15,8 @@ const Booknow = () => {
 
     return (
         <div>
-            <div
-                className={`d-flex justify-content-center align-items-center gap-3 bg-white px-3 rounded-pill position-fixed shadow`}
+            <div id='booknow'
+                className={`d-flex justify-content-center align-items-center gap-md-3 bg-white px-3 rounded-pill position-fixed shadow`}
                 style={{
                     left: "36%",
                     bottom: isVisible ? "5%" : "0%", // this moves it

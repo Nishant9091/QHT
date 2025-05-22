@@ -32,7 +32,7 @@ const Header = () => {
             <div className={`header-wrapper fixed-top transition-all ${showHeader ? 'slide-down' : 'slide-up'}`} style={{ backgroundColor: "#f0f6f2", zIndex: 999 }}>
                 <div className='container-fluid'>
                     <nav className="navbar navbar-expand-lg navbar-light">
-                        <div className="container-fluid py-4 px-4 justify-content-center">
+                        <div className="container-fluid py-4 px-4 justify-content-between">
                             <Link className="navbar-brand d-flex align-items-center" to="/">
                                 <img src={logo} width="130" className='logo' style={{ filter: "invert(1)" }} alt="Logo" />
                             </Link>
@@ -41,7 +41,7 @@ const Header = () => {
                             </button>
 
                             <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                                <ul className="navbar-nav bg-white p-2 rounded align-items-center gap-2 ps-3">
+                                <ul className="navbar-nav bg-white p-2 rounded align-items-md-center gap-2 ps-3">
                                     <li className="nav-item">
                                         <Link className="nav-link fw-500 text-dark" to="/">Home</Link>
                                     </li>

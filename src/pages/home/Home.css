@@ -40,6 +40,7 @@
 #action {
     background: url(../../assets/action.png);
     background-size: cover;
+    background-position: center;
 }
 
 #action .container {

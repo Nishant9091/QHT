@@ -1,31 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import './Home.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import Kapil from '../../assets/kapil.png';
-import Anil from '../../assets/anil.png';
-import surgery from '../../assets/surgery.png';
-import surgery2 from '../../assets/surgery2.png';
-import surgery3 from '../../assets/surgery3.png';
-import book from '../../assets/book.png';
-import after from '../../assets/after.png';
-import jhat from '../../assets/jhat.png';
-import ban from '../../assets/ban.png';
-import Process from '../../assets/process.png';
-import Process1 from '../../assets/Process1.png';
-import Process2 from '../../assets/Process2.png';
-import i1 from '../../assets/icon/1.png';
-import i2 from '../../assets/icon/2.png';
-import i3 from '../../assets/icon/3.png';
-import i4 from '../../assets/icon/4.png';
-import i5 from '../../assets/icon/5.png';
-import Testimonials from '../../components/Testimonials';
-import Booknow from '../../components/Booknow';
+import React, { useState, useEffect } from "react";
+import "./Home.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  ReactCompareSlider,
+  ReactCompareSliderImage,
+} from "react-compare-slider";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import Kapil from "../../assets/kapil.png";
+import Anil from "../../assets/anil.png";
+import surgery from "../../assets/surgery.png";
+import surgery2 from "../../assets/surgery2.png";
+import surgery3 from "../../assets/surgery3.png";
+import book from "../../assets/book.png";
+import after from "../../assets/after.png";
+import jhat from "../../assets/jhat.png";
+import ban from "../../assets/ban.png";
+import Process from "../../assets/process.png";
+import Process1 from "../../assets/Process1.png";
+import Process2 from "../../assets/Process2.png";
+import i1 from "../../assets/icon/1.png";
+import i2 from "../../assets/icon/2.png";
+import i3 from "../../assets/icon/3.png";
+import i4 from "../../assets/icon/4.png";
+import i5 from "../../assets/icon/5.png";
+import Testimonials from "../../components/Testimonials";
+import Booknow from "../../components/Booknow";
 
 const tabs = [
   { id: 0, label: "Who Performs your surgery?" },
@@ -36,27 +39,28 @@ const tabs = [
 ];
 
 const Home = () => {
-
   useEffect(() => {
     // Initialize Bootstrap tooltips
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
       new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
   }, []);
 
   const stages = [
-    { label: 'Consultation', percent: 0, image: Process },
-    { label: 'Pre-Surgery Prep', percent: 30, image: Process1 },
-    { label: 'Surgery', percent: 60, image: Process2 },
-    { label: 'Recovery', percent: 100, image: Process2 },
+    { label: "Consultation", percent: 0, image: Process },
+    { label: "Pre-Surgery Prep", percent: 30, image: Process1 },
+    { label: "Surgery", percent: 60, image: Process2 },
+    { label: "Recovery", percent: 100, image: Process2 },
   ];
 
   const [stageIndex, setStageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStageIndex(prev => (prev + 1) % stages.length);
+      setStageIndex((prev) => (prev + 1) % stages.length);
     }, 2000); // 2 seconds
     return () => clearInterval(interval);
   }, []);
@@ -75,81 +79,145 @@ const Home = () => {
     setSliderValue(updated);
   };
 
-
   return (
     <>
-      <div style={{
-        background: "linear-gradient(180deg, rgba(240, 246, 242, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%)", overflowX: "hidden"
-      }}>
+      <div
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(240, 246, 242, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%)",
+          overflowX: "hidden",
+        }}
+      >
         {/* Fixed button */}
         <Booknow />
 
         {/* Banner */}
-        <div className='container pt-4'>
-          <div className='row justify-content-center align-items-center' style={{ height: "400px" }}>
-            <h1 className='text-center w-75 fw-500' style={{ fontSize: "50px" }}>Get your younger looks back <br /> today with <span className='primary-c'> hair transplant <br /> clinic in india.</span></h1>
-            <h5 className='text-center w-75' style={{ color: "#777" }}>Regain your hair, rebuild confidence, and transform your life with expert hair <br /> restoration solutions tailored to your unique needs</h5>
-            <div className='d-flex justify-content-center align-items-center'>
-              <button className='btn text-white rounded-pill p-3 primary-bg' style={{ width: "250px" }}>Book Free Consultation</button>
+        <div className="container pt-4">
+          <div
+            className="row justify-content-center align-items-center gap-4 gap-md-0 h-fit-content"
+            style={{ height: "400px" }}
+          >
+            <h1
+              className="text-center w-md-75 w-100 fw-500 fs-sm-1"
+              style={{ fontSize: "50px" }}
+            >
+              Get your younger looks back <br className="d-none d-md-block" />{" "}
+              today with{" "}
+              <span className="primary-c">
+                {" "}
+                hair transplant <br className="d-none d-md-block" /> clinic in
+                india.
+              </span>
+            </h1>
+            <h5
+              className="text-center w-md-75 w-100 fs-6"
+              style={{ color: "#777" }}
+            >
+              Regain your hair, rebuild confidence, and transform your life with
+              expert hair <br className="d-none d-md-block" /> restoration
+              solutions tailored to your unique needs
+            </h5>
+            <div className="d-flex justify-content-center align-items-center">
+              <button
+                className="btn text-white rounded-pill p-3 primary-bg"
+                style={{ width: "250px" }}
+              >
+                Book Free Consultation
+              </button>
             </div>
           </div>
         </div>
 
         {/* Celeb Slider */}
-        <div className="container-fluid my-5 py-5">
+        <div className="container-fluid my-md-5 py-5">
           <Swiper
             spaceBetween={30}
-            slidesPerView={3} // how many slides visible at once
             loop={true}
             modules={[Autoplay]}
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
             }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              576: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
+            }}
           >
             <SwiperSlide>
-              <div><img className='rounded-4 w-100' src={Kapil} alt="" /></div>
+              <div>
+                <img className="rounded-4 w-100" src={Kapil} alt="" />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100' src={Anil} alt="" /></div>
+              <div>
+                <img className="rounded-4 w-100" src={Anil} alt="" />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100' src={Kapil} alt="" /></div>
+              <div>
+                <img className="rounded-4 w-100" src={Kapil} alt="" />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100' src={Anil} alt="" /></div>
+              <div>
+                <img className="rounded-4 w-100" src={Anil} alt="" />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100' src={Kapil} alt="" /></div>
+              <div>
+                <img className="rounded-4 w-100" src={Kapil} alt="" />
+              </div>
             </SwiperSlide>
           </Swiper>
         </div>
 
         {/* Truth */}
-        <div className="container my-4 primary-bg rounded-4 p-5 g-gradient" id='truth' style={{
-        }}>
-          <h2 className='text-white fs-1 mt-5'>The Bald Truth.</h2>
-          <h6 className='text-white mb-5 fw-normal'>Most transplant fail - beacuse no one tells you what really matters.</h6>
+        <div
+          className="container my-4 primary-bg rounded-md-4 p-md-5 pt-5 g-gradient"
+          id="truth"
+        >
+          <h2 className="text-white fs-1 mt-5">The Bald Truth.</h2>
+          <h6 className="text-white mb-5 fw-normal">
+            Most transplant fail - beacuse no one tells you what really matters.
+          </h6>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            navigation
             spaceBetween={30}
-            slidesPerView={2.5}
             loop={true}
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
             }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              576: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
+            }}
           >
             <SwiperSlide>
               <div>
-                <div className='d-flex justify-content-center align-items-start'>
+                <div className="d-flex justify-content-center align-items-start">
                   <div>
-                    <h1 className='truth-h mx-3'>1.</h1>
+                    <h1 className="truth-h mx-3">1.</h1>
                   </div>
                   <div>
-                    <h2 className='text-white fw-bold h-120 fs-2'> 70% of hair transplant fail in 3 years.</h2>
-                    <h5 className='text-white'>
+                    <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
+                      70% of hair transplant fail in 3 years.
+                    </h2>
+                    <h5 className="text-white">
                       Because most clinic chase looks, not longevity.
                     </h5>
                   </div>
@@ -158,13 +226,15 @@ const Home = () => {
             </SwiperSlide>
             <SwiperSlide>
               <div>
-                <div className='d-flex justify-content-center align-items-start'>
+                <div className="d-flex justify-content-center align-items-start">
                   <div>
-                    <h1 className='truth-h mx-3'>2.</h1>
+                    <h1 className="truth-h mx-3">2.</h1>
                   </div>
                   <div>
-                    <h2 className='text-white fw-bold h-120 fs-2'> Donor hair never grows back once it is removed.</h2>
-                    <h5 className='text-white'>
+                    <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
+                      Donor hair never grows back once it is removed.
+                    </h2>
+                    <h5 className="text-white">
                       Bad planning equals permanent loss with no recovery.
                     </h5>
                   </div>
@@ -173,13 +243,15 @@ const Home = () => {
             </SwiperSlide>
             <SwiperSlide>
               <div>
-                <div className='d-flex justify-content-center align-items-start'>
+                <div className="d-flex justify-content-center align-items-start">
                   <div>
-                    <h1 className='truth-h mx-3'>3.</h1>
+                    <h1 className="truth-h mx-3">3.</h1>
                   </div>
                   <div>
-                    <h2 className='text-white fw-bold h-120 fs-2'> One bad transplant = lifelong regret</h2>
-                    <h5 className='text-white'>
+                    <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
+                      One bad transplant = lifelong regret
+                    </h2>
+                    <h5 className="text-white">
                       Scars. Fewer grafts. No second chances.
                     </h5>
                   </div>
@@ -188,13 +260,15 @@ const Home = () => {
             </SwiperSlide>
             <SwiperSlide>
               <div>
-                <div className='d-flex justify-content-center align-items-start'>
+                <div className="d-flex justify-content-center align-items-start">
                   <div>
-                    <h1 className='truth-h mx-3'>1.</h1>
+                    <h1 className="truth-h mx-3">1.</h1>
                   </div>
                   <div>
-                    <h2 className='text-white fw-bold'> 70% of hair transplant fail in 3 years.</h2>
-                    <h5 className='text-white'>
+                    <h2 className="text-white fw-bold">
+                      70% of hair transplant fail in 3 years.
+                    </h2>
+                    <h5 className="text-white">
                       Because most clinic chase looks, not longevity.
                     </h5>
                   </div>
@@ -209,35 +283,45 @@ const Home = () => {
         </div>
 
         {/* Our Promise */}
-        <div className='container my-5'>
+        <div className="container my-5">
           <div className="row">
-            <div className='d-flex justify-content-between align-items-center border-bottom pb-4 mb-4'>
-              <h2 className='fs-1'>Our Promise</h2>
-              <h6 className='border py-1 px-2 rounded text-secondary'>1</h6>
+            <div className="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
+              <h2 className="fs-1">Our Promise</h2>
+              <h6 className="border py-1 px-2 rounded text-secondary">1</h6>
             </div>
-            <div className='col-md-6'>
-              <h4>No shortcuts. No surprises. Just results that last a lifetime.</h4>
+            <div className="col-md-6">
+              <h4>
+                No shortcuts. No surprises. Just results that last a lifetime.
+              </h4>
             </div>
-            <div className='col-md-6'>
+            <div className="col-md-6">
               <ol className="custom-ol">
                 <li>
                   <h5> Surgeon-Only Transplants</h5>
-                  <p className='text-secondary fs-5'>No technicians playing doctor. Every graft placed by certified surgeons only.
+                  <p className="text-secondary fs-5">
+                    No technicians playing doctor. Every graft placed by
+                    certified surgeons only.
                   </p>
                 </li>
                 <li>
                   <h5> Smart Graft Planning</h5>
-                  <p className='text-secondary fs-5'>We plan for your future hair loss, not just today's bald spots.
+                  <p className="text-secondary fs-5">
+                    We plan for your future hair loss, not just today's bald
+                    spots.
                   </p>
                 </li>
                 <li>
                   <h5> Natural-Looking Density</h5>
-                  <p className='text-secondary fs-5'>No pluggy look. No weird hairlines. Just seamless, natural results.
+                  <p className="text-secondary fs-5">
+                    No pluggy look. No weird hairlines. Just seamless, natural
+                    results.
                   </p>
                 </li>
                 <li>
                   <h5> One-Time Procedure, Lifetime Results</h5>
-                  <p className='text-secondary fs-5'>We don't build repeat customers. We build permanent confidence.
+                  <p className="text-secondary fs-5">
+                    We don't build repeat customers. We build permanent
+                    confidence.
                   </p>
                 </li>
               </ol>
@@ -246,53 +330,115 @@ const Home = () => {
         </div>
 
         {/* Surg Slider */}
-        <div className="container-fluid my-5 py-5">
+        <div className="container-fluid my-md-5 py-md-5">
           <Swiper
             spaceBetween={30}
-            slidesPerView={3} // how many slides visible at once
             loop={true}
             modules={[Autoplay]}
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
             }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              576: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
+            }}
           >
             <SwiperSlide>
-              <div><img className='rounded-4 w-100 h-500 object-fit-cover' src={surgery} alt="" /></div>
+              <div>
+                <img
+                  className="rounded-4 w-100 h-500 object-fit-cover"
+                  src={surgery}
+                  alt=""
+                />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100 h-500 object-fit-cover' src={surgery2} alt="" /></div>
+              <div>
+                <img
+                  className="rounded-4 w-100 h-500 object-fit-cover"
+                  src={surgery2}
+                  alt=""
+                />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100 h-500 object-fit-cover' src={surgery} alt="" /></div>
+              <div>
+                <img
+                  className="rounded-4 w-100 h-500 object-fit-cover"
+                  src={surgery}
+                  alt=""
+                />
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div><img className='rounded-4 w-100 h-500 object-fit-cover' src={surgery3} alt="" /></div>
+              <div>
+                <img
+                  className="rounded-4 w-100 h-500 object-fit-cover"
+                  src={surgery3}
+                  alt=""
+                />
+              </div>
             </SwiperSlide>
           </Swiper>
         </div>
 
         {/* See differce */}
-        <div className="container py-5 text-center" id='differnce'>
-          <h2 className="fw-500 fs-1">Slide to See the Difference That Matters</h2>
+        <div className="container py-5 text-center" id="differnce">
+          <h2 className="fw-500 fs-1">
+            Slide to See the Difference That Matters
+          </h2>
           <p className="text-muted fw-500 fs-6">
-            Most clinics promise dreams, but we focus on delivering real,<br /> lifelong transformative results.
+            Most clinics promise dreams, but we focus on delivering real,
+            <br className="d-none d-md-block"/> lifelong transformative results.
           </p>
 
-          <div className="d-flex justify-content-center gap-5 align-items-center icons mt-5">
-            <div data-bs-toggle="tooltip" data-bs-placement="top" className='badge' title="Who Performs your surgery? ">
+          <div className="d-flex justify-content-center gap-md-5 align-items-center icons mt-5">
+            <div
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              className="badge"
+              title="Who Performs your surgery? "
+            >
               <img src={i1} alt="icon1" />
             </div>
-            <div data-bs-toggle="tooltip" data-bs-placement="top" className='badge' title="Who Performs your surgery? ">
+            <div
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              className="badge"
+              title="Who Performs your surgery? "
+            >
               <img src={i2} alt="icon2" />
             </div>
-            <div data-bs-toggle="tooltip" data-bs-placement="top" className='badge' title="Who Performs your surgery? ">
+            <div
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              className="badge"
+              title="Who Performs your surgery? "
+            >
               <img src={i3} alt="icon3" />
             </div>
-            <div data-bs-toggle="tooltip" data-bs-placement="top" className='badge' title="Who Performs your surgery? ">
+            <div
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              className="badge"
+              title="Who Performs your surgery? "
+            >
               <img src={i4} alt="icon4" />
             </div>
-            <div data-bs-toggle="tooltip" data-bs-placement="top" className='badge' title="Who Performs your surgery? ">
+            <div
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              className="badge"
+              title="Who Performs your surgery? "
+            >
               <img src={i5} alt="icon5" />
             </div>
           </div>
@@ -310,41 +456,60 @@ const Home = () => {
           </div> */}
 
           {/* Content Box */}
-          <div className='d-flex justify-content-center align-items-center'>
-            <div className="bg-white rounded-5 border p-4 mt-4 w-75">
+          <div className="d-flex justify-content-center align-items-center">
+            <div className="bg-white rounded-5 border p-4 mt-4 w-md-75">
               {[...Array(3)].map((_, i) => {
-
                 return (
-                  <div className="row align-items-center my-4 border-bottom emoji" key={i}>
+                  <div
+                    className="row align-items-center my-4 border-bottom emoji"
+                    key={i}
+                  >
                     <div className="col-md-3 my-4 text-end px-5">
-                      <p className="fw-semibold mb-0 text-muted fw-bold">Most Clinics ❎</p>
-                      <small className="text-muted text-light">Technicians, not <br /> surgeons</small>
+                      <p className="fw-semibold mb-0 text-muted fw-bold">
+                        Most Clinics ❎
+                      </p>
+                      <small className="text-muted text-light">
+                        Technicians, not <br /> surgeons
+                      </small>
                     </div>
 
                     <div className="col-md-6 my-4 position-relative">
-                      <div className="comparison-bar position-relative" style={{ height: "6px", background: "#e2e6de", borderRadius: "3px" }}>
-                        <div className="fill-line" style={{
-                          width: `${sliderValue[i]}%`,
+                      <div
+                        className="comparison-bar position-relative"
+                        style={{
                           height: "6px",
-                          backgroundColor: "#5c6e4a",
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          borderRadius: "3px"
-                        }}></div>
+                          background: "#e2e6de",
+                          borderRadius: "3px",
+                        }}
+                      >
+                        <div
+                          className="fill-line"
+                          style={{
+                            width: `${sliderValue[i]}%`,
+                            height: "6px",
+                            backgroundColor: "#5c6e4a",
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            borderRadius: "3px",
+                          }}
+                        ></div>
 
-                        <div className="smiley" style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: `${sliderValue[i]}%`,
-                          transform: "translate(-50%, -50%)",
-                          background: "white",
-                          borderRadius: "50%",
-                          padding: "6px",
-                          fontSize: "20px",
-                          boxShadow: "0 0 6px rgba(0,0,0,0.15)",
-                          zIndex: 2
-                        }}>
+                        <div
+                          className="smiley"
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: `${sliderValue[i]}%`,
+                            transform: "translate(-50%, -50%)",
+                            background: "white",
+                            borderRadius: "50%",
+                            padding: "6px",
+                            fontSize: "20px",
+                            boxShadow: "0 0 6px rgba(0,0,0,0.15)",
+                            zIndex: 2,
+                          }}
+                        >
                           {getEmoji(sliderValue[i])}
                         </div>
 
@@ -353,7 +518,9 @@ const Home = () => {
                           min="0"
                           max="100"
                           value={sliderValue[i]}
-                          onChange={(e) => handleSliderChange(Number(e.target.value), i)}
+                          onChange={(e) =>
+                            handleSliderChange(Number(e.target.value), i)
+                          }
                           style={{
                             position: "absolute",
                             top: "-12px",
@@ -363,15 +530,19 @@ const Home = () => {
                             background: "transparent",
                             zIndex: 3,
                             WebkitAppearance: "none",
-                            cursor: "pointer"
+                            cursor: "pointer",
                           }}
                         />
                       </div>
                     </div>
 
                     <div className="col-md-3 my-4 text-start px-5">
-                      <p className="fw-semibold primary-c fw-bold mb-0">QHT PROMISE ✅</p>
-                      <small>Only experienced <br /> touch your scalp.</small>
+                      <p className="fw-semibold primary-c fw-bold mb-0">
+                        QHT PROMISE ✅
+                      </p>
+                      <small>
+                        Only experienced <br /> touch your scalp.
+                      </small>
                     </div>
                   </div>
                 );
@@ -380,17 +551,20 @@ const Home = () => {
           </div>
 
           {/* Prev/Next Buttons */}
-          <div className='d-flex justify-content-center align-items-center'>
+          <div className="d-flex justify-content-center align-items-center">
             <div className="d-flex justify-content-between w-75 mt-4">
               <button
-                className="btn text-white rounded-pill px-4" style={{ backgroundColor: "#C7C7C7" }}
-                onClick={() => setActiveTab(prev => Math.max(0, prev - 1))}
+                className="btn text-white rounded-pill px-4"
+                style={{ backgroundColor: "#C7C7C7" }}
+                onClick={() => setActiveTab((prev) => Math.max(0, prev - 1))}
               >
                 « &nbsp;&nbsp;&nbsp; PREV
               </button>
               <button
                 className="btn primary-bg text-white rounded-pill px-4"
-                onClick={() => setActiveTab(prev => Math.min(tabs.length - 1, prev + 1))}
+                onClick={() =>
+                  setActiveTab((prev) => Math.min(tabs.length - 1, prev + 1))
+                }
               >
                 NEXT &nbsp;&nbsp;&nbsp; »
               </button>
@@ -399,25 +573,31 @@ const Home = () => {
         </div>
 
         {/* Process */}
-        <div id='process' className='py-5'>
-          <div className="container py-5">
+        <div id="process" className="py-5">
+          <div className="container py-md-5">
             <div className="text-center mb-4">
               <h2 className="fs-1 fw-500">A Team of Experts, Focused on You</h2>
               <p className="text-muted fw-500 mt-3 mb-5 fs-6">
-                Hair restoration <strong>isn’t a one-person job</strong>. At QHT, a team of seasoned specialists — from surgeons to nurses — <br />
-                works in sync to give you natural, lasting results with zero compromise.
+                Hair restoration <strong>isn’t a one-person job</strong>. At
+                QHT, a team of seasoned specialists — from surgeons to nurses —{" "}
+                <br />
+                works in sync to give you natural, lasting results with zero
+                compromise.
               </p>
             </div>
 
             {/* Timeline */}
-            <div className="position-relative mb-5 mx-5" style={{ height: '100px' }}>
+            <div
+              className="position-relative mb-5 mx-5"
+              style={{ height: "100px" }}
+            >
               {/* Moving Label (Top Center) */}
               <div
                 className="position-absolute translate-middle-x text-center"
                 style={{
-                  top: '-10%',
+                  top: "-10%",
                   left: `${stages[stageIndex].percent}%`,
-                  transition: 'left 0.5s ease-in-out',
+                  transition: "left 0.5s ease-in-out",
                   zIndex: 2,
                 }}
               >
@@ -430,16 +610,19 @@ const Home = () => {
               <div
                 className="position-absolute start-0 end-0"
                 style={{
-                  top: '40%',
+                  top: "40%",
                 }}
               >
-                <div className="progress" style={{ height: '8px', backgroundColor: '#D5E6C3' }}>
+                <div
+                  className="progress"
+                  style={{ height: "8px", backgroundColor: "#D5E6C3" }}
+                >
                   <div
                     className="progress-bar primary-bg primary-c"
                     role="progressbar"
                     style={{
                       width: `${stages[stageIndex].percent}%`,
-                      transition: 'width 0.5s ease-in-out',
+                      transition: "width 0.5s ease-in-out",
                     }}
                   ></div>
                 </div>
@@ -449,62 +632,87 @@ const Home = () => {
               <div
                 className="position-absolute translate-middle-x text-center"
                 style={{
-                  top: '55%',
+                  top: "55%",
                   left: `${stages[stageIndex].percent}%`,
-                  transition: 'left 0.5s ease-in-out',
+                  transition: "left 0.5s ease-in-out",
                 }}
               >
-                <div className='text-af'>|</div>
+                <div className="text-af">|</div>
                 <div className="small fw-semibold text-af">
                   {stages[stageIndex].percent}%
                 </div>
               </div>
             </div>
 
-
             {/* Image for Current Stage */}
             <div className="row g-4 justify-content-center">
-              <img src={stages[stageIndex].image} alt="Stage" className="img-fluid w-75" />
+              <img
+                src={stages[stageIndex].image}
+                alt="Stage"
+                className="img-fluid w-75"
+              />
             </div>
           </div>
         </div>
 
         {/* Img */}
-        <div className='container-fluid p-0'>
+        <div className="container-fluid p-0">
           <div className="row">
-            <img src={ban} className='w-100' alt="" />
+            <img src={ban} className="w-100" alt="" />
           </div>
         </div>
 
         {/* Services */}
-        <div className='container sec-pad'>
-          <div className="row">
-            <div className='d-flex justify-content-between align-items-center border-bottom pb-4 mb-4'>
-              <h2 className='p-head'>Our Services</h2>
-              <h6 className='border py-1 px-2 rounded text-secondary'>2</h6>
+        <div className="container sec-pad">
+          <div className="row px-3 px-md-0">
+            <div className="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
+              <h2 className="p-head">Our Services</h2>
+              <h6 className="border py-1 px-2 rounded text-secondary">2</h6>
             </div>
-            <div className="col-md-6 pb-5 my-5 d-flex justify-content-between align-items center flex-column">
-              <div><h6>Introduction</h6></div>
-              <div className='d-flex justify-content-center align-items-center'><img src={jhat} className='w-50 my-5' alt="" /></div>
-              <div className='text-start'> <button
-                className="btn text-white rounded-pill px-4 py-2"
-                style={{ backgroundColor: "#627251" }}
-              >
-                Book Free Consultation
-              </button>
+            <div className="col-md-6 pb-md-5 my-md-5 d-flex justify-content-between align-items center flex-column">
+              <div>
+                <h6>Introduction</h6>
+              </div>
+              <div className="d-flex justify-content-center align-items-center">
+                <img src={jhat} className="w-50 my-5" alt="" />
+              </div>
+              <div className="text-start">
+                {" "}
+                <button
+                  className="btn text-white rounded-pill px-4 mb-5 mb-md-0 py-2"
+                  style={{ backgroundColor: "#627251" }}
+                >
+                  Book Free Consultation
+                </button>
               </div>
             </div>
-            <div className="col-md-6 pb-5 my-5">
-              <h3>Hair loss affects more than just your scalp — it touches your identity.</h3>
-              <h5 className='text-secondary mb-4 mt-3'>Our range of services is designed to restore both your hair and your confidence.</h5>
+            <div className="col-md-6 pb-md-5my-md-5">
+              <h3>
+                Hair loss affects more than just your scalp — it touches your
+                identity.
+              </h3>
+              <h5 className="text-secondary mb-4 mt-3">
+                Our range of services is designed to restore both your hair and
+                your confidence.
+              </h5>
               <div className="accordion" id="hairTransplantAccordion">
                 <div className="accordion-item border-0 border-bottom">
                   <h2 className="accordion-header">
-                    <button className="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-                      <span className="step-circle">1</span> Hair Transplant For Men
+                    <button
+                      className="accordion-button collapsed bg-white"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse1"
+                    >
+                      <span className="step-circle">1</span> Hair Transplant For
+                      Men
                     </button>
                   </h2>
-                  <div id="collapse1" className="accordion-collapse collapse" data-bs-parent="#hairTransplantAccordion">
+                  <div
+                    id="collapse1"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#hairTransplantAccordion"
+                  >
                     <div className="accordion-body">
                       Content for Hair Transplant For Men.
                     </div>
@@ -513,11 +721,21 @@ const Home = () => {
 
                 <div className="accordion-item border-0 border-bottom">
                   <h2 className="accordion-header">
-                    <button className="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                      <span className="step-circle">2</span> Hairline Reconstruction
+                    <button
+                      className="accordion-button collapsed bg-white"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse2"
+                    >
+                      <span className="step-circle">2</span> Hairline
+                      Reconstruction
                     </button>
                   </h2>
-                  <div id="collapse2" className="accordion-collapse collapse" data-bs-parent="#hairTransplantAccordion">
+                  <div
+                    id="collapse2"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#hairTransplantAccordion"
+                  >
                     <div className="accordion-body">
                       Content for Hairline Reconstruction.
                     </div>
@@ -526,11 +744,21 @@ const Home = () => {
 
                 <div className="accordion-item border-0 border-bottom">
                   <h2 className="accordion-header">
-                    <button className="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                      <span className="step-circle">3</span> Failed Hair Transplant Repair
+                    <button
+                      className="accordion-button collapsed bg-white"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse3"
+                    >
+                      <span className="step-circle">3</span> Failed Hair
+                      Transplant Repair
                     </button>
                   </h2>
-                  <div id="collapse3" className="accordion-collapse collapse" data-bs-parent="#hairTransplantAccordion">
+                  <div
+                    id="collapse3"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#hairTransplantAccordion"
+                  >
                     <div className="accordion-body">
                       Content for Failed Hair Transplant Repair.
                     </div>
@@ -539,11 +767,21 @@ const Home = () => {
 
                 <div className="accordion-item border-0 border-bottom">
                   <h2 className="accordion-header">
-                    <button className="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
-                      <span className="step-circle">4</span> Body Hair Transplant
+                    <button
+                      className="accordion-button collapsed bg-white"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse4"
+                    >
+                      <span className="step-circle">4</span> Body Hair
+                      Transplant
                     </button>
                   </h2>
-                  <div id="collapse4" className="accordion-collapse collapse" data-bs-parent="#hairTransplantAccordion">
+                  <div
+                    id="collapse4"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#hairTransplantAccordion"
+                  >
                     <div className="accordion-body">
                       Content for Body Hair Transplant.
                     </div>
@@ -552,11 +790,20 @@ const Home = () => {
 
                 <div className="accordion-item border-0 border-bottom">
                   <h2 className="accordion-header">
-                    <button className="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                    <button
+                      className="accordion-button collapsed bg-white"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse5"
+                    >
                       <span className="step-circle">5</span> Beard Transplant
                     </button>
                   </h2>
-                  <div id="collapse5" className="accordion-collapse collapse" data-bs-parent="#hairTransplantAccordion">
+                  <div
+                    id="collapse5"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#hairTransplantAccordion"
+                  >
                     <div className="accordion-body">
                       Content for Beard Transplant.
                     </div>
@@ -565,11 +812,20 @@ const Home = () => {
 
                 <div className="accordion-item border-0 border-bottom">
                   <h2 className="accordion-header">
-                    <button className="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6">
+                    <button
+                      className="accordion-button collapsed bg-white"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse6"
+                    >
                       <span className="step-circle">6</span> PRP Treatment
                     </button>
                   </h2>
-                  <div id="collapse6" className="accordion-collapse collapse" data-bs-parent="#hairTransplantAccordion">
+                  <div
+                    id="collapse6"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#hairTransplantAccordion"
+                  >
                     <div className="accordion-body">
                       Content for PRP Treatment.
                     </div>
@@ -581,16 +837,19 @@ const Home = () => {
         </div>
 
         {/* Result */}
-        <div className='container'>
-          <div className='row'>
-            <div className='d-flex justify-content-between align-items-center border-bottom pb-4 mb-5'>
-              <h2 className='p-head'>Regrowth Gallery</h2>
-              <h6 className='border py-1 px-2 rounded text-secondary'>3</h6>
+        <div className="container">
+          <div className="row">
+            <div className="d-flex justify-content-between align-items-center border-bottom pb-4 mb-5">
+              <h2 className="p-head">Regrowth Gallery</h2>
+              <h6 className="border py-1 px-2 rounded text-secondary">3</h6>
             </div>
             <div className="col-md-4">
-              <h4 className='fs-2'>Every ‘before’ has an ‘after’ see how we bring hairlines (and smiles) back.</h4>
+              <h4 className="fs-2">
+                Every ‘before’ has an ‘after’ see how we bring hairlines (and
+                smiles) back.
+              </h4>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 mb-4 mb-md-0">
               <ReactCompareSlider
                 style={{ borderRadius: "20px" }}
                 itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
@@ -604,7 +863,7 @@ const Home = () => {
                 itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
               />
             </div>
-            <div className="text-end my-5">
+            <div className="text-md-end text-center my-5">
               {/* Button trigger modal */}
               <button
                 type="button"
@@ -638,143 +897,313 @@ const Home = () => {
                       ></button>
                     </div>
                     <div className="modal-body">
-                      <div className='row justify-content-start border-bottom pb-5'>
-                        <h4 className='pb-3'>Grade I (3)</h4>
+                      <div className="row justify-content-start border-bottom pb-5">
+                        <h4 className="pb-3">Grade I (3)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                      </div>
-                      <div className='row justify-content-start border-bottom py-5'>
-                        <h4 className='pb-3'>Grade II (2)</h4>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                      </div>
-                      <div className='row justify-content-start border-bottom py-5'>
-                        <h4 className='pb-3'>Grade III (3)</h4>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                       </div>
-                      <div className='row justify-content-start border-bottom py-5'>
-                        <h4 className='pb-3'>Grade IV (2)</h4>
+                      <div className="row justify-content-start border-bottom py-5">
+                        <h4 className="pb-3">Grade II (2)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                      </div>
-                      <div className='row justify-content-start border-bottom py-5'>
-                        <h4 className='pb-3'>Grade V (3)</h4>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <ReactCompareSlider
-                            style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                       </div>
-                      <div className='row justify-content-start border-bottom py-5'>
-                        <h4 className='pb-3'>Grade VI (1)</h4>
+                      <div className="row justify-content-start border-bottom py-5">
+                        <h4 className="pb-3">Grade III (3)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                       </div>
-                      <div className='row justify-content-start pt-5'>
-                        <h4 className='pb-3'>Grade VII (3)</h4>
+                      <div className="row justify-content-start border-bottom py-5">
+                        <h4 className="pb-3">Grade IV (2)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="row justify-content-start border-bottom py-5">
+                        <h4 className="pb-3">Grade V (3)</h4>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                         <div className="col-md-4">
                           <ReactCompareSlider
                             style={{ borderRadius: "20px" }}
-                            itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                            itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="row justify-content-start border-bottom py-5">
+                        <h4 className="pb-3">Grade VI (1)</h4>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="row justify-content-start pt-5">
+                        <h4 className="pb-3">Grade VII (3)</h4>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
+                          />
+                        </div>
+                        <div className="col-md-4">
+                          <ReactCompareSlider
+                            style={{ borderRadius: "20px" }}
+                            itemOne={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="Before"
+                              />
+                            }
+                            itemTwo={
+                              <ReactCompareSliderImage
+                                src={after}
+                                alt="After"
+                              />
+                            }
                           />
                         </div>
                       </div>
@@ -787,29 +1216,37 @@ const Home = () => {
         </div>
 
         {/* Book */}
-        <div className="sec-pad" id='book' style={{ backgroundColor: '#627251' }}>
+        <div
+          className="sec-pad"
+          id="book"
+          style={{ backgroundColor: "#627251" }}
+        >
           <div className="container">
             <div className="row align-items-center">
-
               {/* Left side - Books Image */}
               <div className="col-md-6 text-center mb-4 mb-md-0">
                 <img
                   src={book}
                   alt="Hair Transplant Guide 1"
-                  className='animate-book'
+                  className="animate-book w-100"
                 />
               </div>
 
               {/* Right side - Text + Form */}
               <div className="col-md-6 text-white">
-                <h2 className="fw-bold mb-4">Thinking About a Hair <br /> Transplant? Read This First.</h2>
+                <h2 className="fw-bold mb-4">
+                  Thinking About a Hair <br /> Transplant? Read This First.
+                </h2>
                 <p className="mb-4" style={{ lineHeight: 1.6 }}>
-                  A free doctor-reviewed guide that answers all your questions about cost, results, pain, recovery, and more.
+                  A free doctor-reviewed guide that answers all your questions
+                  about cost, results, pain, recovery, and more.
                 </p>
                 <ul className="list-unstyled mb-4">
                   <li className="mb-2">• See real patient transformations</li>
                   <li className="mb-2">• Know what to expect – step-by-step</li>
-                  <li className="mb-2">• Get expert tips to avoid bad results</li>
+                  <li className="mb-2">
+                    • Get expert tips to avoid bad results
+                  </li>
                 </ul>
 
                 {/* Simple Form */}
@@ -826,12 +1263,12 @@ const Home = () => {
                   />
                   <button
                     type="submit"
-                    className="btn btn-light rounded-pill px-4 py-2" style={{ color: "#627251", width: "500px" }}
+                    className="btn btn-light rounded-pill px-4 py-2 w-100"
+                    style={{ color: "#627251", width: "500px" }}
                   >
                     Download Now
                   </button>
                 </form>
-
               </div>
             </div>
           </div>
@@ -841,91 +1278,156 @@ const Home = () => {
         <Testimonials />
 
         {/* FAQ's */}
-        <div id='faq' className='sec-pad'>
+        <div id="faq" className="sec-pad">
           <div className="container">
             <div className="row">
-              <h2 className='text-center p-head'>Frequently Asked Questions</h2>
-              <p className='text-center'>If you don’t find relevant answer please send us your queries on <br /> support@qhtclinic.com or Call +91-9897020696</p>
+              <h2 className="text-center p-head">Frequently Asked Questions</h2>
+              <p className="text-center">
+                If you don’t find relevant answer please send us your queries on{" "}
+                <br /> support@qhtclinic.com or Call +91-9897020696
+              </p>
               <div className="accordion" id="faqAccordion">
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingOne">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                      <span className="faq-number">01</span> Do you provide a natural front hairline?
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                    >
+                      <span className="faq-number">01</span> Do you provide a
+                      natural front hairline?
                     </button>
                   </h2>
-                  <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div
+                    id="collapseOne"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                  >
                     <div className="accordion-body">
-                      Yes, we specialize in designing a natural-looking hairline that suits your facial structure.
+                      Yes, we specialize in designing a natural-looking hairline
+                      that suits your facial structure.
                     </div>
                   </div>
                 </div>
 
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingTwo">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                      <span className="faq-number">02</span> What's the cost of hair transplant in India?
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                    >
+                      <span className="faq-number">02</span> What's the cost of
+                      hair transplant in India?
                     </button>
                   </h2>
-                  <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div
+                    id="collapseTwo"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                  >
                     <div className="accordion-body">
-                      The cost varies depending on several factors like technique and grafts needed. Contact us for a free estimate.
+                      The cost varies depending on several factors like
+                      technique and grafts needed. Contact us for a free
+                      estimate.
                     </div>
                   </div>
                 </div>
 
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingThree">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                      <span className="faq-number">03</span> Which are the different packages provided for hair transplant India?
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                    >
+                      <span className="faq-number">03</span> Which are the
+                      different packages provided for hair transplant India?
                     </button>
                   </h2>
-                  <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div
+                    id="collapseThree"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                  >
                     <div className="accordion-body">
-                      We offer standard, premium, and VIP packages customized to your needs.
+                      We offer standard, premium, and VIP packages customized to
+                      your needs.
                     </div>
                   </div>
                 </div>
 
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingFour">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                      <span className="faq-number">04</span> Is there any impact of the type of hair surgery on the cost?
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour"
+                    >
+                      <span className="faq-number">04</span> Is there any impact
+                      of the type of hair surgery on the cost?
                     </button>
                   </h2>
-                  <div id="collapseFour" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div
+                    id="collapseFour"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                  >
                     <div className="accordion-body">
-                      Yes, different techniques like FUE, FUT, or DHI have varying costs.
+                      Yes, different techniques like FUE, FUT, or DHI have
+                      varying costs.
                     </div>
                   </div>
                 </div>
 
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingFive">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
-                      <span className="faq-number">05</span> Does hair transplant damage existing hair?
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFive"
+                    >
+                      <span className="faq-number">05</span> Does hair
+                      transplant damage existing hair?
                     </button>
                   </h2>
-                  <div id="collapseFive" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div
+                    id="collapseFive"
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                  >
                     <div className="accordion-body">
-                      No, if performed correctly, the existing hair remains unaffected.
+                      No, if performed correctly, the existing hair remains
+                      unaffected.
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
 
         {/* Actions */}
-        <div id='action'>
+        <div id="action">
           <div className="container">
-            <h1 className='text-white fw-bold'>Time To Take Action</h1>
-            <h4 className='text-white text-center fw-normal mx-4 mt-3 mb-4'>It’s time to invest in yourself and your confidence. Take the first step toward fuller, healthier hair with a treatment plan tailored just for you. Your journey to transformation begins today.</h4>
-            <button className='btn rounded-pill bg-white px-4 py-3 fw-normal'>Get Started Now</button>
+            <h1 className="text-white fw-bold">Time To Take Action</h1>
+            <h4 className="text-white text-center fw-normal mx-4 mt-3 mb-4">
+              It’s time to invest in yourself and your confidence. Take the
+              first step toward fuller, healthier hair with a treatment plan
+              tailored just for you. Your journey to transformation begins
+              today.
+            </h4>
+            <button className="btn rounded-pill bg-white px-4 py-3 fw-normal">
+              Get Started Now
+            </button>
           </div>
         </div>
-      </div >
+      </div>
     </>
   );
 };

@@ -65,7 +65,7 @@ const Footer = () => {
                         </div>
                         <div className='row border-bottom'>
                             <h4 className='text-white my-3'>In Your City</h4>
-                            <ul className='list-unstyled column-3'>
+                            <ul className='list-unstyled column-md-3'>
                                 <li>Hair Transplant in Delhi
                                 </li><li>Hair Transplant in Bangalore
                                 </li><li>Hair Transplant in Lucknow
@@ -79,7 +79,7 @@ const Footer = () => {
                         </div>
                         <div className='row'>
                             <h4 className='text-white my-3'>In Your Country</h4>
-                            <ul className='list-unstyled column-3'>
+                            <ul className='list-unstyled column-md-3'>
                                 <li>Hair Transplant In India
                                 </li><li>Hair Transplant In Germany
                                 </li><li>Hair Transplant In Canada
