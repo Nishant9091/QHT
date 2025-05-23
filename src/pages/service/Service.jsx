@@ -273,8 +273,8 @@ const Service = () => {
       </div>
 
       {/* Form */}
-      <div className="position-relative" id="Form">
-        <div className="primary-bg py-5 rounded-4 my-4 container d-flex align-items-center justify-content-around">
+      <div className="position-relative position-sm-static h-sm-fit-content" id="Form">
+        <div className="primary-bg py-5 rounded-md-4 my-md-4 container d-flex align-items-center justify-content-around">
           <form className="row g-2 align-items-center w-100 w-md-auto flex-grow-1">
             <h4 className="col-md-3 just-align-center text-white fw-light">
               Request a callback
@@ -321,7 +321,7 @@ const Service = () => {
 
       {/* Description */}
       <div className="sec-pad">
-        <div className="container mt-5 sec-c">
+        <div className="container mt-md-5 sec-c">
           <div className="row">
             <div className="col-md-6 just-align-center flex-column align-items-start">
               <h2 className="p-head text-black m-0">
@@ -346,15 +346,15 @@ const Service = () => {
               </p>
             </div>
             <div className="col-md-6 just-align-center">
-              <img src={D1} className="w-75 rounded-4" alt="" />
+              <img src={D1} className="w-md-75 w-100 rounded-4" alt="" />
             </div>
           </div>
           <div className="row mt-5">
             <div className="col-md-6 just-align-center">
-              <img src={D2} className="w-75 rounded-4" alt="" />
+              <img src={D2} className="w-md-75 w-100 rounded-4" alt="" />
             </div>
             <div className="col-md-6 just-align-center flex-column align-items-start">
-              <h2 className="p-head text-black">Hair Transplant In India?</h2>
+              <h2 className="p-head text-black mt-4 mt-md-0">Hair Transplant In India?</h2>
               <p>
                 Hair loss is a common issue among men, with over
                 60% experiencing significant hair loss by age 50. If you’re
@@ -442,13 +442,13 @@ const Service = () => {
 
           <div className="row">
             <div className="d-flex justify-content-center align-items-center mt-5">
-              <div className="line"></div>
+              <div className="line d-none d-md-block"></div>
               <div>
                 <button className="btn bg-white text-black rounded-pill px-4 py-2">
                   Explore More Results +
                 </button>
               </div>
-              <div className="line"></div>
+              <div className="line d-none d-md-block"></div>
             </div>
           </div>
         </div>
@@ -554,14 +554,14 @@ const Service = () => {
         <div className="container">
           <div className="row justify-content-center">
             <h2 className="p-head text-center">Types of Hair Transplant</h2>
-            <h5 className="sec-c fw-light text-center w-75 my-3">
+            <h5 className="sec-c fw-light text-center w-md-75 my-3">
               As you explore male hair transplant options, it’s essential to
               understand the different techniques available. Here are the main
               types:
             </h5>
           </div>
 
-          <div className="row mt-5">
+          <div className="row mt-5 gap-5 gap-md-0">
             <div className="col-md-4">
               <h4>Follicular Unit Extraction (FUE)</h4>
               <p>
@@ -634,7 +634,7 @@ const Service = () => {
               className="row align-items-center py-5 border-bottom"
             >
               <div className="col-md-2">
-                <img src={item.icon} alt={`icon-${idx}`} className="w-75" />
+                <img src={item.icon} alt={`icon-${idx}`} className="w-md-75 mb-4 mb-md-0 w-25" />
               </div>
               <div className="col-md-4">
                 <h4 className="fw-normal text-white lh-base">{item.title}</h4>
@@ -651,7 +651,7 @@ const Service = () => {
 
       {/* Procedure */}
       <div className="sec-pad">
-        <div className="container py-5">
+        <div className="container py-md-5">
           <div className="row mb-4 justify-content-between">
             <div className="col-md-6">
               <h2 className="p-head">
@@ -665,7 +665,7 @@ const Service = () => {
             </div>
             <div className="col-md-5">
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-6 col-6">
                   <div className="hw-200 rounded-4 text-start border rounded p-4">
                     <h2
                       className="primary-c fw-normal"
@@ -676,7 +676,7 @@ const Service = () => {
                     <h4 className="primary-c">Week Recovery</h4>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6 col-6">
                   <div className="hw-200 rounded-4 text-start border rounded p-4">
                     <img src={Bijli} className="w-25" alt="" />
                     <h4 className="primary-c mt-4">Minimal Pain</h4>
@@ -687,13 +687,13 @@ const Service = () => {
           </div>
 
           <div className="row mt-5 align-items-center">
-            <div className="col-md-5 text-start justify-content-between">
+            <div className="col-md-5 text-md-start text-center justify-content-between">
               <img
                 src={beforeAfterImage}
                 alt="Before and After"
-                className="img-fluid w-75 mb-5"
+                className="img-fluid w-md-75 mb-5"
               />
-              <button className="primary-btn px-4 mt-5">
+              <button className="primary-btn px-4 mb-5 mb-md-0 mt-5">
                 Book Free Consultation
               </button>
             </div>
@@ -718,7 +718,7 @@ const Service = () => {
       {/* Procedure tip */}
       <div className="sec-pad pt-5">
         <div className="container border-top border-lgrey pt-5">
-          <div className="row pt-5">
+          <div className="row pt-0 pt-md-5">
             <div className="col-md-5">
               <h2 className="p-head">Pre Procedure Tips</h2>
             </div>
@@ -733,28 +733,28 @@ const Service = () => {
           </div>
 
           <div className="row my-5">
-            <div className="col-md-3 border-x border-lgrey px-5">
+            <div className="col-md-3 border-x border-lgrey px-md-5 px-3">
               <img src={glass} alt="" />
               <h4>Medical Evaluation</h4>
               <p className="sec-c">
                 Assess overall health and scalp condition.
               </p>
             </div>
-            <div className="col-md-3 border-x border-lgrey px-5">
+            <div className="col-md-3 border-x border-lgrey px-md-5 px-3">
               <img src={cut} alt="" />
               <h4>Avoid Blood Thinners</h4>
               <p className="sec-c">
                 Stop medications that increase bleeding risk.
               </p>
             </div>
-            <div className="col-md-3 border-x border-lgrey px-5">
+            <div className="col-md-3 border-x border-lgrey px-md-5 px-3">
               <img src={alchol} alt="" />
               <h4>No Smoking or Alcohol</h4>
               <p className="sec-c">
                 Prevent healing complications and poor graft survival.
               </p>
             </div>
-            <div className="col-md-3 border-x border-lgrey px-5">
+            <div className="col-md-3 border-x border-lgrey px-md-5 px-3">
               <img src={hairwash} alt="" />
               <h4>Hair Wash & Scalp Cleanliness</h4>
               <p className="sec-c">Ensure a clean scalp before surgery day.</p>
@@ -783,7 +783,7 @@ const Service = () => {
                 standards, without compromising quality.
               </p>
               <div className="mt-5">
-                <span className="fs-1 sec-c border hw-100 border-secondary just-align-center rounded-circle">
+                <span className="d-none d-md-flex fs-1 sec-c border hw-100 border-secondary just-align-center rounded-circle">
                   ↓
                 </span>
               </div>
@@ -832,7 +832,9 @@ const Service = () => {
 
           <div className="row my-5">
             <div className="col-md-5">
-              <h3>Factors affecting <br /> the cost of hair transplant</h3>
+              <h3>
+                Factors affecting <br /> the cost of hair transplant
+              </h3>
             </div>
             <div className="col-md-6">
               <h6 className="sec-c fw-normal">
@@ -845,32 +847,48 @@ const Service = () => {
           </div>
 
           <div className="row align-items-center my-5">
-            <div className="col-md-3 text-start border-lgrey px-5">
-              <img src={doctor} alt="Surgeon Icon" className="mb-3 hw-100 object-fit-contain" />
+            <div className="col-md-3 text-start border-lgrey px-md-5 px-3">
+              <img
+                src={doctor}
+                alt="Surgeon Icon"
+                className="mb-3 hw-100 object-fit-contain"
+              />
               <h5 className="fw-500">Surgeon's Skill and Experience</h5>
               <p className="text-muted small">
                 Experienced surgeons charge more for precision, expertise, and
                 proven results.
               </p>
             </div>
-            <div className="col-md-3 text-start border-x border-lgrey px-5">
-              <img src={bald} alt="Technique Icon" className="mb-3 hw-100 object-fit-contain" />
+            <div className="col-md-3 text-start border-x border-lgrey px-md-5 px-3">
+              <img
+                src={bald}
+                alt="Technique Icon"
+                className="mb-3 hw-100 object-fit-contain"
+              />
               <h5 className="fw-500">Hair Transplant Technique Chosen</h5>
               <p className="text-muted small">
                 FUE and FUT vary in complexity, effectiveness, and pricing for
                 hair transplant procedures.
               </p>
             </div>
-            <div className="col-md-3 text-start border-x border-lgrey px-5">
-              <img src={graftp} alt="Grafts Icon" className="mb-3 hw-100 object-fit-contain" />
+            <div className="col-md-3 text-start border-x border-lgrey px-md-5 px-3">
+              <img
+                src={graftp}
+                alt="Grafts Icon"
+                className="mb-3 hw-100 object-fit-contain"
+              />
               <h5 className="fw-500">Total Grafts Transplant Needed</h5>
               <p className="text-muted small">
                 More grafts raise cost due to longer procedure time, resources,
                 and expertise.
               </p>
             </div>
-            <div className="col-md-3 text-start border-lgrey px-5">
-              <img src={location} alt="Clinic Icon" className="mb-3 hw-100 object-fit-contain" />
+            <div className="col-md-3 text-start border-lgrey px-md-5 px-3">
+              <img
+                src={location}
+                alt="Clinic Icon"
+                className="mb-3 hw-100 object-fit-contain"
+              />
               <h5 className="fw-500">Clinic Location and Facilities</h5>
               <p className="text-muted small">
                 Metro clinics charge more for advanced facilities, services, and
@@ -913,7 +931,7 @@ const Service = () => {
                 className="img-fluid"
                 style={{ maxWidth: "350px" }}
               />
-              <button className="btn btn-light rounded-pill mt-5 px-4 py-2 fw-medium w-50">
+              <button className="btn btn-light rounded-pill mt-5 px-4 py-2 fw-medium w-md-50">
                 Book Free Consultation
               </button>
             </div>
@@ -944,7 +962,7 @@ const Service = () => {
       <div className="sec-pad">
         <div className="container">
           <div className="row">
-            <h2 className="p-head w-50">
+            <h2 className="p-head w-md-50">
               Watch the incredible journey & transformation.
             </h2>
           </div>
@@ -954,7 +972,7 @@ const Service = () => {
                 <img
                   src={video.thumbnail}
                   alt=""
-                  className="m-3 w-100"
+                  className="m-md-3 my-2 my-md-0 w-100"
                   style={{ cursor: "pointer" }}
                   onClick={() => handleShow(video.videoUrl)}
                 />
@@ -1136,10 +1154,10 @@ const Service = () => {
           <div className="row">
             <div className="col-md-6">
               <h2 className="p-head mb-4">Post Surgery Support</h2>
-              <img src={Psurgery} className="w-75" alt="" />
+              <img src={Psurgery} className="w-md-75 w-100" alt="" />
             </div>
             <div className="col-md-6">
-              <h5 className="sec-c fw-light mb-3 border-bottom pb-4">
+              <h5 className="sec-c fw-light mb-3 border-bottom pb-4 mt-4 mt-md-0">
                 We provide comprehensive post-surgery support, ensuring a smooth
                 recovery through personalized care plans, regular follow-ups,
                 and expert guidance—helping patients achieve optimal healing
@@ -1209,7 +1227,7 @@ const Service = () => {
             <h2 className="p-head text-white text-center">
               Do’s and Don’ts After Hair Transplantation
             </h2>
-            <h5 className="sec-c fw-light w-75 my-3 text-white text-center">
+            <h5 className="sec-c fw-light w-md-75 my-3 text-white text-center">
               After undergoing a hair transplant in Haridwar at QHT Clinic, it’s
               crucial to follow these guidelines to ensure optimal recovery and
               results:
@@ -1224,40 +1242,40 @@ const Service = () => {
                     Don’ts
                   </h4>
                   <ul className="list-unstyled">
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="bg-danger fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✖
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Avoid direct sunlight and UV rays for the first few
                         weeks. Keep your scalp protected.
                       </span>
                     </li>
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="bg-danger fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✖
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Avoid heavy exercise or activities that cause excessive
                         sweating.
                       </span>
                     </li>
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="bg-danger fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✖
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Avoid touching, scratching, or picking at the
                         transplanted area to prevent dislodging grafts.
                       </span>
                     </li>
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="bg-danger fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✖
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Refrain from using hair products like gels, sprays, or
@@ -1275,39 +1293,39 @@ const Service = () => {
                     Do’s
                   </h4>
                   <ul className="list-unstyled">
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="primary-bg fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✓
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Adhere to the recommended post-operative care
                         instructions.
                       </span>
                     </li>
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="primary-bg fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✓
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Gently wash your scalp as advised to prevent infection.
                       </span>
                     </li>
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="primary-bg fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✓
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Maintain a healthy diet and stay hydrated to support
                         healing.
                       </span>
                     </li>
-                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px">
+                    <li className="my-3 border-bottom border-lgrey pt-3 fs-5 fw-light d-flex h-100px h-sm-fit-content">
                       <span className="primary-bg fs-20px hw-20 text-white rounded-circle d-flex justify-content-center align-items-center">
                         ✓
-                      </span>{" "}
+                      </span>
                       &nbsp;
                       <span>
                         Take prescribed medications to manage pain and prevent
@@ -1329,7 +1347,7 @@ const Service = () => {
             <h2 className="p-head">
               Recovery time & after care of hair transplant.
             </h2>
-            <h5 className="sec-c fw-light w-75 my-3">
+            <h5 className="sec-c fw-light w-md-75 my-3">
               Learn about the recovery timeline and essential aftercare tips
               following a hair transplant to ensure proper healing, optimal
               results, and long-lasting, healthy hair growth.
@@ -1349,7 +1367,7 @@ const Service = () => {
                     (week, index) => (
                       <button
                         key={index}
-                        className={`nav-link sec-c rounded-pill tab-btn text-center mb-4 w-75 ${
+                        className={`nav-link sec-c rounded-pill tab-btn text-center mb-4 w-md-75 ${
                           index === 3 ? "active" : ""
                         }`}
                         id={`v-pills-${index}-tab`}
@@ -1391,7 +1409,7 @@ const Service = () => {
                         {/* Text Section */}
                         <div className="col-md-6">
                           {/* What to Expect */}
-                          <div className="bg-light p-4 mb-3 rounded-4 shadow-sm">
+                          <div className="bg-light p-4 mb-3 rounded-4 mt-3 mt-md-3 shadow-sm">
                             <h6 className="primary-c fw-bold">
                               WHAT TO EXPECT
                             </h6>
@@ -1399,14 +1417,14 @@ const Service = () => {
                               <li className="py-4 border-bottom border-lgrey">
                                 <span className="primary-bg text-white rounded-circle px-1 fs-20px">
                                   ✓
-                                </span>{" "}
+                                </span>
                                 Transplanted hairs may shed significantly (don’t
                                 panic)
                               </li>
                               <li className="py-4">
                                 <span className="primary-bg text-white rounded-circle px-1 fs-20px">
                                   ✓
-                                </span>{" "}
+                                </span>
                                 Redness reduces, scalp feels more normal
                               </li>
                             </ul>
@@ -1419,19 +1437,19 @@ const Service = () => {
                               <li className="py-4 border-bottom border-lgrey">
                                 <span className="primary-bg text-white rounded-circle px-1 fs-20px">
                                   ✓
-                                </span>{" "}
+                                </span>
                                 Resume light physical activities
                               </li>
                               <li className="py-4 border-bottom border-lgrey">
                                 <span className="primary-bg text-white rounded-circle px-1 fs-20px">
                                   ✓
-                                </span>{" "}
+                                </span>
                                 Keep scalp clean and moisturized (if advised)
                               </li>
                               <li className="py-4">
                                 <span className="primary-bg text-white rounded-circle px-1 fs-20px">
                                   ✓
-                                </span>{" "}
+                                </span>
                                 Stay patient — new growth hasn’t started yet
                               </li>
                             </ul>
@@ -1475,7 +1493,7 @@ const Service = () => {
             <h2 className="p-head text-center">
               Comparison of GFC vs PRP Hair treatment
             </h2>
-            <h5 className="sec-c fw-light text-center w-75 my-3">
+            <h5 className="sec-c fw-light text-center w-md-75 my-3">
               GFC injections are different from the PRP injections, though both
               of them are non-invasive, the following factors make them
               different from one to another:
@@ -1677,11 +1695,21 @@ const Service = () => {
             modules={[Navigation, Pagination, Autoplay]}
             navigation
             spaceBetween={30}
-            slidesPerView={3}
             loop={true}
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
+            }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              576: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
             }}
           >
             <SwiperSlide>
@@ -1715,7 +1743,7 @@ const Service = () => {
           </h2>
           <div className="row">
             {cities.map((city, index) => (
-              <div className="col-md-2 p-3" key={index}>
+              <div className="col-md-2 col-6 p-2 p-md-3" key={index}>
                 <div className="box rounded-4">
                   <img src={city.img} alt={city.name} />
                   <h4 className="text-white fw-normal fs-5">{city.name}</h4>
@@ -1784,7 +1812,9 @@ const Service = () => {
                       <option value="PRP">PRP</option>
                     </select>
                   </div>
-                  <button className="primary-btn w-25">Submit</button>
+                  <button className="primary-btn w-25 ms-3 ms-md-0">
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>

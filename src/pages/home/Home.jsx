@@ -883,8 +883,8 @@ const Home = () => {
                 aria-labelledby="resultsModalLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog modal-dialog-centered gallery-model">
-                  <div className="modal-content text-start p-5">
+                <div className="modal-dialog modal-dialog-centered gallery-model mx-md-auto">
+                  <div className="modal-content text-start p-md-5">
                     <div className="modal-header border-none">
                       <h2 className="modal-title" id="resultsModalLabel">
                         Hair Transplant Gallery
@@ -897,7 +897,7 @@ const Home = () => {
                       ></button>
                     </div>
                     <div className="modal-body">
-                      <div className="row justify-content-start border-bottom pb-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 border-bottom pb-5">
                         <h4 className="pb-3">Grade I (3)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -951,7 +951,7 @@ const Home = () => {
                           />
                         </div>
                       </div>
-                      <div className="row justify-content-start border-bottom py-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 border-bottom py-5">
                         <h4 className="pb-3">Grade II (2)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -988,7 +988,7 @@ const Home = () => {
                           />
                         </div>
                       </div>
-                      <div className="row justify-content-start border-bottom py-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 border-bottom py-5">
                         <h4 className="pb-3">Grade III (3)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -1042,7 +1042,7 @@ const Home = () => {
                           />
                         </div>
                       </div>
-                      <div className="row justify-content-start border-bottom py-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 border-bottom py-5">
                         <h4 className="pb-3">Grade IV (2)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -1079,7 +1079,7 @@ const Home = () => {
                           />
                         </div>
                       </div>
-                      <div className="row justify-content-start border-bottom py-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 border-bottom py-5">
                         <h4 className="pb-3">Grade V (3)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -1133,7 +1133,7 @@ const Home = () => {
                           />
                         </div>
                       </div>
-                      <div className="row justify-content-start border-bottom py-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 border-bottom py-5">
                         <h4 className="pb-3">Grade VI (1)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -1153,7 +1153,7 @@ const Home = () => {
                           />
                         </div>
                       </div>
-                      <div className="row justify-content-start pt-5">
+                      <div className="row justify-content-start gap-4 gap-md-0 pt-5">
                         <h4 className="pb-3">Grade VII (3)</h4>
                         <div className="col-md-4">
                           <ReactCompareSlider
@@ -1295,7 +1295,7 @@ const Home = () => {
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
                     >
-                      <span className="faq-number">01</span> Do you provide a
+                      <span className="faq-number primary-c">01</span> Do you provide a
                       natural front hairline?
                     </button>
                   </h2>

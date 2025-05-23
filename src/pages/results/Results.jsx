@@ -259,7 +259,7 @@ const Results = () => {
       {/* Banner */}
       <div className="sec-pad sec-bg pt-0">
         <div className="container">
-          <div className="row h-500">
+          <div className="row h-500 h-sm-fit-content">
             <div className="col-md-4 p-3 just-align-center align-items-end">
               <div
                 className="card py-3 bg-black rounded-4 position-relative overflow-hidden promo"
@@ -284,10 +284,10 @@ const Results = () => {
                 From thinning crowns to full heads — see what’s possible with
                 QHT.
               </h4>
-              <img src={scrollDown} height="150" className="mt-5" alt="" />
+              <img src={scrollDown} height="150" className="mt-5 d-none d-md-block" alt="" />
             </div>
 
-            <div className="col-md-4 just-align-center align-items-start">
+            <div className="col-md-4 d-none d-md-flex just-align-center align-items-start">
               <ReactCompareSlider
                 style={{
                   borderRadius: "20px",
@@ -594,7 +594,7 @@ const Results = () => {
                   </div>
                 </div>
 
-                <div className="d-flex gap-4">
+                <div className="d-flex flex-column flex-md-row gap-4">
                   <div>
                     <img
                       src={selectedPatient.beforeImage}
@@ -634,7 +634,7 @@ const Results = () => {
           {/* Load More */}
           {visibleCount < transformations.length && (
             <div className="d-flex justify-content-center gap-4 align-items-center mt-5">
-              <div className="line"></div>
+              <div className="line d-none d-md-block"></div>
               <div>
                 <button
                   className="primary-btn px-5"
@@ -643,7 +643,7 @@ const Results = () => {
                   Load More
                 </button>
               </div>
-              <div className="line"></div>
+              <div className="line d-none d-md-block"></div>
             </div>
           )}
         </div>
@@ -695,9 +695,9 @@ const Results = () => {
             </div>
           </div>
 
-          <div className="row mt-5 ">
+          <div className="row mt-md-5 ">
             <div className="col-md-6">
-              <img src={bald} className="w-75 rounded-3" alt="" />
+              <img src={bald} className="w-md-75 w-100 mb-4 mb-md-0 rounded-3" alt="" />
             </div>
             <div className="col-md-6">
               <h3 className="fs-2 fw-normal">

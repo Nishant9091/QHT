@@ -209,3 +209,10 @@
 #Cost table {
     border-color: #ddd!important;
 }
+
+@media (max-width:768px){
+  .hw-200{
+    height: 190px;
+    width: 190px;
+  }
+}
