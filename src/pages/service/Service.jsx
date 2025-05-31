@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import "./Service.css";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Modal } from "react-bootstrap";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import {
-  ReactCompareSlider,
-  ReactCompareSliderImage,
-} from "react-compare-slider";
-import after from "../../assets/after.png";
 import Testimonials from "../../components/Testimonials.jsx";
 import Booknow from "../../components/Booknow.jsx";
 import Bangalore from "../../assets/city/bangalore.png";
@@ -33,7 +26,6 @@ import S1 from "../../assets/s1.png";
 import S2 from "../../assets/s2.png";
 import S3 from "../../assets/s3.png";
 import Llogo from "../../assets/llogo.png";
-import Glogo from "../../assets/glogo.png";
 import Booked from "../../assets/booked.png";
 import Men from "../../assets/men.png";
 import Psurgery from "../../assets/psurgery.png";
@@ -47,12 +39,6 @@ import Alopecia from "../../assets/icon/alopecia.png";
 import Genetics from "../../assets/icon/genetics.png";
 import Hormonal from "../../assets/icon/hormonal.png";
 import Scarring from "../../assets/icon/scarring.png";
-import V1 from "../../assets/video-thumbnail/1.png";
-import V2 from "../../assets/video-thumbnail/2.png";
-import V3 from "../../assets/video-thumbnail/3.png";
-import V4 from "../../assets/video-thumbnail/4.png";
-import V5 from "../../assets/video-thumbnail/5.png";
-import V6 from "../../assets/video-thumbnail/6.png";
 import GoogleRating from "../../assets/GoogleRating.png";
 import TwoFace from "../../assets/twoface.png";
 import Banner from "../../assets/banner.png";
@@ -74,6 +60,9 @@ import doctor from "../../assets/icon/doctor.png";
 import graftp from "../../assets/icon/graftp.png";
 import bald from "../../assets/icon/bald.png";
 import location from "../../assets/icon/location.png";
+import GetInTouch from "../../components/GetInTouch.jsx";
+import Videos from "../../components/Videos.jsx";
+import Results from "../../components/Results.jsx";
 
 const cities = [
   { name: "Bangalore", img: Bangalore },
@@ -131,15 +120,6 @@ const clinicsData = [
   },
 ];
 
-const videoData = [
-  { thumbnail: V1, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
-  { thumbnail: V6, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
-  { thumbnail: V5, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
-  { thumbnail: V2, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
-  { thumbnail: V3, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
-  { thumbnail: V4, videoUrl: "https://www.youtube.com/embed/llYfX0Rf_Yk" },
-];
-
 const benefits = [
   {
     icon: Graft,
@@ -195,23 +175,10 @@ const steps = [
 ];
 
 const Service = () => {
-  const [show, setShow] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState("");
-
-  const handleShow = (url) => {
-    setSelectedVideo(url);
-    setShow(true);
-  };
-
-  const handleClose = () => {
-    setShow(false);
-    setSelectedVideo("");
-  };
-
   return (
     <>
       {/* Float Button */}
-      <Booknow />
+      {/* <Booknow /> */}
 
       {/* Banner */}
       <div className="sec-pad sec-bg">
@@ -273,7 +240,10 @@ const Service = () => {
       </div>
 
       {/* Form */}
-      <div className="position-relative position-sm-static h-sm-fit-content" id="Form">
+      <div
+        className="position-relative position-sm-static h-sm-fit-content"
+        id="Form"
+      >
         <div className="primary-bg py-5 rounded-md-4 my-md-4 container d-flex align-items-center justify-content-around">
           <form className="row g-2 align-items-center w-100 w-md-auto flex-grow-1">
             <h4 className="col-md-3 just-align-center text-white fw-light">
@@ -354,7 +324,9 @@ const Service = () => {
               <img src={D2} className="w-md-75 w-100 rounded-4" alt="" />
             </div>
             <div className="col-md-6 just-align-center flex-column align-items-start">
-              <h2 className="p-head text-black mt-4 mt-md-0">Hair Transplant In India?</h2>
+              <h2 className="p-head text-black mt-4 mt-md-0">
+                Hair Transplant In India?
+              </h2>
               <p>
                 Hair loss is a common issue among men, with over
                 60% experiencing significant hair loss by age 50. If you’re
@@ -376,83 +348,7 @@ const Service = () => {
         </div>
       </div>
 
-      {/* Results */}
-      <div className="g-gradient sec-pad">
-        <div className="container">
-          <div className="row align-items-center justify-content-between mb-5">
-            <div className="col-md-9">
-              <h2 className="p-head text-white">Results of Hair Transplant.</h2>
-              <p className="mt-3 text-white fw-light">
-                At QHT Hair Transplant Clinic in India, we understand the
-                emotional and psychological impact of hair loss. Our team of
-                dedicated hair transplant professionals offers
-                comprehensive hair treatment for men, using advanced techniques
-                to ensure natural-looking results.
-              </p>
-            </div>
-            <div className="col-md-3 text-md-end">
-              <img src={Glogo} alt="Google Rating" className="img-fluid w-50" />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="d-flex justify-content-center align-items-center mt-5">
-              <div className="line d-none d-md-block"></div>
-              <div>
-                <button className="btn bg-white text-black rounded-pill px-4 py-2">
-                  Explore More Results +
-                </button>
-              </div>
-              <div className="line d-none d-md-block"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Results />
 
       {/* Who is ideal */}
       <div className="sec-pad">
@@ -634,7 +530,11 @@ const Service = () => {
               className="row align-items-center py-5 border-bottom"
             >
               <div className="col-md-2">
-                <img src={item.icon} alt={`icon-${idx}`} className="w-md-75 mb-4 mb-md-0 w-25" />
+                <img
+                  src={item.icon}
+                  alt={`icon-${idx}`}
+                  className="w-md-75 mb-4 mb-md-0 w-25"
+                />
               </div>
               <div className="col-md-4">
                 <h4 className="fw-normal text-white lh-base">{item.title}</h4>
@@ -958,44 +858,7 @@ const Service = () => {
         </div>
       </div>
 
-      {/* Video */}
-      <div className="sec-pad">
-        <div className="container">
-          <div className="row">
-            <h2 className="p-head w-md-50">
-              Watch the incredible journey & transformation.
-            </h2>
-          </div>
-          <div className="row">
-            {videoData.map((video, index) => (
-              <div className="col-md-4" key={index}>
-                <img
-                  src={video.thumbnail}
-                  alt=""
-                  className="m-md-3 my-2 my-md-0 w-100"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleShow(video.videoUrl)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bootstrap Modal */}
-        <Modal show={show} onHide={handleClose} centered size="lg">
-          <Modal.Body className="p-0">
-            <div className="ratio ratio-16x9">
-              <iframe
-                src={selectedVideo}
-                title="Video"
-                frameBorder="0"
-                allow="autoplay; fullscreen"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </Modal.Body>
-        </Modal>
-      </div>
+      <Videos />
 
       {/* Cause */}
       <div className="sec-pad pt-0">
@@ -1754,105 +1617,7 @@ const Service = () => {
         </div>
       </div>
 
-      {/* Get in Touch */}
-      <div className="sec-bg sec-pad">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <h2 className="p-head">
-                Get in touch with us <br /> or you can visit us.
-              </h2>
-              <h5 className="sec-c fw-light w-75 my-3">
-                Reach out anytime or visit us directly for personalized
-                assistance, expert guidance, and seamless support experience.
-              </h5>
-              <ul className="list-unstyled fw-500 mt-2 lh-lg">
-                <li>+91-9897020696</li>
-                <li>regrowclinic@gmail.com</li>
-              </ul>
-            </div>
-            <div className="col-md-6">
-              <form>
-                <div className="row">
-                  <div className="col-md-6">
-                    <input
-                      className="form-control bg-transparent p-3 border-none border-bottom border-grey rounded-0 mb-4"
-                      type="text"
-                      placeholder="First Name"
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      className="form-control bg-transparent p-3 border-none border-bottom border-grey rounded-0 mb-4"
-                      type="text"
-                      placeholder="Last Name"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      className="form-control bg-transparent p-3 border-none border-bottom border-grey rounded-0 mb-4"
-                      type="email"
-                      placeholder="Email Address"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      className="form-control bg-transparent p-3 border-none border-bottom border-grey rounded-0 mb-4"
-                      type="tel"
-                      placeholder="Mobile"
-                    />
-                  </div>
-                  <div>
-                    <select className="form-control bg-transparent p-3 border-none border-bottom border-grey rounded-0 mb-4">
-                      <option value="Interested In ?" selected disabled>
-                        Interested In ?
-                      </option>
-                      <option value="PRP">PRP</option>
-                      <option value="PRP">PRP</option>
-                      <option value="PRP">PRP</option>
-                    </select>
-                  </div>
-                  <button className="primary-btn w-25 ms-3 ms-md-0">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="row mt-4">
-            <div className="col-md-4 p-3">
-              <div className="bg-white rounded-4 p-4 h-100">
-                <FaMapMarkerAlt className="fs-3 primary-c" />
-                <h4 className="my-3">Haridwar</h4>
-                <p className="sec-c">
-                  QHT Clinic,521, Model Colony, Ranipur More, Haridwar,
-                  Uttarakhand
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 p-3">
-              <div className="bg-white rounded-4 p-4 h-100">
-                <FaMapMarkerAlt className="fs-3 primary-c" />
-                <h4 className="my-3">Delhi</h4>
-                <p className="sec-c">
-                  D -15, Outer Ring Rd, above Federal Bank, Prashant Vihar,
-                  Sector 14, Rohini, New Delhi, Delhi, 110085
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 p-3">
-              <div className="bg-white rounded-4 p-4 h-100">
-                <FaMapMarkerAlt className="fs-3 primary-c" />
-                <h4 className="my-3">Hyderabad</h4>
-                <p className="sec-c">
-                  QHT Clinic Opposite Hotel Park HyattRoad No. 2 Banjara Hills,
-                  Hyderabad, Telangana
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <GetInTouch />
     </>
   );
 };
