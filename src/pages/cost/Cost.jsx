@@ -282,7 +282,7 @@ const Cost = () => {
 
   return (
     <>
-      <div>
+      <div id="costpg">
         {/* Map */}
         <div className="sec-pad sec-bg">
           <div className="container just-align-center">

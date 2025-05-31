@@ -119,3 +119,7 @@
   box-shadow: none;
   color: #586548;
 }
+
+#costpg table{
+  min-width: 800px;
+}
