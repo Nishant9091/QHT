@@ -286,12 +286,12 @@ const Cost = () => {
         {/* Map */}
         <div className="sec-pad sec-bg">
           <div className="container just-align-center">
-            <img src={Map} className="w-75" alt="" />
+            <img src={Map} className="w-md-75 w-100" alt="" />
           </div>
         </div>
 
         {/* Marquee & Accordian */}
-        <div className="sec-pad">
+        <div className="sec-pad bg-white">
           <div className="container">
             <div className="marquee-container">
               <div className="marquee-text">
@@ -767,7 +767,7 @@ const Cost = () => {
             <hr className="my-5" />
 
             {/* SAVA-FUE Section */}
-            <div className="row gy-4 py-5">
+            <div className="row flex-column-reverse flex-md-row gy-4 py-5">
               <div className="col-lg-7 ">
                 <div className="table-responsive bg-white px-4 py-2 rounded-4">
                   <table className="table text-start">
@@ -1128,7 +1128,7 @@ const Cost = () => {
                   <img
                     src={satisfy} // Replace with your image path
                     alt="Patients"
-                    className="me-3"
+                    className="me-3 w-sm-100"
                     width={550}
                   />
                 </div>
@@ -1136,7 +1136,7 @@ const Cost = () => {
                   <img
                     src={gr} // Replace with star image or SVG
                     alt="Google Rating"
-                    className="me-3"
+                    className="me-3 w-sm-100"
                     width={300}
                   />
                 </div>
@@ -1175,7 +1175,7 @@ const Cost = () => {
                 <h5 className="form-label fw-semibold mb-4">
                   Select Your Baldness Level
                 </h5>
-                <div className="d-flex justify-content-between align-items-center mt-2 flex-wrap">
+                <div className="d-flex justify-content-md-between justify-content-start align-items-center mt-2 flex-wrap">
                   {[1, 2, 3, 4, 5, 6, 7].map((level) => (
                     <label
                       key={level}
@@ -1291,7 +1291,7 @@ const Cost = () => {
 
         {/* Why QHT */}
         <div
-          className="qht-section text-white d-flex align-items-center"
+          className="qht-section text-white d-flex align-items-center py-5 p-md-0"
           style={{
             backgroundImage: `url(${bgImage})`,
             backgroundSize: "cover",
