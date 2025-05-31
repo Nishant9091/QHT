@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 const Footer = () => {
     return (
         <>
-            <div className='container-fluid px-5 pt-5' style={{backgroundColor:"#3d4536"}} id='footer'>
+            <div className='container-fluid px-3 px-md-5 pb-5 pb-md-0 pt-5' style={{backgroundColor:"#3d4536"}} id='footer'>
                 <div className='row justify-content-between'>
                     <div className='col-md-4'>
                         <div>
@@ -93,7 +93,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='border-top mt-3 pb-2 pt-4'>
-                        <p>
+                        <p className='text-center text-md-start'>
                         © 2025 QHT Regrow Hair &nbsp; l &nbsp; Privacy Policy &nbsp; l &nbsp; Terms & Conditions
                         </p>
                     </div>
