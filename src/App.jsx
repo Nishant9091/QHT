@@ -8,6 +8,7 @@ import Results from "./pages/results/Results.jsx";
 import Cost from "./pages/cost/Cost.jsx";
 import "./App.css";
 import Booknow from "./components/Booknow.jsx";
+import AboutUs from "./pages/about/AboutUs.jsx";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/service" element={<Service />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/cost" element={<Cost />} />
       </Routes>
       <Footer />

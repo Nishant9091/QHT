@@ -35,7 +35,7 @@ const Videos = () => {
       <div className="sec-pad">
         <div className="container">
           <div className="row">
-            <h2 className="p-head w-md-50">
+            <h2 className="p-head w-md-50 mb-5">
               Watch the incredible journey & transformation.
             </h2>
           </div>

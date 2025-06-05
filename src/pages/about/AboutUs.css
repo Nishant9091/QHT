@@ -1,0 +1,47 @@
+#tourism {
+  background: linear-gradient(90deg, #000000 -9.68%, rgba(0, 0, 0, 0) 72.67%),
+    url(../../assets/tour.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.check-icon {
+  color: green;
+  font-size: 1.2rem;
+}
+.cross-icon {
+  color: red;
+  font-size: 1.2rem;
+}
+.highlight-bg {
+  background-color: #f1fdf5;
+}
+.testimonial-box {
+  min-height: 400px;
+  position: relative;
+}
+.swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.trusted-highlight {
+  background-color: #dfe8d9;
+  color: #365c2c;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+}
+
+.emoji-inline {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+.trusted-section h2 {
+  line-height: 1.4;
+}
+
+.image-wrapper img {
+  max-height: 500px;
+  object-fit: cover;
+}
