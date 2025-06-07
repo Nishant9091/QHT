@@ -314,4 +314,10 @@ span {
   .w-sm-100 {
     width: 100% !important;
   }
+  .rounded-left {
+    border-radius: 0 0 1.5rem 1.5rem;
+  }
+  .rounded-right {
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
 }

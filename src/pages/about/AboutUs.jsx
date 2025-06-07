@@ -153,14 +153,14 @@ const AboutUs = () => {
     <>
       <div>
         {/* Banner */}
-        <div className="sec-bg pt-5 sec-pad">
+        <div className="sec-bg pt-md-5 pt-0 sec-pad">
           <div className="container">
             <div className="row justify-content-center align-items-center">
-              <img src={abouth1} className="w-50 mb-4" alt="" />
+              <img src={abouth1} className="w-md-50 w-100 mb-4" alt="" />
               <p className="text-center sec-c">
                 We are recognized for our world-class treatment, consistency,
-                eye for aesthetics, and <br /> natural results. Our popularity
-                is not limited to India alone.
+                eye for aesthetics, and <br className="d-none d-md-block" />{" "}
+                natural results. Our popularity is not limited to India alone.
               </p>
 
               <div>
@@ -203,7 +203,7 @@ const AboutUs = () => {
 
                 {/* Certifications */}
                 <p className="mt-4">Our Certifications</p>
-                <div className="d-flex gap-3 mt-3 flex-wrap">
+                <div className="d-flex gap-3 mt-3 flex-wrap flex-column">
                   <div className="border rounded-4 p-4 d-flex align-items-center gap-3">
                     <img src={fda} alt="FDA" width="40" />
                     <div>
@@ -294,7 +294,7 @@ const AboutUs = () => {
             >
               {timelineData.map((item, idx) => (
                 <SwiperSlide key={idx}>
-                  <div className="p-5 pb-5 bg-transparent border position-relative border-white ms-5 me-2 rounded-5 h-300">
+                  <div className="p-5 pb-5 bg-transparent border position-relative border-white ms-5 me-2 rounded-5 h-300 h-sm-fit-content">
                     <span className="px-3 py-2 fs-5 position-absolute text-white fw-normal">
                       {item.year}
                     </span>
@@ -318,7 +318,7 @@ const AboutUs = () => {
                 </h2>
               </div>
               <div className="col-md-6">
-                <p className="sec-c w-75">
+                <p className="sec-c w-md-75 w-100">
                   QHT Clinic delivers advanced hair restoration solutions with
                   global presence, expert care, and world-class infrastructure.
                 </p>
@@ -376,7 +376,7 @@ const AboutUs = () => {
                     outstanding value.
                   </h2>
                 </div>
-                <div className="d-flex justify-content-end align-items-center">
+                <div className="d-none d-md-flex justify-content-end align-items-center">
                   <img
                     src={mission1}
                     alt="Clinic"
@@ -385,21 +385,21 @@ const AboutUs = () => {
                   />
                 </div>
               </div>
-              <div className="col-md-2 d-flex justify-content-end align-items-center">
+              <div className="col-md-2 d-none d-md-flex justify-content-end align-items-center">
                 <img src={mission2} alt="Tool" className="w-100" />
               </div>
-              <div className="col-md-5 d-flex justify-content-between flex-column align-items-start">
+              <div className="col-md-5 d-flex justify-content-between flex-column align-items-center align-items-md-start">
                 <div>
                   <img
                     src={mission3}
                     alt="Procedure"
-                    className="w-75"
+                    className="w-md-75 w-100 ml-sm-0"
                     style={{ marginLeft: "-2.5rem" }}
                   />
                 </div>
 
                 <div className="text-end">
-                  <h6 className="text-parot">Our Vision</h6>
+                  <h6 className="text-parot mt-3 mt-md-0">Our Vision</h6>
                   <h3 className="fw-normal mt-3">
                     Hair transplantation combines “Hair Design” and “Art,”
                     creating not just results but a true work of art.
@@ -413,7 +413,7 @@ const AboutUs = () => {
         {/* Get Know */}
         <div className="p-5 know-bg">
           <div className="container text-white">
-            <div className="row justify-content-center align-items-center">
+            <div className="row justify-content-center align-items-center gap-3 gap-md-0">
               <div className="col-md-2">
                 <img src={calc} alt="" />
               </div>
@@ -548,19 +548,23 @@ const AboutUs = () => {
               >
                 {celebrityTestimonials.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <div className="row px-5 align-items-center testimonial-box rounded-5 overflow-hidden">
-                      <div className="col-md-6 rounded-left p-5 text-white text-start primary-bg h-600">
-                        <div className="display-1 mx-4 mt-5">❝</div>
-                        <h3 className="fw-normal mb-3 mx-4">{item.review}</h3>
-                        <p className="mx-4 fs-5 fw-light">{item.details}</p>
-                        <p className="mt-4 mb-1 mx-4 fs-5">
+                    <div className="row px-5 flex-column-reverse flex-md-row align-items-center testimonial-box rounded-5 overflow-hidden">
+                      <div className="col-md-6 rounded-left p-md-5 p-3 text-white text-start primary-bg h-600 h-sm-fit-content">
+                        <div className="display-1 mx-md-4 mx-0 mt-md-5 mt-0">❝</div>
+                        <h3 className="fw-normal mb-3 mx-md-4 mx-0">
+                          {item.review}
+                        </h3>
+                        <p className="mx-md-4 mx-0 fs-5 fw-light">
+                          {item.details}
+                        </p>
+                        <p className="mt-md-4 mx-0 mb-1 mx-md-4 mx-0 fs-5">
                           {"★".repeat(item.stars)}
                         </p>
-                        <p className="mb-0 mx-4 fs-5">
+                        <p className="mb-0 mx-md-4 mx-0 fs-5">
                           – {item.name.split(" ")[0]}
                           <strong>{item.name.split(" ")[1]}</strong>
                         </p>
-                        <small className="text-white fw-lighter mx-4">
+                        <small className="text-white fw-lighter mx-md-4 mx-0">
                           {item.title}
                         </small>
                       </div>
@@ -596,8 +600,8 @@ const AboutUs = () => {
             </h2>
             <p className="text-center sec-c mb-5">
               QHT offers advanced hair transplant solutions with personalized
-              care, often preferred over <br /> Delhi/Mumbai clinics for
-              quality, technology, and results.
+              care, often preferred over <br className="d-none d-md-block" />{" "}
+              Delhi/Mumbai clinics for quality, technology, and results.
             </p>
 
             <div className="table-responsive">
@@ -697,13 +701,13 @@ const AboutUs = () => {
 
         {/* Medical Tourism */}
         <div className="sec-pad" id="tourism">
-          <div className="container text-white py-5">
-            <div className="row py-5">
-              <h2 className="p-head w-50">
+          <div className="container text-white py-md-5 py-0">
+            <div className="row py-md-5 py-0">
+              <h2 className="p-head w-100 w-md-50">
                 QHT Medical Tourism facilities to make your experience
                 extraordinary & Comfortable
               </h2>
-              <p className="w-75 mt-2">
+              <p className="w-md-75 w-100 mt-2">
                 We are providing facilities that are one of the most advanced &
                 well appointed with cutting edge latest machines & equipment to
                 certify unmatched levels of safety & hygiene.

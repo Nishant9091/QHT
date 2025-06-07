@@ -6,7 +6,7 @@ const Services = () => {
     <>
       {/* Services */}
       <div className="container sec-pad">
-        <div className="row px-3 px-md-0">
+        <div className="row w-100 px-3 px-md-0">
           <div className="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
             <h2 className="p-head">Our Services</h2>
             <h6 className="border py-1 px-2 rounded text-secondary">2</h6>

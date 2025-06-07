@@ -162,7 +162,7 @@
   margin-bottom: 8rem;
 }
 
-#timeline .swiper-slide span{
+#timeline .swiper-slide span {
   top: -1rem;
   left: -1rem;
   background: #525e46;
@@ -179,4 +179,13 @@
   height: 150%; /* Or set a fixed height */
   z-index: -1;
   margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  #timeline .swiper-slide {
+    margin-bottom: 1rem;
+  }
+  .ml-sm-0 {
+    margin-left: 0!important;
+  }
 }
