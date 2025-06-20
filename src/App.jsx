@@ -10,6 +10,7 @@ import "./App.css";
 import Booknow from "./components/Booknow.jsx";
 import AboutUs from "./pages/about/AboutUs.jsx";
 import ContactUs from "./pages/contactus/ContactUs.jsx";
+import Blogs from "./pages/blogs/Blogs.jsx";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/cost" element={<Cost />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/blogs" element={<Blogs />} />
       </Routes>
       <Footer />
     </Router>
