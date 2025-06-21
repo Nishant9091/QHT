@@ -70,6 +70,15 @@ span {
   );
 }
 
+.sec-gradient {
+  background: linear-gradient(
+    179.87deg,
+    rgba(235, 243, 237, 0.8) 0.11%,
+    rgba(255, 255, 255, 0.8) 23.48%,
+    #eff5f1 80.69%
+  );
+}
+
 .h-250 {
   height: 250px;
 }
@@ -267,7 +276,9 @@ span {
 .text-parot {
   color: #c5ed82;
 }
-
+.bg-parot {
+  background-color  : #c5ed82;
+}
 
 @media (min-width: 768px) {
   .column-md-3 {

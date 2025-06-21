@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "../blogs/Blogs.css";
 import blogimg from "../../assets/blogimg.png";
+import Guide from "../../components/Guide";
 
 const categories = [
   "Hair Transplant Techniques",
@@ -154,50 +155,7 @@ const blogs = () => {
       </div>
 
       {/* Care Guide blogs */}
-      <div className="sec-pad primary-bg" id="guide">
-        <div className="container text-white">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="p-head">Hair Care Guides</h2>
-          </div>
-
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            navigation
-            spaceBetween={30}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false,
-            }}
-          >
-            {guides.map((guide, idx) => (
-              <SwiperSlide key={idx}>
-                <div className="card bg-transparent text-white border-0">
-                  <img
-                    src={guide.image}
-                    className="card-img-top rounded"
-                    alt="..."
-                  />
-                  <div className="card-body px-0">
-                    <small className="text-parot">{guide.date}</small>
-                    <h4 className="fw-normal mt-2">{guide.title}</h4>
-                    <h6 className="sec-c fw-light text-white mt-3 h-100px">
-                      {guide.desc}
-                    </h6>
-                    <a href="#" className="primary-c d-block text-parot">
-                      Read more
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </div>
+      <Guide />
     </>
   );
 };
