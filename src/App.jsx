@@ -13,6 +13,12 @@ import ContactUs from "./pages/contactus/ContactUs.jsx";
 import Blogs from "./pages/blogs/Blogs.jsx";
 import BlogDetails from "./pages/blog-details/BlogDetails.jsx";
 import OurClinic from "./pages/our-clinic/OurClinic.jsx";
+import Thankyou from "./pages/Thankyou.jsx";
+import FourOFour from "./pages/FourOFour.jsx";
+import PaymentTC from "./pages/PaymentTC.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import Faqs from "./pages/Faqs.jsx";
+import MedicalTourism from "./pages/medical-tourism/MedicalTourism.jsx";
 
 const App = () => {
   return (
@@ -29,6 +35,12 @@ const App = () => {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/our-clinic" element={<OurClinic />} />
+        <Route path="/thankyou" element={<Thankyou />} />
+        <Route path="/not-found" element={<FourOFour />} />
+        <Route path="/payment-tc" element={<PaymentTC />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/faqs" element={<Faqs />} />
+        <Route path="/medical-tourism" element={<MedicalTourism />} />
       </Routes>
       <Footer />
     </Router>

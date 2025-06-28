@@ -240,11 +240,15 @@ span {
         align-items: flex-start !important;
     }
 } */
-
 .header-wrapper {
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  background-color: rgb(255 255 255 / 0%) !important;
-  backdrop-filter: blur(5px) !important;
+  transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.4s ease,
+    backdrop-filter 0.4s ease;
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
+.header-wrapper.scrolled {
+  backdrop-filter: blur(8px);
 }
 
 .slide-up {
@@ -277,7 +281,7 @@ span {
   color: #c5ed82;
 }
 .bg-parot {
-  background-color  : #c5ed82;
+  background-color: #c5ed82;
 }
 
 @media (min-width: 768px) {

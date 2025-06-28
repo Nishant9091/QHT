@@ -5,12 +5,14 @@ import logo from '../assets/qht-logo-final.png';
 const Header = () => {
     const [showHeader, setShowHeader] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
             if (currentScrollY > 100) {
+                setScrolled(true);
                 if (currentScrollY < lastScrollY) {
                     setShowHeader(true); // scrolling up
                 } else {
@@ -18,6 +20,7 @@ const Header = () => {
                 }
             } else {
                 setShowHeader(true); // show when at top
+                setScrolled(false);
             }
 
             setLastScrollY(currentScrollY);
@@ -29,7 +32,10 @@ const Header = () => {
 
     return (
         <>
-            <div className={`header-wrapper fixed-top transition-all ${showHeader ? 'slide-down' : 'slide-up'}`} style={{ backgroundColor: "#f0f6f2", zIndex: 999 }}>
+            <div
+                className={`header-wrapper fixed-top transition-all ${showHeader ? 'slide-down' : 'slide-up'} ${scrolled ? 'scrolled' : ''}`}
+                style={{ zIndex: 999 }}
+            >
                 <div className='container-fluid'>
                     <nav className="navbar navbar-expand-lg navbar-light">
                         <div className="container-fluid py-4 px-4 justify-content-between">
