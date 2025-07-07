@@ -1,33 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bc from "../assets/icon/bc.png";
 import baal from "../assets/icon/baal.png";
 import ghadi from "../assets/icon/ghadi.png";
 
-const faqData = [
-  "Do you provide a natural front hairline?",
-  "What’s the cost of hair transplant in India?",
-  "Which are the different packages provided for hair transplant India?",
-  "Is there any impact of the type of hair surgery on the cost?",
-  "Does hair transplant damage existing hair?",
-];
-
 const sections = [
   {
     title: "Hair Transplant Recovery Timeline",
-    icon: ghadi, // yahan apna icon path do
+    icon: ghadi,
+    slug: "recovery-timeline",
   },
   {
     title: "Pre & Post Surgery Care",
     icon: baal,
+    slug: "pre-post-care",
   },
   {
     title: "Side Effects & Risks Explained",
     icon: bc,
+    slug: "side-effects",
   },
 ];
 
 const Faqs = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [faqs, setFaqs] = useState([]);
+
+  // const pageSlug = sections[activeSection].slug; // 👈 Identify which FAQ section to show
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/faqs`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("All FAQs:", data);
+        // const filtered = data.filter((faq) => faq.page === pageSlug);
+        setFaqs(data);
+        // console.log("Filtered FAQs for:", pageSlug, filtered);
+      });
+  }, []);
 
   return (
     <>
@@ -61,7 +70,7 @@ const Faqs = () => {
                   onClick={() => setActiveSection(index)}
                 >
                   <img
-                    src={section.icon} // Use section.icon, not baal if you want different icons
+                    src={section.icon}
                     alt=""
                     width="40"
                   />
@@ -74,41 +83,46 @@ const Faqs = () => {
           {/* FAQs */}
           <div className="col-md-8 px-5">
             <h2 className="p-head mb-5">
-              Looking for an answer <br /> on hair transplant ?
+              Looking for an answer <br /> on hair transplant?
             </h2>
             <h4 className="mb-4">{sections[activeSection].title}</h4>
-            <div className="accordion" id={`accordion-${activeSection}`}>
-              {faqData.map((q, idx) => (
-                <div
-                  className="accordion-item border-bottom py-3 sec-c border-none"
-                  key={idx}
-                >
-                  <h2
-                    className="accordion-header sec-c"
-                    id={`heading-${activeSection}-${idx}`}
-                  >
-                    <button
-                      className="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={`#collapse-${activeSection}-${idx}`}
-                      aria-expanded="false"
-                      aria-controls={`collapse-${activeSection}-${idx}`}
-                    >
-                      {String(idx + 1).padStart(2, "0")} &nbsp; {q}
-                    </button>
-                  </h2>
+
+            {faqs.length === 0 ? (
+              <p>No FAQs available for this section yet.</p>
+            ) : (
+              <div className="accordion" id={`accordion-${activeSection}`}>
+                {faqs.map((faq, idx) => (
                   <div
-                    id={`collapse-${activeSection}-${idx}`}
-                    className="accordion-collapse collapse"
-                    aria-labelledby={`heading-${activeSection}-${idx}`}
-                    data-bs-parent={`#accordion-${activeSection}`}
+                    className="accordion-item border-bottom py-3 sec-c border-none"
+                    key={idx}
                   >
-                    <div className="accordion-body">Answer coming soon...</div>
+                    <h2
+                      className="accordion-header sec-c"
+                      id={`heading-${activeSection}-${idx}`}
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse-${activeSection}-${idx}`}
+                        aria-expanded="false"
+                        aria-controls={`collapse-${activeSection}-${idx}`}
+                      >
+                        {String(idx + 1).padStart(2, "0")} &nbsp; {faq.question}
+                      </button>
+                    </h2>
+                    <div
+                      id={`collapse-${activeSection}-${idx}`}
+                      className="accordion-collapse collapse"
+                      aria-labelledby={`heading-${activeSection}-${idx}`}
+                      data-bs-parent={`#accordion-${activeSection}`}
+                    >
+                      <div className="accordion-body">{faq.answer}</div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

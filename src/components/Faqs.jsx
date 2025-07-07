@@ -13,10 +13,10 @@ const Faqs = () => {
       .then((res) => res.json())
       .then((data) => {
         // Frontend filter by page field
-        console.log("sare page ke",data)
+        // console.log("sare page ke",data)
         const filtered = data.filter((faq) => faq.page === pageSlug);
         setFaqs(filtered);
-        console.log("iss page ke",filtered)
+        // console.log("iss page ke",filtered)
       });
   }, [pageSlug]);
 

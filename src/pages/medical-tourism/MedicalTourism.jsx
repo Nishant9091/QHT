@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../medical-tourism/MedicalTourism.css";
 import Services from "../../components/Services";
 import Faqs from "../../components/Faqs";
@@ -78,82 +78,40 @@ const testimonialsData = [
   },
 ];
 
-const countryData = [
-  {
-    country: "UAE",
-    flag: "https://flagcdn.com/w40/ae.png",
-    price: "$4,000",
-    desc: "UAE clinics provide luxury care with modern techniques, especially in Dubai—offering premium services at costs higher than India or Turkey.",
-  },
-  {
-    country: "U.S.A",
-    flag: "https://flagcdn.com/w40/us.png",
-    price: "$7,000",
-    desc: "USA hair transplants offer advanced technology and premium care, delivering excellent results but with significantly higher costs and surgeon fees.",
-  },
-  {
-    country: "Turkey",
-    flag: "https://flagcdn.com/w40/tr.png",
-    price: "$1,500",
-    desc: "Turkey offers affordable hair transplants with skilled surgeons, all-inclusive packages, and attracts international patients seeking quality, cost-effective care.",
-  },
-  {
-    country: "India",
-    flag: "https://flagcdn.com/w40/in.png",
-    price: "$800",
-    desc: "India offers affordable, world-class hair transplant services with expert surgeons, modern clinics, advanced techniques, and significant cost savings.",
-  },
-];
-
-const sections = [
-  {
-    title: "Before Visit",
-    icon: ungli, // yahan apna icon path do
-  },
-  {
-    title: "Your Stay",
-    icon: buildstar,
-  },
-  {
-    title: "The Treatment",
-    icon: baldgraft,
-  },
-  {
-    title: "Departure",
-    icon: plane,
-  },
-];
-
-const rows = [
-  {
-    feature: "Growth factor concentration",
-    qht: "Higher the concentration of the growth factors, better are the results",
-    fue: "Even lower plasma concentration is enough",
-  },
-  {
-    feature: "Pain & discomfort",
-    qht: "Minimal, due to the use of latest technology",
-    fue: "Moderate due to the less refined technological process",
-  },
-  {
-    feature: "Effectiveness",
-    qht: "More consistent results can be achieved",
-    fue: "Lesser consistent results",
-  },
-  {
-    feature: "Risk of side effects",
-    qht: "Very low",
-    fue: "Comparatively higher",
-  },
-  {
-    feature: "Cost",
-    qht: "Moderately priced & is effective",
-    fue: "Comparatively lower in price",
-  },
-];
-
 const MedicalTourism = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/medical-tourism`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result.data);
+        console.log(result.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // if (loading) return <div>Loading...</div>;
+  if (!data) return <div>Error loading data</div>;
+
+  // Prepare sections data from API
+  const sections = data.sections.processTabs.tabs.map((tab) => ({
+    title: tab.title,
+    icon:
+      tab.icon === "ungli.png"
+        ? ungli
+        : tab.icon === "buildstar.png"
+        ? buildstar
+        : tab.icon === "baldgraft.png"
+        ? baldgraft
+        : tab.icon === "plane.png"
+        ? plane
+        : ungli,
+    content: tab.content,
+  }));
 
   return (
     <>
@@ -162,11 +120,10 @@ const MedicalTourism = () => {
         <div className="container just-align-center h-100">
           <div className="row">
             <h1 className="text-white text-center display-3 fw-normal">
-              Medical Tourism By Qht Hair <br /> Transplant Clinic
+              {data.sections.banner.title}
             </h1>
             <h4 className="text-white text-center fw-light">
-              Affordable, high-quality hair transplants abroad with expert
-              medical care.
+              {data.sections.banner.subtitle}
             </h4>
             <div className="just-align-center mt-5">
               <span className="border text-white display-3 hw-100 just-align-center rounded-circle">
@@ -182,16 +139,10 @@ const MedicalTourism = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-7">
-              <h2 className="p-head">
-                Why India is the top choice <br /> for hair transplant.
-              </h2>
+              <h2 className="p-head">{data.sections.topChoice.heading}</h2>
             </div>
             <div className="col-md-5">
-              <p className="sec-c">
-                The city offers a high level of luxury at a cost-effective
-                price. Many patients visit QHT Clinic with their families, who
-                can enjoy an extended vacation.
-              </p>
+              <p className="sec-c">{data.sections.topChoice.description}</p>
             </div>
           </div>
 
@@ -202,51 +153,34 @@ const MedicalTourism = () => {
               </div>
             </div>
             <div className="col-md-4 mt-4 mt-md-0">
-              <div className="sec-bg p-4 rounded-4">
-                <img src={capman} width="60" alt="" />
-                <h4 className="py-3">
-                  Cost-Effective <br /> Treatments
-                </h4>
-                <p className="h-100px">
-                  Hair transplants in India cost much less than in Western
-                  countries, offering exceptional value without sacrificing
-                  quality or safety.
-                </p>
-              </div>
-              <div className="sec-bg p-4 mt-4 rounded-4">
-                <img src={plusbag} width="60" alt="" />
-                <h4 className="py-3">
-                  State of the Art <br /> Technology
-                </h4>
-                <p className="h-100px">
-                  Clinics use modern equipment and the latest techniques like
-                  FUE and DHI, ensuring minimally invasive, safe, and
-                  natural-looking hair restoration.
-                </p>
-              </div>
+              {data.sections.topChoice.features
+                .slice(0, 2)
+                .map((feature, index) => (
+                  <div
+                    key={feature._id}
+                    className="sec-bg p-4 rounded-4"
+                    style={index === 1 ? { marginTop: "1rem" } : {}}
+                  >
+                    <img src={feature.icon} alt={feature.title} width="60" />
+                    <h4 className="py-3">{feature.title}</h4>
+                    <p className="h-100px">{feature.description}</p>
+                  </div>
+                ))}
             </div>
             <div className="col-md-4 mt-4 mt-md-0">
-              <div className="sec-bg p-4 rounded-4">
-                <img src={baldgraft} width="60" alt="" />
-                <h4 className="py-3">
-                  Highly Skilled <br /> Surgeons
-                </h4>
-                <p className="h-100px">
-                  Indian surgeons are internationally trained and experienced,
-                  specializing in advanced hair restoration with high success
-                  and satisfaction rates.
-                </p>
-              </div>
-              <div className="sec-bg p-4 mt-4 rounded-4">
-                <img src={hathplus} width="60" alt="" />
-                <h4 className="py-3">
-                  Seamless Medical <br /> Travel Support
-                </h4>
-                <p className="h-100px">
-                  Clinics use advanced tools and techniques like FUE and DHI for
-                  safe, natural, minimally invasive hair restoration.
-                </p>
-              </div>
+              {data.sections.topChoice.features
+                .slice(2, 4)
+                .map((feature, index) => (
+                  <div
+                    key={feature._id}
+                    className="sec-bg p-4 rounded-4"
+                    style={index === 1 ? { marginTop: "1rem" } : {}}
+                  >
+                    <img src={feature.icon} alt={feature.title} width="60" />
+                    <h4 className="py-3">{feature.title}</h4>
+                    <p className="h-100px">{feature.description}</p>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -255,7 +189,7 @@ const MedicalTourism = () => {
       {/* Why */}
       <div className="sec-pad g-gradient">
         <div className="container">
-          <img src={Why} className="w-100" alt="" />
+          <img src={data.sections.whySection.image} className="w-100" alt="" />
         </div>
       </div>
 
@@ -263,14 +197,8 @@ const MedicalTourism = () => {
       <div className="sec-pad pb-0" id="comp">
         <div className="container">
           <div className="row text-md-center text-start">
-            <h2 className="p-head">
-              FUE vs QHT clear comparisons <br /> with strong benefits
-            </h2>
-            <p className="sec-c">
-              QHT offers advanced hair transplant solutions with personalized
-              care, often preferred over <br /> Delhi/Mumbai clinics for
-              quality, technology, and results.
-            </p>
+            <h2 className="p-head">{data.sections.comparison.heading}</h2>
+            <p className="sec-c">{data.sections.comparison.description}</p>
           </div>
 
           <div className="container my-4">
@@ -283,15 +211,21 @@ const MedicalTourism = () => {
                   <tr>
                     <th className="fw-medium fs-4 text-start">Feature</th>
                     <th className="fw-medium fs-4 text-start primary-c">
-                      <span className="me-2"><img src={uphand} alt="" /></span> QHT Benefits
+                      <span className="me-2">
+                        <img src={uphand} alt="" />
+                      </span>{" "}
+                      QHT Benefits
                     </th>
                     <th className="fw-medium fs-4 text-start">
-                      <span className="me-2"><img src={downhand} alt="" /></span> FUE Technique
+                      <span className="me-2">
+                        <img src={downhand} alt="" />
+                      </span>{" "}
+                      FUE Technique
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {rows.map((row, idx) => (
+                  {data.sections.comparison.table.map((row, idx) => (
                     <tr key={idx}>
                       <td className="text-start">{row.feature}</td>
                       <td className="text-start">{row.qht}</td>
@@ -313,7 +247,8 @@ const MedicalTourism = () => {
           </div>
           <div className="col-md-6 border-start border-sm-none pe-md-5 pe-0 just-align-center justify-content-end">
             <h2 className="p-head text-white text-center text-md-start fw-normal">
-              Connect with <br className="d-none d-md-block"/> hair transplant expert.
+              Connect with <br className="d-none d-md-block" /> hair transplant
+              expert.
             </h2>
           </div>
           <div className="col-md-2 just-align-center">
@@ -327,87 +262,77 @@ const MedicalTourism = () => {
       {/* Tabs */}
       <div className="container sec-pad">
         <h2 className="p-head w-md-75 px-2 px-md-0">
-          Benefits you’ll receive during your visit for a seamless, satisfying
-          experience.
+          {data.sections.processTabs.heading}
         </h2>
         <p className="pt-4 pb-5 px-2 px-md-0">
-          During your visit to QHT Hair Transplant, you’ll experience expert
-          consultation, personalized treatment planning, advanced hair
-          restoration techniques, compassionate care, hygienic facilities, and
-          transparent pricing—ensuring a comfortable, satisfying, and
-          results-driven journey toward natural hair regrowth.
+          {data.sections.processTabs.description}
         </p>
         <div className="container">
-        <div className="row">
-          {/* Sidebar */}
-          <div className="col-md-4 mb-4 pe-md-5">
-            <div className="list-group rounded-3 sec-bg p-4">
-              {sections.map((section, index) => (
-                <button
-                  key={index}
-                  className={`list-group-item border-bottom border-none rounded-3 text-black d-flex justify-content-start gap-3 align-items-center  p-4 list-group-item-action ${
-                    activeSection === index
-                      ? "primary-bg text-white shadow"
-                      : "sec-bg"
-                  }`}
-                  onClick={() => setActiveSection(index)}
-                >
-                  <img
-                    src={section.icon} // Use section.icon, not baal if you want different icons
-                    alt=""
-                    width="40"
-                  />
-                  {section.title}
-                </button>
-              ))}
+          <div className="row">
+            {/* Sidebar */}
+            <div className="col-md-4 mb-4 pe-md-5">
+              <div className="list-group rounded-3 sec-bg p-4">
+                {sections.map((section, index) => (
+                  <button
+                    key={index}
+                    className={`list-group-item border-bottom border-none rounded-3 text-black d-flex justify-content-start gap-3 align-items-center  p-4 list-group-item-action ${
+                      activeSection === index
+                        ? "primary-bg text-white shadow"
+                        : "sec-bg"
+                    }`}
+                    onClick={() => setActiveSection(index)}
+                  >
+                    <img src={section.icon} alt="" width="40" />
+                    {section.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-md-8 px-5">
+              <h2 className="p-head mb-3">
+                What we do for your premium stay and seamless experience
+              </h2>
+              <p>
+                We ensure your visit is as smooth and stress-free as possible.
+                From the moment you arrive, our team offers support with
+                accommodation, transport, and local assistance. Our priority is
+                to make you feel relaxed so you can focus on your
+                transformation.
+              </p>
+              <img src={mtism} className="w-100 rounded-4" alt="" />
+              <ul className="my-3 m-0 ps-3">
+                <li>
+                  Travel Assistance, Support with booking flights and airport
+                  transfers.
+                </li>
+                <li>
+                  Comfortable Accommodation, Assistance in finding safe,
+                  hygienic, and convenient hotels near the clinic.
+                </li>
+                <li>
+                  On-Ground Support, Friendly team available for local guidance
+                  and logistical help.
+                </li>
+              </ul>
+              <p>
+                Whether you're visiting from another city or abroad, you'll
+                receive personal attention and local guidance. Our goal is to
+                ensure your journey is hassle-free, letting you focus on your
+                treatment and recovery.
+              </p>
             </div>
           </div>
-
-          <div className="col-md-8 px-5">
-            <h2 className="p-head mb-3">
-              What we do for your premium stay and seamless experience
-            </h2>
-            <p>
-              We ensure your visit is as smooth and stress-free as possible.
-              From the moment you arrive, our team offers support with
-              accommodation, transport, and local assistance. Our priority is to
-              make you feel relaxed so you can focus on your transformation.
-            </p>
-            <img src={mtism} className="w-100 rounded-4" alt="" />
-            <ul className="my-3 m-0 ps-3">
-              <li>
-                Travel Assistance, Support with booking flights and airport
-                transfers.
-              </li>
-              <li>
-                Comfortable Accommodation, Assistance in finding safe, hygienic,
-                and convenient hotels near the clinic.
-              </li>
-              <li>
-                On-Ground Support, Friendly team available for local guidance
-                and logistical help.
-              </li>
-            </ul>
-            <p>
-              Whether you’re visiting from another city or abroad, you’ll
-              receive personal attention and local guidance. Our goal is to
-              ensure your journey is hassle-free, letting you focus on your
-              treatment and recovery.
-            </p>
-          </div>
-        </div></div>
+        </div>
       </div>
 
       {/* Cost Comparison */}
       <div className="sec-pad sec-bg">
         <div className="container">
-          <h2 className="p-head">
-            Cost Comparison between hair transplant <br /> in USA, indian,
-            turkey and UAE.
-          </h2>
+          <h2 className="p-head">{data.sections.costComparison.heading}</h2>
 
           <div className="row g-4 py-5">
-            {countryData.map((item, index) => (
+            {data.sections.costComparison.countries.map((item, index) => (
               <div className="col-md-3" key={index}>
                 <div className="card h-100 border-0 rounded-4 shadow-sm">
                   <div className="card-body p-4">
@@ -519,15 +444,15 @@ const MedicalTourism = () => {
       {/* Glimps */}
       <div className="sec-pad">
         <div className="container text-center">
-          <h2 className="p-head">
-            Glimpse of our infrastructure <br /> & hospitality
-          </h2>
-          <p className="sec-c">
-            Experience our state-of-the-art infrastructure and exceptional
-            hospitality, designed to <br /> ensure comfort, care, and
-            outstanding results.
-          </p>
-          <img src={glimps} className="w-100 mt-4" alt="" />
+          <h2 className="p-head">{data.sections.glimpse.heading}</h2>
+          <p className="sec-c">{data.sections.glimpse.description}</p>
+          <div className="row">
+            {data.sections.glimpse.images.map((image, index) => (
+              <div className="col-md-4">
+                <img src={image} className="w-100 mt-4" alt="glimps" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
