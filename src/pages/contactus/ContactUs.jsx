@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../contactus/ContactUs.css";
 import callmsg from "../../assets/icon/callmsg.png";
 import hosp from "../../assets/icon/hosp.png";
@@ -19,38 +19,46 @@ import {
 } from "react-icons/fa";
 import ExploreMore from "../../components/ExploreMore";
 
-const clinics = [
-  {
-    city: "Delhi",
-    address:
-      "D-15, Outer Ring Rd, above Federal Bank, Prashant Vihar, Sector 14, Rohini, New Delhi, Delhi, 110085",
-    contact: "07217033844",
-    icon: delhi,
-  },
-  {
-    city: "Hyderabad",
-    address:
-      "QHT Clinic Opposite Hotel Park Hyatt Road No. 2 Banjara Hills, Hyderabad, Telangana",
-    contact: "09992228265",
-    icon: hydrabad,
-  },
-  {
-    city: "Haridwar",
-    address:
-      "QHT Clinic, 521, Model Colony, Ranipur More, Haridwar, Uttarakhand",
-    contact: "09528168089",
-    icon: haridwar,
-  },
-  {
-    city: "Noida",
-    address:
-      "3rd Floor, C Block, Phase 2, Industrial Area, Sector 62, Noida, Uttar Pradesh 201301",
-    contact: "09899015045",
-    icon: noida,
-  },
-];
-
 const ContactUs = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/contact`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result.contactData);
+        console.log(result.contactData);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // if (loading) return <div>Loading...</div>;
+  if (!data) return <div>Error loading data</div>;
+
+  // Helper function to get icon based on filename
+  const getIcon = (iconName) => {
+    switch (iconName) {
+      case "msgppl.png":
+        return msgppl;
+      case "callmsg.png":
+        return callmsg;
+      case "hosp.png":
+        return hosp;
+      case "delhi.png":
+        return delhi;
+      case "hydrabad.png":
+        return hydrabad;
+      case "haridwar.png":
+        return haridwar;
+      case "noida.png":
+        return noida;
+      default:
+        return msgppl;
+    }
+  };
+
   return (
     <>
       {/* Banner */}
@@ -58,10 +66,10 @@ const ContactUs = () => {
         <div className="container just-align-center h-100">
           <div className="row">
             <h1 className="text-white text-center display-3 fw-normal">
-              Contact QHT Clinic
+              {data.banner.title}
             </h1>
             <h4 className="text-white text-center fw-light">
-              Expert care, compassionate service, here when needed most.
+              {data.banner.subtitle}
             </h4>
           </div>
         </div>
@@ -71,43 +79,23 @@ const ContactUs = () => {
       <div className="sec-pad patti">
         <div className="container">
           <div className="row text-center text-md-start text-white">
-            <div className="col-md-4 border-x mb-3 mb-md-0 border-grey">
-              <div className="row justify-content-center">
-                <div className="col-md-4 just-align-center">
-                  <img src={msgppl} className="mb-3 mb-md-0" alt="" />
-                </div>
-                <div className="col-md-7 just-align-center">
-                  <h5 className="fw-normal">
-                    Personalized Hair Loss Help Services
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 border-x mb-3 mb-md-0 border-grey">
-              <div className="row justify-content-center">
-                <div className="col-md-4 just-align-center">
-                  <img src={callmsg} className="mb-3 mb-md-0" alt="" />
-                </div>
-                <div className="col-md-7 just-align-center">
-                  <h5 className="fw-normal">
-                    Quick & Easy <br className="d-none d-md-block" /> Contact
-                    Options
-                  </h5>
+            {data.badges.map((badge, index) => (
+              <div
+                key={badge._id}
+                className={`col-md-4 border-x mb-3 mb-md-0 border-grey ${
+                  index !== data.badges.length - 1 ? "border-end" : ""
+                }`}
+              >
+                <div className="row justify-content-center">
+                  <div className="col-md-4 just-align-center">
+                    <img src={badge.icon} className="mb-3 mb-md-0" alt="" />
+                  </div>
+                  <div className="col-md-7 just-align-center">
+                    <h5 className="fw-normal">{badge.title}</h5>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-4 border-x mb-3 mb-md-0 border-grey">
-              <div className="row justify-content-center">
-                <div className="col-md-4 just-align-center">
-                  <img src={hosp} className="mb-3 mb-md-0" alt="" />
-                </div>
-                <div className="col-md-7 just-align-center">
-                  <h5 className="fw-normal">
-                    Trusted Clinic, Proven Transplant Results
-                  </h5>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -117,43 +105,37 @@ const ContactUs = () => {
         <div className="container py-5">
           <div className="row align-items-start">
             <div className="col-md-6 mb-4">
-              <h2 className="p-head text-black">
-                Contact The
-                <br />
-                Leading Hair Transplant
-                <br />
-                Clinic In India.
-              </h2>
-              <p className="sec-c mt-3">
-                Reach out to India’s leading hair transplant clinic for
-                <br />
-                expert care, proven results, and support.
-              </p>
+              <h2 className="p-head text-black">{data.contactInfo.heading}</h2>
+              <p className="sec-c mt-3">{data.contactInfo.description}</p>
 
               <div className="d-flex align-items-center mt-5">
                 <div className="icon-circle primary-bg text-white px-2 py-1 rounded-circle me-3">
                   <FaEnvelope />
                 </div>
-                <span>regrowclinic@gmail.com</span>
+                <span>{data.contactInfo.email}</span>
               </div>
 
               <div className="d-flex align-items-center mt-3">
                 <div className="icon-circle primary-bg text-white px-2 py-1 rounded-circle me-3">
                   <FaPhoneAlt />
                 </div>
-                <span>+91-9084726916, +91-9084726916</span>
+                <span>{data.contactInfo.phoneNumbers.join(", ")}</span>
               </div>
 
               <div className="mt-4">
-                <span className="bg-white px-2 py-1 me-3 rounded-circle primary-c">
-                  <FaInstagram />
-                </span>
-                <span className="bg-white px-2 py-1 me-3 rounded-circle primary-c">
-                  <FaFacebookF />
-                </span>
-                <span className="bg-white px-2 py-1 me-3 rounded-circle primary-c">
-                  <FaLinkedinIn />
-                </span>
+                {data.contactInfo.socialMedia.map((social) => (
+                  <a
+                    key={social._id}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white px-2 py-1 me-3 rounded-circle primary-c d-inline-block"
+                  >
+                    {social.platform === "instagram" && <FaInstagram />}
+                    {social.platform === "facebook" && <FaFacebookF />}
+                    {social.platform === "linkedin" && <FaLinkedinIn />}
+                  </a>
+                ))}
               </div>
             </div>
 
@@ -209,18 +191,13 @@ const ContactUs = () => {
       {/* City */}
       <div className="sec-pad">
         <div className="container py-5 text-center">
-          <h2 className="p-head mb-3">Locate Our Clinics</h2>
-          <p className="sec-c mb-5">
-            Discuss and compare QHT with other hair transplant techniques. Share
-            experiences, <br /> ask questions, and get expert insights from real
-            patients.
-          </p>
+          <h2 className="p-head mb-3">{data.clinicSection.heading}</h2>
+          <p className="sec-c mb-5">{data.clinicSection.description}</p>
 
           <div className="row gap-0">
-            {clinics.map((clinic, idx) => (
-              <div className="col-md-3 p-0" key={idx}>
+            {data.clinics.map((clinic, idx) => (
+              <div className="col-md-3 p-0" key={clinic._id}>
                 <div className="border-x border-lgrey py-4 px-5 h-100 text-start position-relative">
-                  {/* <div className="fs-1 mb-3">{clinic.icon}</div> */}
                   <img
                     src={clinic.icon}
                     className="mb-3 object-fit-contain"
@@ -239,9 +216,14 @@ const ContactUs = () => {
                     <span className="text-black">Contact :</span>{" "}
                     {clinic.contact}
                   </p>
-                  <div className="d-flex justify-content-start align-items-center mt-4 fs-3">
+                  <a
+                    href={clinic.mapLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="d-flex text-black justify-content-start align-items-center mt-4 fs-3 text-decoration-none"
+                  >
                     🡽
-                  </div>
+                  </a>
                 </div>
               </div>
             ))}
