@@ -19,6 +19,8 @@ import PaymentTC from "./pages/PaymentTC.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import Faqs from "./pages/Faqs.jsx";
 import MedicalTourism from "./pages/medical-tourism/MedicalTourism.jsx";
+import Country from "./pages/country/Country.jsx";
+import City from "./pages/city/City.jsx";
 
 const App = () => {
   return (
@@ -27,16 +29,19 @@ const App = () => {
       <Booknow />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/service" element={<Service />} />
+        <Route path="/service/:slug" element={<Service />} />
+        <Route path="/country/:slug" element={<Country />} />
+        <Route path="/city/:slug" element={<City />} />
         <Route path="/results" element={<Results />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/cost" element={<Cost />} />
+        <Route path="/cost/:slug" element={<Cost />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blog-details" element={<BlogDetails />} />
+        <Route path="/blog/:slug" element={<BlogDetails />} />
+        <Route path="/guide/:slug" element={<BlogDetails />} />
         <Route path="/our-clinic" element={<OurClinic />} />
         <Route path="/thankyou" element={<Thankyou />} />
-        <Route path="/not-found" element={<FourOFour />} />
+        <Route path="*" element={<FourOFour />} />
         <Route path="/payment-tc" element={<PaymentTC />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/faqs" element={<Faqs />} />

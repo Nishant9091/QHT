@@ -1,138 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Faqs = () => {
+  const [faqs, setFaqs] = useState([]);
+  const location = useLocation();
+
+  // Slug nikaal lo
+  const pageSlug = location.pathname.split("/")[1] || "general";
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/faqs`)
+      .then((res) => res.json())
+      .then((data) => {
+        // Frontend filter by page field
+        console.log("sare page ke",data)
+        const filtered = data.filter((faq) => faq.page === pageSlug);
+        setFaqs(filtered);
+        console.log("iss page ke",filtered)
+      });
+  }, [pageSlug]);
+
   return (
-    <div>
-      {/* FAQ's */}
-      <div id="faq" className="sec-pad">
-        <div className="container">
-          <div className="row">
-            <h2 className="text-center p-head">Frequently Asked Questions</h2>
-            <p className="text-center">
-              If you don’t find relevant answer please send us your queries on{" "}
-              <br /> support@qhtclinic.com or Call +91-9897020696
-            </p>
-            <div className="accordion" id="faqAccordion">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                  >
-                    <span className="faq-number primary-c">01</span> Do you
-                    provide a natural front hairline?
-                  </button>
-                </h2>
-                <div
-                  id="collapseOne"
-                  className="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div className="accordion-body">
-                    Yes, we specialize in designing a natural-looking hairline
-                    that suits your facial structure.
-                  </div>
-                </div>
-              </div>
+    <div id="faq" className="sec-pad">
+      <div className="container">
+        <div className="row">
+          <h2 className="text-center p-head">Frequently Asked Questions</h2>
+          <p className="text-center">
+            If you don’t find a relevant answer please send us your queries on{" "}
+            <br /> support@qhtclinic.com or Call +91-9897020696
+          </p>
 
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingTwo">
+          <div className="accordion" id="faqAccordion">
+            {faqs.map((faq, idx) => (
+              <div key={faq._id} className="accordion-item">
+                <h2 className="accordion-header" id={`heading${idx}`}>
                   <button
                     className="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
+                    data-bs-target={`#collapse${idx}`}
                   >
-                    <span className="faq-number">02</span> What's the cost of
-                    hair transplant in India?
+                    <span className="faq-number primary-c">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>{" "}
+                    {faq.question}
                   </button>
                 </h2>
                 <div
-                  id="collapseTwo"
+                  id={`collapse${idx}`}
                   className="accordion-collapse collapse"
                   data-bs-parent="#faqAccordion"
                 >
-                  <div className="accordion-body">
-                    The cost varies depending on several factors like technique
-                    and grafts needed. Contact us for a free estimate.
-                  </div>
+                  <div className="accordion-body">{faq.answer}</div>
                 </div>
               </div>
+            ))}
 
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingThree">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                  >
-                    <span className="faq-number">03</span> Which are the
-                    different packages provided for hair transplant India?
-                  </button>
-                </h2>
-                <div
-                  id="collapseThree"
-                  className="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div className="accordion-body">
-                    We offer standard, premium, and VIP packages customized to
-                    your needs.
-                  </div>
-                </div>
-              </div>
-
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingFour">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour"
-                  >
-                    <span className="faq-number">04</span> Is there any impact
-                    of the type of hair surgery on the cost?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFour"
-                  className="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div className="accordion-body">
-                    Yes, different techniques like FUE, FUT, or DHI have varying
-                    costs.
-                  </div>
-                </div>
-              </div>
-
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingFive">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFive"
-                  >
-                    <span className="faq-number">05</span> Does hair transplant
-                    damage existing hair?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFive"
-                  className="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div className="accordion-body">
-                    No, if performed correctly, the existing hair remains
-                    unaffected.
-                  </div>
-                </div>
-              </div>
-            </div>
+            {faqs.length === 0 && (
+              <p className="text-center my-5">No FAQs found for this page.</p>
+            )}
           </div>
         </div>
       </div>

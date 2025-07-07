@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Results.css";
 import {
   ReactCompareSlider,
@@ -103,20 +103,19 @@ const transformations = [
     ],
     surgeryCount: "first",
   },
-  // Skipping promo and video entries
   {
     promo: true,
     type: "consultation",
     title: "Want Similar Results?",
     description: "Tailored strategies for success, book free consultation.",
     phone: "+91-9084726916",
-    img: jhat, // path to green image background you uploaded
+    img: jhat,
   },
   {
     video: true,
     type: "video",
-    videoUrl: "https://example.com/video.mp4", // Replace with actual video link
-    img: promo, // path to video thumbnail you uploaded
+    videoUrl: "https://example.com/video.mp4", 
+    img: promo, 
     cta: "Book Free Consultation",
   },
   {
@@ -176,6 +175,13 @@ const Results = () => {
     surgeryCount: "",
     ageGroup: "",
   });
+  const [transformations, setTransformations] = useState([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/results`)
+      .then((res) => res.json())
+      .then(setTransformations);
+  }, []);
 
   const openModal = (patient) => {
     setSelectedPatient(patient);
@@ -284,7 +290,12 @@ const Results = () => {
                 From thinning crowns to full heads — see what’s possible with
                 QHT.
               </h4>
-              <img src={scrollDown} height="150" className="mt-5 d-none d-md-block" alt="" />
+              <img
+                src={scrollDown}
+                height="150"
+                className="mt-5 d-none d-md-block"
+                alt=""
+              />
             </div>
 
             <div className="col-md-4 d-none d-md-flex just-align-center align-items-start">
@@ -697,7 +708,11 @@ const Results = () => {
 
           <div className="row mt-md-5 ">
             <div className="col-md-6">
-              <img src={bald} className="w-md-75 w-100 mb-4 mb-md-0 rounded-3" alt="" />
+              <img
+                src={bald}
+                className="w-md-75 w-100 mb-4 mb-md-0 rounded-3"
+                alt=""
+              />
             </div>
             <div className="col-md-6">
               <h3 className="fs-2 fw-normal">

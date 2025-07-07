@@ -7,58 +7,58 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import test from "../assets/test.png";
 import quote from "../assets/quotes.png";
 
-const testimonialsData = [
-  {
-    id: 1,
-    name: "Priyanka Das",
-    age: 26,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-  {
-    id: 2,
-    name: "Abhishek Kumar",
-    age: 22,
-    location: "India",
-    rating: 3,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade II",
-  },
-  {
-    id: 3,
-    name: "Amardeep Singh",
-    age: 45,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-  {
-    id: 4,
-    name: "Amardeep Singh",
-    age: 45,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-  {
-    id: 5,
-    name: "Amardeep Singh",
-    age: 45,
-    location: "India",
-    rating: 5,
-    text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
-    image: test,
-    grade: "Grade III",
-  },
-];
+// const testimonialsData = [
+//   {
+//     id: 1,
+//     name: "Priyanka Das",
+//     age: 26,
+//     location: "India",
+//     rating: 5,
+//     text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
+//     image: test,
+//     grade: "Grade III",
+//   },
+//   {
+//     id: 2,
+//     name: "Abhishek Kumar",
+//     age: 22,
+//     location: "India",
+//     rating: 3,
+//     text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
+//     image: test,
+//     grade: "Grade II",
+//   },
+//   {
+//     id: 3,
+//     name: "Amardeep Singh",
+//     age: 45,
+//     location: "India",
+//     rating: 5,
+//     text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
+//     image: test,
+//     grade: "Grade III",
+//   },
+//   {
+//     id: 4,
+//     name: "Amardeep Singh",
+//     age: 45,
+//     location: "India",
+//     rating: 5,
+//     text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
+//     image: test,
+//     grade: "Grade III",
+//   },
+//   {
+//     id: 5,
+//     name: "Amardeep Singh",
+//     age: 45,
+//     location: "India",
+//     rating: 5,
+//     text: "Very good place for hair transplant and everything went smoothly. All staff including Digant brother and receptionist Ma'am were so cooperative...",
+//     image: test,
+//     grade: "Grade III",
+//   },
+// ];
 
 const grades = [
   "Grade I",
@@ -74,6 +74,13 @@ const Testimonials = () => {
   const [selectedGrade, setSelectedGrade] = useState("Grade III");
   const [activeTab, setActiveTab] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [testimonialsData, setTestimonialsData] = useState([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/testimonials`)
+      .then((res) => res.json())
+      .then(setTestimonialsData);
+  }, []);
 
   const filteredTestimonials = testimonialsData.filter(
     (item) => item.grade === selectedGrade
@@ -140,8 +147,8 @@ const Testimonials = () => {
           </div>
 
           <h4 className="my-4">
-            What our community says about their journey <br className="d-none d-md-block"/> and experiences
-            with us so far.
+            What our community says about their journey{" "}
+            <br className="d-none d-md-block" /> and experiences with us so far.
           </h4>
 
           {/* Swiper Testimonials */}

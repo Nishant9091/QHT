@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Service.css";
+// import "./Service.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useParams, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -68,123 +68,13 @@ import Videos from "../../components/Videos.jsx";
 import Results from "../../components/Results.jsx";
 import Faqs from "../../components/Faqs.jsx";
 
-const cities = [
-  { name: "Bangalore", img: Bangalore },
-  { name: "Kolkata", img: Kolkata },
-  { name: "Hyderabad", img: Hyderabad },
-  { name: "Chennai", img: Chennai },
-  { name: "Mumbai", img: Mumbai },
-  { name: "Ahmedabad", img: Ahmedabad },
-  { name: "Jaipur", img: Jaipur },
-  { name: "Indore", img: Indore },
-  { name: "Noida", img: Noida },
-  { name: "Lucknow", img: Lucknow },
-  { name: "Chandigarh", img: Chandigarh },
-  { name: "Gurgaon", img: Gurgaon },
-  { name: "Pune", img: Pune },
-  { name: "Rishikesh", img: Rishikesh },
-  { name: "Haridwar", img: Hairdwar },
-];
-
-const clinicsData = [
-  {
-    title: "Celebrity Clinic",
-    description:
-      "QHT is a celebrity hair transplant clinic in India with a proven track record of delivering exceptional results.",
-    bg: Celeb,
-  },
-  {
-    title: "Expertise",
-    description:
-      "With years of experience and expertise in hair transplantation, our hair transplant surgeon ensures that each patient receives personalized care and the best possible outcome.",
-    bg: Expert,
-  },
-  {
-    title: "Natural Looking Results",
-    description:
-      "Our skilled surgeon’s artistic approach and attention to detail result in natural-looking hairlines and fuller, thicker hair.",
-    bg: Natural,
-  },
-  {
-    title: "State of the Art Facility",
-    description:
-      "Our clinic is equipped with cutting-edge technology and modern facilities to provide patients with a comfortable and seamless experience throughout their hair transplant journey.",
-    bg: Facility,
-  },
-  {
-    title: "Comprehensive Care",
-    description:
-      "From the initial consultation to post-transplant follow-up, our team at QHT Clinic is dedicated to providing extensive care and support.",
-    bg: Care,
-  },
-  {
-    title: "",
-    description: "",
-    bg: Care,
-  },
-];
-
-const benefits = [
-  {
-    icon: Graft,
-    title: "Permanent Hair Transplant For Lasting Results",
-    description:
-      "Hair transplant provides a long-term solution for hair loss as transplanted follicles continue to grow naturally.",
-  },
-  {
-    icon: Cost,
-    title: "Cost-Effective Hair Solution That Saves Money",
-    description:
-      "Despite initial expenses, hair transplant proves cost-effective over time, eliminating the need for ongoing treatments or products.",
-  },
-  {
-    icon: Result,
-    title: "Natural Looking Results With Real Hair",
-    description:
-      "Unlike other methods, hair transplant yields natural-looking outcomes, seamlessly blending with your existing hair.",
-  },
-  {
-    icon: Time,
-    title: "Quick Recovery After Hair Transplant Procedure",
-    description:
-      "Patients typically resume normal activities within days post-transplant, with full results visible in months.",
-  },
-];
-
-const steps = [
-  {
-    title: "Consultation & Assessment",
-    description:
-      "A thorough evaluation of hair loss and donor area suitability is done.",
-    number: "01",
-  },
-  {
-    title: "Donor Hair Extraction",
-    description:
-      "Follicles are harvested from the donor area using methods like FUE or FUT.",
-    number: "02",
-  },
-  {
-    title: "Recovery & Aftercare",
-    description:
-      "Post-procedure instructions are provided for healing, hair growth, and maintenance.",
-    number: "03",
-  },
-  {
-    title: "Preparation & Implantation",
-    description:
-      "Follicles are prepared and implanted precisely into thinning or bald scalp areas.",
-    number: "04",
-  },
-];
-
-const Service = () => {
+const Country = () => {
   const { slug } = useParams();
   const location = useLocation();
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const apiUrl = `${import.meta.env.VITE_API_URL}/services/${slug}`;
+    const apiUrl = `${import.meta.env.VITE_API_URL}/countries/${slug}`;
     fetch(apiUrl)
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
@@ -1093,9 +983,9 @@ const Service = () => {
               </div>
               <img src={Llogo} width="250" alt="" />
             </div>
-            <div className="col-md-6 faqhide">
-              <Faqs/>
-              {/* <div className="accordion" id="faqAccordion">
+            <div className="col-md-6">
+              {/* <Faqs/> */}
+              <div className="accordion" id="faqAccordion">
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingOne">
                     <button
@@ -1216,7 +1106,7 @@ const Service = () => {
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -1289,4 +1179,4 @@ const Service = () => {
   );
 };
 
-export default Service;
+export default Country;

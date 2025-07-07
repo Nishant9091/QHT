@@ -1,4 +1,6 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "../cost/Cost.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -217,7 +219,7 @@ const costData = [
   },
 ];
 
-const data = [
+const costdata = [
   {
     metric: "Cost",
     qht: "₹ 80 per graft.",
@@ -268,6 +270,9 @@ const qhtCostData = [
 ];
 
 const Cost = () => {
+  const { slug } = useParams();
+  const location = useLocation();
+  const [data, setData] = useState(null);
   const [baldnessLevel, setBaldnessLevel] = useState(1);
   const [heredity, setHeredity] = useState("none");
 
@@ -280,212 +285,120 @@ const Cost = () => {
       </div>
     ));
 
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/cities/${slug}`;
+    fetch(apiUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Service data:", data);
+        setData(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching Service:", err);
+      });
+  }, [slug, location.pathname]);
+
+  if (!data) return <div>Loading...</div>;
+
   return (
     <>
       <div id="costpg">
+        {/* SEO HEAD */}
+        <Helmet>
+          <title>{data?.metaTitle || data?.title}</title>
+          <meta
+            name="description"
+            content={data?.metaDescription || data?.title}
+          />
+          <meta name="keywords" content={data?.metaKeywords || ""} />
+        </Helmet>
+
         {/* Map */}
         <div className="sec-pad sec-bg">
           <div className="container just-align-center">
-            <img src={Map} className="w-md-75 w-100" alt="" />
+            <img
+              src={data.mapBanner.image}
+              className="w-md-75 w-100"
+              alt={data.mapBanner.altText}
+            />
           </div>
         </div>
 
-        {/* Marquee & Accordian */}
+        {/* Marquee & Accordion */}
         <div className="sec-pad bg-white">
           <div className="container">
             <div className="marquee-container">
               <div className="marquee-text">
-                ✨ Wait! don’t miss these cost-saving secrets before you scroll
-                to prices
+                {data.marqueeAccordion.marqueeText}
               </div>
             </div>
           </div>
 
           <div className="container py-5">
             {/* Heading */}
-            <h2 className="p-head mb-3">
-              Want to know the cost? great — but first, <br /> here’s how you
-              can save big.
-            </h2>
+            <h2 className="p-head mb-3">{data.marqueeAccordion.heading}</h2>
             <p className="sec-c w-75 mb-5">
-              Before we show you the pricing breakdown, we want to share 21
-              powerful ways you can reduce your hair transplant cost without
-              compromising quality. Whether it’s planning the right time,
-              choosing the right technique, or using hidden offers — these tips
-              could save you ₹30,000 to ₹60,000 or more.
+              {data.marqueeAccordion.description}
             </p>
 
             {/* Bootstrap Accordion */}
             <div className="accordion" id="savingTipsAccordion">
-              {/* Item 1 */}
-              <div className="accordion-item border-y border-none border-lgrey py-2">
-                <h2 className="accordion-header" id="headingOne">
-                  <button
-                    className="accordion-button collapsed fw-semibold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="false"
-                    aria-controls="collapseOne"
-                  >
-                    ▶ &nbsp;&nbsp; Timing & Booking Hacks
-                  </button>
-                </h2>
+              {data.marqueeAccordion.accordionItems.map((item, idx) => (
                 <div
-                  id="collapseOne"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingOne"
-                  data-bs-parent="#savingTipsAccordion"
+                  key={item._id}
+                  className="accordion-item border-y border-none border-lgrey py-2"
                 >
-                  <div className="accordion-body">
-                    (Add content here when needed.)
-                  </div>
-                </div>
-              </div>
-
-              {/* Item 2 */}
-              <div className="accordion-item border-y border-none border-lgrey py-2">
-                <h2 className="accordion-header" id="headingTwo">
-                  <button
-                    className="accordion-button fw-semibold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="true"
-                    aria-controls="collapseTwo"
+                  <h2 className="accordion-header" id={`heading${idx}`}>
+                    <button
+                      className={`accordion-button ${
+                        idx !== 1 ? "collapsed" : ""
+                      } fw-semibold`}
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#collapse${idx}`}
+                      aria-expanded={idx === 1 ? "true" : "false"}
+                      aria-controls={`collapse${idx}`}
+                    >
+                      ▶ &nbsp;&nbsp;{item.title}
+                    </button>
+                  </h2>
+                  <div
+                    id={`collapse${idx}`}
+                    className={`accordion-collapse collapse ${
+                      idx === 1 ? "show" : ""
+                    }`}
+                    aria-labelledby={`heading${idx}`}
+                    data-bs-parent="#savingTipsAccordion"
                   >
-                    ▶ &nbsp;&nbsp;Online & Remote Consultations
-                  </button>
-                </h2>
-                <div
-                  id="collapseTwo"
-                  className="accordion-collapse collapse show"
-                  aria-labelledby="headingTwo"
-                  data-bs-parent="#savingTipsAccordion"
-                >
-                  <div className="accordion-body">
-                    <div className="row text-center">
-                      <div className="col-6 col-md-3 mb-4">
-                        <div className="icon-box text-start">
-                          <img
-                            src={fm}
-                            className="object-fit-contain mb-3"
-                            width="50"
-                            height="50"
-                            alt=""
-                          />
-                          <h6 className="fw-semi-bold">
-                            Get Free Online Consultations
-                          </h6>
-                          <p className="small sec-c">
-                            Save time and money by consulting via Zoom or Google
-                            Meet.
-                          </p>
+                    <div className="accordion-body">
+                      {typeof item.content === "string" ? (
+                        <>{item.content}</>
+                      ) : (
+                        <div className="row text-center">
+                          {item.content.tips.map((tip, tipIdx) => (
+                            <div className="col-6 col-md-3 mb-4" key={tipIdx}>
+                              <div className="icon-box text-start">
+                                <img
+                                  src={tip.icon}
+                                  className="object-fit-contain mb-3"
+                                  width="50"
+                                  height="50"
+                                  alt=""
+                                />
+                                <h6 className="fw-semi-bold">{tip.title}</h6>
+                                <p className="small sec-c">{tip.description}</p>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      </div>
-                      <div className="col-6 col-md-3 mb-4">
-                        <div className="icon-box text-start">
-                          <img
-                            src={tv}
-                            className="object-fit-contain mb-3"
-                            width="50"
-                            height="50"
-                            alt=""
-                          />
-                          <h6 className="fw-semi-bold">Attend Webinars</h6>
-                          <p className="small sec-c">
-                            Clinics often offer discounts to attendees.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-3 mb-4">
-                        <div className="icon-box text-start">
-                          <img
-                            src={msg}
-                            className="object-fit-contain mb-3"
-                            width="50"
-                            height="50"
-                            alt=""
-                          />
-                          <h6 className="fw-semi-bold">Join Forums</h6>
-                          <p className="small sec-c">
-                            Reddit, Facebook groups, and communities often share
-                            deals.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-3 mb-4">
-                        <div className="icon-box text-start">
-                          <img
-                            src={share}
-                            className="object-fit-contain mb-3"
-                            width="50"
-                            height="50"
-                            alt=""
-                          />
-                          <h6 className="fw-semi-bold">Ask for Referrals</h6>
-                          <p className="small sec-c">
-                            Many clinics offer discounts for both existing and
-                            new patients.
-                          </p>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Item 3 */}
-              <div className="accordion-item border-y border-none border-lgrey py-2">
-                <h2 className="accordion-header" id="headingThree">
-                  <button
-                    className="accordion-button collapsed fw-semibold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
-                  >
-                    ▶ &nbsp;&nbsp;Choosing the Right Clinic
-                  </button>
-                </h2>
-                <div
-                  id="collapseThree"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingThree"
-                  data-bs-parent="#savingTipsAccordion"
-                >
-                  <div className="accordion-body">
-                    (Add content here when needed.)
-                  </div>
-                </div>
-              </div>
-
-              {/* Item 4 */}
-              <div className="accordion-item border-y border-none border-lgrey py-2">
-                <h2 className="accordion-header" id="headingFour">
-                  <button
-                    className="accordion-button collapsed fw-semibold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
-                  >
-                    ▶ &nbsp;&nbsp;Smart Planning & Travel
-                  </button>
-                </h2>
-                <div
-                  id="collapseFour"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingFour"
-                  data-bs-parent="#savingTipsAccordion"
-                >
-                  <div className="accordion-body">
-                    (Add content here when needed.)
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -509,70 +422,33 @@ const Cost = () => {
             </div>
 
             <div className="row g-4 pb-5">
-              <div className="col-md-4">
-                <div className="px-4 py-5 sec-bg rounded-4 h-100">
-                  <img src={backbald} className="object-fit-contain mb-3" height="60" width="60" alt="" />
-                  <h6 className="fw-semibold fs-5">Grade Of Baldness</h6>
-                  <p className="sec-c">
-                    The cost of hair transplant in India is mostly determined on
-                    the degree of baldness. It is critical to comprehend the
-                    evolution of hair loss in order to select the best course of
-                    therapy.
-                  </p>
+              {data.factors.map((factor) => (
+                <div className="col-md-4" key={factor._id}>
+                  <div className="px-4 py-5 sec-bg rounded-4 h-100">
+                    <img
+                      src={factor.icon}
+                      className="object-fit-contain mb-3"
+                      height="60"
+                      width="60"
+                      alt=""
+                    />
+                    <h6 className="fw-semibold fs-5">{factor.title}</h6>
+                    <p className="sec-c">{factor.description}</p>
+                  </div>
                 </div>
-              </div>
+              ))}
 
-              <div className="col-md-4">
-                <div className="px-4 py-5 sec-bg rounded-4 h-100">
-                  <img src={gfput} className="object-fit-contain mb-3" height="60" width="60" alt="" />
-                  <h6 className="fw-semibold fs-5">Number of sitting</h6>
-                  <p className="sec-c">
-                    The number of sitting/sessions necessary for a certain set
-                    of grafts is another element that influences the cost of
-                    hair transplants in India.
-                  </p>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="px-4 py-5 sec-bg rounded-4 h-100">
-                  <img src={backh} className="object-fit-contain mb-3" height="60" width="60" alt="" />
-                  <h6 className="fw-semibold fs-5">Donor Area Quality</h6>
-                  <p className="sec-c">
-                    The grafts are removed from the scalp; if the donor region
-                    is good. If not, doctors may have to extract grafts from
-                    other body areas, raising cost per graft.
-                  </p>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="px-4 py-5 sec-bg rounded-4 h-100">
-                  <img src={graftpluck} className="object-fit-contain mb-3" height="60" width="60" alt="" />
-                  <h6 className="fw-semibold fs-5">Number of Grafts</h6>
-                  <p className="sec-c">
-                    The cost of hair transplant in India depends on the number
-                    of grafts needed. Full scalp transplants are costlier than
-                    small bald spots.
-                  </p>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="px-4 py-5 sec-bg rounded-4 h-100">
-                  <img src={star} className="object-fit-contain mb-3" height="60" width="60" alt="" />
-                  <h6 className="fw-semibold fs-5">Clinic Reputation</h6>
-                  <p className="sec-c">
-                    The cost can vary by clinic reputation and experience.
-                    Advanced clinics may charge higher fees for services.
-                  </p>
-                </div>
-              </div>
-
+              {/* Last static box */}
               <div className="col-md-4">
                 <div className="p-4 primary-bg text-white rounded h-100 text-center d-flex flex-column justify-content-center align-items-center">
                   <h6 className="fw-normal fs-4">Explore Results</h6>
-                  <img src={doublearrow} className="object-fit-contain mb-3" height="100" width="100" alt="" />
+                  <img
+                    src={doublearrow}
+                    className="object-fit-contain mb-3"
+                    height="100"
+                    width="100"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -708,11 +584,7 @@ const Cost = () => {
                 <h4 className="p-head text-black">
                   FUE Hair Transplant Cost In India
                 </h4>
-                <p>
-                  There is also some hair loss treatment available for people
-                  suffering from initial hair loss like PRP (Platelet-Rich
-                  Plasma).
-                </p>
+                <p>{data.cost.fue.description}</p>
                 <ul>
                   <li>
                     FUE hair transplant in India is generally a preferred method
@@ -735,7 +607,7 @@ const Cost = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-lg-7 ">
+              <div className="col-lg-7">
                 <div className="table-responsive bg-white px-4 py-2 rounded-4">
                   <table className="table text-start">
                     <thead className="table-white">
@@ -750,8 +622,8 @@ const Cost = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {hairCostData.map((row, i) => (
-                        <tr key={i}>
+                      {data.cost.fue.pricingTable.map((row) => (
+                        <tr key={row._id}>
                           <td className="p-3">{row.level}</td>
                           <td className="p-3">{row.grafts}</td>
                           <td className="p-3">{row.cost}</td>
@@ -768,7 +640,7 @@ const Cost = () => {
 
             {/* SAVA-FUE Section */}
             <div className="row flex-column-reverse flex-md-row gy-4 py-5">
-              <div className="col-lg-7 ">
+              <div className="col-lg-7">
                 <div className="table-responsive bg-white px-4 py-2 rounded-4">
                   <table className="table text-start">
                     <thead className="table-white">
@@ -783,8 +655,8 @@ const Cost = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {hairCostData.map((row, i) => (
-                        <tr key={i}>
+                      {data.cost.savaFue.pricingTable.map((row) => (
+                        <tr key={row._id}>
                           <td className="p-3">{row.level}</td>
                           <td className="p-3">{row.grafts}</td>
                           <td className="p-3">{row.cost}</td>
@@ -796,11 +668,7 @@ const Cost = () => {
               </div>
               <div className="col-lg-5 sec-c">
                 <h5 className="p-head text-black">SAVA–FUE</h5>
-                <p>
-                  The clinic will add taxes to your final bill. And also, the
-                  above cost is just an estimation and is subject to change
-                  without prior notification.
-                </p>
+                <p>{data.cost.savaFue.description}</p>
                 <ul>
                   <li>
                     In Dense Hair Implantation, the hair graft is implanted one
@@ -839,11 +707,7 @@ const Cost = () => {
                 <h4 className="p-head text-black">
                   QHT (Advance FUE) Cost in India
                 </h4>
-                <p>
-                  The clinic will add taxes to your final bill. And also, the
-                  above cost is just an estimation and is subject to change
-                  without prior notification.
-                </p>
+                <p>{data.cost.qht.description}</p>
                 <ul>
                   <li>
                     FUE hair transplant in India is generally a preferred method
@@ -866,7 +730,7 @@ const Cost = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-lg-7 ">
+              <div className="col-lg-7">
                 <div className="table-responsive bg-white px-4 py-2 rounded-4">
                   <table className="table text-start">
                     <thead className="table-white">
@@ -881,8 +745,8 @@ const Cost = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {hairCostData.map((row, i) => (
-                        <tr key={i}>
+                      {data.cost.qht.pricingTable.map((row) => (
+                        <tr key={row._id}>
                           <td className="p-3">{row.level}</td>
                           <td className="p-3">{row.grafts}</td>
                           <td className="p-3">{row.cost}</td>
@@ -1006,15 +870,11 @@ const Cost = () => {
           </div>
         </div>
 
-        {/* Qht delhi vs mumbai */}
+        {/* QHT vs Delhi/Mumbai */}
         <div className="sec-pad pt-0">
           <div className="container border-top py-5 text-center">
-            <h2 className="p-head pt-5">QHT vs Delhi/Mumbai Clinics</h2>
-            <p className="sec-c mb-5">
-              QHT offers advanced hair transplant solutions with personalized
-              care, often preferred over <br /> Delhi/Mumbai clinics for
-              quality, technology, and results.
-            </p>
+            <h2 className="p-head pt-5">{data.qhtVsDelhiMumbai.heading}</h2>
+            <p className="sec-c mb-5">{data.qhtVsDelhiMumbai.description}</p>
 
             <div className="container">
               <div className="table-responsive">
@@ -1030,8 +890,8 @@ const Cost = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.map((row, idx) => (
-                      <tr key={idx}>
+                    {data.qhtVsDelhiMumbai.comparisonTable.map((row) => (
+                      <tr key={row._id}>
                         <td className="p-4">{row.metric}</td>
                         <td className="bg-success bg-opacity-10">
                           {typeof row.qht === "boolean" ? (
@@ -1078,14 +938,9 @@ const Cost = () => {
         {/* Cost Comparison */}
         <div className="sec-pad g-gradient">
           <div className="py-5 px-3 text-white text-center">
-            <h2 className="p-head mb-3">
-              Cost Comparison Between <br /> QHT vs FUE vs DHI
-            </h2>
-            <p className="mb-5">
-              Compare costs of QHT, FUE, and DHI hair transplant techniques to
-              make informed, <br /> budget-friendly, and results-driven
-              decisions for restoration.
-            </p>
+            <h2 className="p-head mb-3">{data.costComparison.heading}</h2>
+            <p className="mb-5">{data.costComparison.description}</p>
+
             <div className="container">
               <div className="table-responsive bg-white p-5 rounded-4">
                 <table className="table table-bordered bg-white text-dark overflow-hidden">
@@ -1109,8 +964,8 @@ const Cost = () => {
                     </tr>
                   </thead>
                   <tbody className="text-start px-3 py-2">
-                    {costData.map((row, idx) => (
-                      <tr key={idx}>
+                    {data.costComparison.comparisonTable.map((row) => (
+                      <tr key={row._id}>
                         <td className="px-4 py-3">{row.level}</td>
                         <td className="px-4 py-3">{row.grafts}</td>
                         <td className="px-4 py-3">{row.qht}</td>
@@ -1126,7 +981,7 @@ const Cost = () => {
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-5 p-4 rounded-4 primary-bg text-white">
                 <div className="d-flex align-items-center mb-3 mb-md-0">
                   <img
-                    src={satisfy} // Replace with your image path
+                    src={satisfy} // your image path
                     alt="Patients"
                     className="me-3 w-sm-100"
                     width={550}
@@ -1134,7 +989,7 @@ const Cost = () => {
                 </div>
                 <div className="d-flex align-items-center mb-3 mb-md-0 border-x px-5 border-white">
                   <img
-                    src={gr} // Replace with star image or SVG
+                    src={gr} // your star rating image
                     alt="Google Rating"
                     className="me-3 w-sm-100"
                     width={300}
@@ -1365,15 +1220,14 @@ const Cost = () => {
                 disableOnInteraction: false,
               }}
             >
-              {solutions.map((item, idx) => (
-                <SwiperSlide key={idx}>
+              {data.solutions.map((item) => (
+                <SwiperSlide key={item._id}>
                   <div className="bg-white h-300 text-dark p-4 rounded-3 text-start d-flex flex-column justify-content-between align-items-start">
                     <img
-                      src={item.icon}
+                      src={item.icon} // helper to map icon string to import
                       className="hw-70 object-fit-contain"
-                      alt=""
+                      alt={item.title}
                     />
-                    {/* <div style={{ fontSize: "2.5rem" }}>{item.icon}</div> */}
                     <h4 className="h-50px">{item.title}</h4>
                     <div className="primary-c" style={{ fontSize: "3rem" }}>
                       🡥
@@ -1395,15 +1249,19 @@ const Cost = () => {
             {/* Section 1 - City */}
             <div className="mb-5">
               <h2 className="p-head w-75 mb-3">
-                Explore Hair Transplant Costs by City for Best Comparison.
+                {data.exploreLocations.cities.heading}
               </h2>
               <p className="sec-c w-75 fs-5">
-                Compare hair transplant costs across major cities and countries
-                to make informed decisions based on location, clinic quality,
-                and budget preferences.
+                {data.exploreLocations.cities.description}
               </p>
               <div className="row text-underline">
-                {renderLinks(cities, "city")}
+                {data.exploreLocations.cities.list.map((item) => (
+                  <div className="col-md-3 mb-2" key={item._id}>
+                    <a href={item.link} className="sec-c">
+                      {item.name}
+                    </a>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -1412,15 +1270,19 @@ const Cost = () => {
             {/* Section 2 - Country */}
             <div>
               <h2 className="p-head w-75 mb-3">
-                Explore Hair Transplant Costs by Country for Best Comparison.
+                {data.exploreLocations.countries.heading}
               </h2>
               <p className="sec-c w-75 fs-5">
-                Compare hair transplant costs across major cities and countries
-                to make informed decisions based on location, clinic quality,
-                and budget preferences.
+                {data.exploreLocations.countries.description}
               </p>
               <div className="row text-underline">
-                {renderLinks(countries, "country")}
+                {data.exploreLocations.countries.list.map((item) => (
+                  <div className="col-md-3 mb-2" key={item._id}>
+                    <a href={item.link} className="sec-c">
+                      {item.name}
+                    </a>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

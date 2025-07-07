@@ -1,10 +1,6 @@
-import { React, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../blogs/Blogs.css";
-import blogimg from "../../assets/blogimg.png";
 import Guide from "../../components/Guide";
 
 const categories = [
@@ -15,84 +11,28 @@ const categories = [
   "Scalp & Hair Health",
 ];
 
-const posts = [
-  {
-    title: "Best Hair Loss Treatment for Men | QHT Clinic India",
-    date: "04th May 2025",
-    desc: "Best Hair loss treatment for Men Hair loss though seems a common problem is really distressing...",
-    image: blogimg,
-    category: "Hair Transplant Techniques",
-  },
-  {
-    title:
-      "Success rate of Hair transplant treatment in India: Expert’s Analysis.",
-    date: "04th May 2025",
-    desc: "Hair transplant in India is increasing in demand in recent times as there has been increasing...",
-    image: blogimg,
-    category: "Baldness Grade",
-  },
-  {
-    title:
-      "What Is the Right Age for a Hair Transplant? Expert Guide for 20s, 30s & 40s",
-    date: "04th May 2025",
-    desc: "What is a Hair Transplant? hair transplant is a cosmetic surgical procedure which involves the...",
-    image: blogimg,
-    category: "Baldness Grade",
-  },
-  {
-    title:
-      "Success rate of Hair transplant treatment in India: Expert’s Analysis.",
-    date: "04th May 2025",
-    desc: "Hair transplant in India is increasing in demand in recent times as there has been increasing...",
-    image: blogimg,
-    category: "Patient Experiences",
-  },
-  {
-    title: "Best Hair Loss Treatment for Men | QHT Clinic India",
-    date: "04th May 2025",
-    desc: "Best Hair loss treatment for Men Hair loss though seems a common problem is really distressing...",
-    image: blogimg,
-    category: "Hair Care Tips",
-  },
-  {
-    title:
-      "What Is the Right Age for a Hair Transplant? Expert Guide for 20s, 30s & 40s",
-    date: "04th May 2025",
-    desc: "What is a Hair Transplant? hair transplant is a cosmetic surgical procedure which involves the...",
-    image: blogimg,
-    category: "Scalp & Hair Health",
-  },
-];
+const Blogs = () => {
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const [posts, setPosts] = useState([]);
 
-const guides = [
-  {
-    title: "Top 10 Trending Hairstyles for Men in 2025",
-    date: "04ᵗʰ May 2025",
-    desc: "Explore the latest stylish haircuts and grooming trends every man should try this year.",
-    image: blogimg,
-  },
-  {
-    title: "Top 10 Trending Hairstyles for Women to Try Today",
-    date: "04ᵗʰ May 2025",
-    desc: "Discover popular and easy-to-maintain hairstyles perfect for any occasion in 2025.",
-    image: blogimg,
-  },
-  {
-    title: "Top 10 Hair Care Tips to Keep Your Hair Healthy and Shiny",
-    date: "04ᵗʰ May 2025",
-    desc: "What is a Hair Transplant? A hair transplant is a cosmetic surgical procedure which involves the...",
-    image: blogimg,
-  },
-  {
-    title: "Top 10 Hair Care Tips to Keep Your Hair Healthy and Shiny",
-    date: "04ᵗʰ May 2025",
-    desc: "What is a Hair Transplant? A hair transplant is a cosmetic surgical procedure which involves the...",
-    image: blogimg,
-  },
-];
+  console.log(posts);
 
-const blogs = () => {
-  const [activeCategory, setActiveCategory] = useState("Baldness Grade");
+  useEffect(() => {
+    console.log("API URL:", `${import.meta.env.VITE_API_URL}/blogs`);
+    fetch(`${import.meta.env.VITE_API_URL}/blogs`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        console.log("All posts:", data);
+        setPosts(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching posts:", err);
+        // Optionally set an error state here
+      });
+  }, []);
 
   const filteredPosts = posts.filter(
     (post) => post.category === activeCategory
@@ -132,24 +72,37 @@ const blogs = () => {
               </button>
             ))}
           </div>
-          {/* <hr /> */}
 
           <div className="row">
-            {filteredPosts.map((post, index) => (
-              <div className="col-md-6 col-lg-4 mb-4" key={index}>
-                <div className="card border-0 h-100">
-                  <img src={post.image} alt="blog" className="card-img-top" />
-                  <div className="card-body px-0">
-                    <small className="sec-c">{post.date}</small>
-                    <h4 className="fw-medium mt-2">{post.title}</h4>
-                    <h6 className="sec-c fw-light mt-3 h-100px">{post.desc}</h6>
-                    <a href="#" className="primary-c d-block">
-                      Read more
-                    </a>
+            {filteredPosts.length === 0 ? (
+              <p>No posts found for this category.</p>
+            ) : (
+              filteredPosts.map((post) => (
+                <div className="col-md-6 col-lg-4 mb-4" key={post._id}>
+                  <div className="card border-0 h-100">
+                    <img
+                      src={post.thumbnail || "/default-blog.png"}
+                      alt={post.title}
+                      className="card-img-top"
+                    />
+                    <div className="card-body px-0">
+                      <small className="sec-c">{post.date}</small>
+                      <h4 className="fw-medium mt-2">{post.title}</h4>
+                      <h6 className="sec-c fw-light mt-3 h-100px">
+                        {post.content.replace(/<[^>]+>/g, "").slice(0, 100)}
+                        ...
+                      </h6>
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        className="primary-c d-block"
+                      >
+                        Read more
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -160,4 +113,4 @@ const blogs = () => {
   );
 };
 
-export default blogs;
+export default Blogs;

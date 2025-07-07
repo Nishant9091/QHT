@@ -210,6 +210,14 @@
     border-color: #ddd!important;
 }
 
+.faqhide .p-head,
+.faqhide>#faq>.container>.row>p{
+  display: none!important;
+}
+.faqhide .sec-pad{
+  padding: 0;
+}
+
 @media (max-width:768px){
   .hw-200{
     height: 190px;
