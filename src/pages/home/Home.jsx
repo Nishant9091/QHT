@@ -40,6 +40,13 @@ const tabs = [
 ];
 
 const Home = () => {
+  const [data, setData] = useState(null);
+  const [home, setHome] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [sliderValue, setSliderValue] = useState([50, 50, 50]);
+  const [stageIndex, setStageIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
+
   useEffect(() => {
     // Initialize Bootstrap tooltips
     const tooltipTriggerList = document.querySelectorAll(
@@ -48,25 +55,28 @@ const Home = () => {
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
       new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
+
+    // Fetch data
+    const apiUrl = `${import.meta.env.VITE_API_URL}/home`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result.sections);
+        setHome(result);
+        console.log(result.sections);
+        console.log(result);
+      })
+      .catch((err) => console.error(err));
   }, []);
-
-  const stages = [
-    { label: "Consultation", percent: 0, image: Process },
-    { label: "Pre-Surgery Prep", percent: 30, image: Process1 },
-    { label: "Surgery", percent: 60, image: Process2 },
-    { label: "Recovery", percent: 100, image: Process2 },
-  ];
-
-  const [stageIndex, setStageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStageIndex((prev) => (prev + 1) % stages.length);
+      setStageIndex(
+        (prev) => (prev + 1) % data?.processSection?.stages?.length
+      );
     }, 2000); // 2 seconds
     return () => clearInterval(interval);
-  }, []);
-
-  const [sliderValue, setSliderValue] = useState([50, 50, 50]);
+  }, [data]);
 
   const getEmoji = (value) => {
     if (value < 25) return "😢";
@@ -79,6 +89,9 @@ const Home = () => {
     updated[index] = val;
     setSliderValue(updated);
   };
+
+  // if (loading) return <div>Loading...</div>;
+  if (!data) return <div>Error loading data</div>;
 
   return (
     <>
@@ -99,35 +112,29 @@ const Home = () => {
               className="text-center w-md-75 w-100 fw-500 fs-sm-1"
               style={{ fontSize: "50px" }}
             >
-              Get your younger looks back <br className="d-none d-md-block" />{" "}
-              today with{" "}
-              <span className="primary-c">
-                {" "}
-                hair transplant <br className="d-none d-md-block" /> clinic in
-                india.
-              </span>
+              {data.banner.heading}
             </h1>
             <h5
               className="text-center w-md-75 w-100 fs-6"
               style={{ color: "#777" }}
             >
-              Regain your hair, rebuild confidence, and transform your life with
-              expert hair <br className="d-none d-md-block" /> restoration
-              solutions tailored to your unique needs
+              {data.banner.subheading}
             </h5>
             <div className="d-flex justify-content-center align-items-center">
-              <button
+              <a
+                href={data.banner.cta.link}
                 className="btn text-white rounded-pill p-3 primary-bg"
                 style={{ width: "250px" }}
               >
-                Book Free Consultation
-              </button>
+                {data.banner.cta.text}
+              </a>
             </div>
           </div>
         </div>
 
         {/* Celeb Slider */}
         <div className="container-fluid my-md-5 py-5">
+          {/* <h2 className="text-center mb-4">{data.celebritySlider.title}</h2> */}
           <Swiper
             spaceBetween={30}
             loop={true}
@@ -148,31 +155,13 @@ const Home = () => {
               },
             }}
           >
-            <SwiperSlide>
-              <div>
-                <img className="rounded-4 w-100" src={Kapil} alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img className="rounded-4 w-100" src={Anil} alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img className="rounded-4 w-100" src={Kapil} alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img className="rounded-4 w-100" src={Anil} alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img className="rounded-4 w-100" src={Kapil} alt="" />
-              </div>
-            </SwiperSlide>
+            {data.celebritySlider.images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <div>
+                  <img className="rounded-4 w-100" src={image} alt="" />
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
 
@@ -181,9 +170,9 @@ const Home = () => {
           className="container my-4 primary-bg rounded-md-4 p-md-5 pt-5 g-gradient"
           id="truth"
         >
-          <h2 className="text-white fs-1 mt-5">The Bald Truth.</h2>
+          <h2 className="text-white fs-1 mt-5">{data.truthSection.title}</h2>
           <h6 className="text-white mb-5 fw-normal">
-            Most transplant fail - beacuse no one tells you what really matters.
+            {data.truthSection.subtitle}
           </h6>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -205,123 +194,44 @@ const Home = () => {
               },
             }}
           >
-            <SwiperSlide>
-              <div>
-                <div className="d-flex justify-content-center align-items-start">
-                  <div>
-                    <h1 className="truth-h mx-3">1.</h1>
-                  </div>
-                  <div>
-                    <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
-                      70% of hair transplant fail in 3 years.
-                    </h2>
-                    <h5 className="text-white">
-                      Because most clinic chase looks, not longevity.
-                    </h5>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <div className="d-flex justify-content-center align-items-start">
-                  <div>
-                    <h1 className="truth-h mx-3">2.</h1>
-                  </div>
-                  <div>
-                    <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
-                      Donor hair never grows back once it is removed.
-                    </h2>
-                    <h5 className="text-white">
-                      Bad planning equals permanent loss with no recovery.
-                    </h5>
+            {data.truthSection.points.map((point, index) => (
+              <SwiperSlide key={index}>
+                <div>
+                  <div className="d-flex justify-content-center align-items-start">
+                    <div>
+                      <h1 className="truth-h mx-3">{point.number}.</h1>
+                    </div>
+                    <div>
+                      <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
+                        {point.title}
+                      </h2>
+                      <h5 className="text-white">{point.description}</h5>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <div className="d-flex justify-content-center align-items-start">
-                  <div>
-                    <h1 className="truth-h mx-3">3.</h1>
-                  </div>
-                  <div>
-                    <h2 className="text-white fw-bold h-120 h-fit-content fs-2">
-                      One bad transplant = lifelong regret
-                    </h2>
-                    <h5 className="text-white">
-                      Scars. Fewer grafts. No second chances.
-                    </h5>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <div className="d-flex justify-content-center align-items-start">
-                  <div>
-                    <h1 className="truth-h mx-3">1.</h1>
-                  </div>
-                  <div>
-                    <h2 className="text-white fw-bold">
-                      70% of hair transplant fail in 3 years.
-                    </h2>
-                    <h5 className="text-white">
-                      Because most clinic chase looks, not longevity.
-                    </h5>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            ))}
           </Swiper>
-          {/* <div className='d-flex justify-content-end gap-3 my-5 align-items-center'>
-            <div className='bg-white p-3 fw-bold rounded-circle' style={{ transform: "rotate(180deg)" }}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" /></svg></div>
-            <div className='bg-white p-3 fw-bold rounded-circle'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" /></svg></div>
-          </div> */}
         </div>
 
         {/* Our Promise */}
         <div className="container my-5">
           <div className="row">
             <div className="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
-              <h2 className="fs-1">Our Promise</h2>
+              <h2 className="fs-1">{data.ourPromise.title}</h2>
               <h6 className="border py-1 px-2 rounded text-secondary">1</h6>
             </div>
             <div className="col-md-6">
-              <h4>
-                No shortcuts. No surprises. Just results that last a lifetime.
-              </h4>
+              <h4>{data.ourPromise.subtitle}</h4>
             </div>
             <div className="col-md-6">
               <ol className="custom-ol">
-                <li>
-                  <h5> Surgeon-Only Transplants</h5>
-                  <p className="text-secondary fs-5">
-                    No technicians playing doctor. Every graft placed by
-                    certified surgeons only.
-                  </p>
-                </li>
-                <li>
-                  <h5> Smart Graft Planning</h5>
-                  <p className="text-secondary fs-5">
-                    We plan for your future hair loss, not just today's bald
-                    spots.
-                  </p>
-                </li>
-                <li>
-                  <h5> Natural-Looking Density</h5>
-                  <p className="text-secondary fs-5">
-                    No pluggy look. No weird hairlines. Just seamless, natural
-                    results.
-                  </p>
-                </li>
-                <li>
-                  <h5> One-Time Procedure, Lifetime Results</h5>
-                  <p className="text-secondary fs-5">
-                    We don't build repeat customers. We build permanent
-                    confidence.
-                  </p>
-                </li>
+                {data.ourPromise.promises.map((promise, index) => (
+                  <li key={index}>
+                    <h5>{promise.title}</h5>
+                    <p className="text-secondary fs-5">{promise.description}</p>
+                  </li>
+                ))}
               </ol>
             </div>
           </div>
@@ -349,42 +259,17 @@ const Home = () => {
               },
             }}
           >
-            <SwiperSlide>
-              <div>
-                <img
-                  className="rounded-4 w-100 h-500 object-fit-cover"
-                  src={surgery}
-                  alt=""
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img
-                  className="rounded-4 w-100 h-500 object-fit-cover"
-                  src={surgery2}
-                  alt=""
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img
-                  className="rounded-4 w-100 h-500 object-fit-cover"
-                  src={surgery}
-                  alt=""
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div>
-                <img
-                  className="rounded-4 w-100 h-500 object-fit-cover"
-                  src={surgery3}
-                  alt=""
-                />
-              </div>
-            </SwiperSlide>
+            {data.surgeryGallery.images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <div>
+                  <img
+                    className="rounded-4 w-100 h-500 object-fit-cover"
+                    src={image}
+                    alt=""
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
 
@@ -400,59 +285,21 @@ const Home = () => {
           </p>
 
           <div className="d-flex justify-content-center gap-md-5 align-items-center icons mt-5">
-            <div
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              className="badge"
-              title="Who Performs your surgery? "
-            >
-              <img src={i1} alt="icon1" />
-            </div>
-            <div
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              className="badge"
-              title="Who Performs your surgery? "
-            >
-              <img src={i2} alt="icon2" />
-            </div>
-            <div
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              className="badge"
-              title="Who Performs your surgery? "
-            >
-              <img src={i3} alt="icon3" />
-            </div>
-            <div
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              className="badge"
-              title="Who Performs your surgery? "
-            >
-              <img src={i4} alt="icon4" />
-            </div>
-            <div
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              className="badge"
-              title="Who Performs your surgery? "
-            >
-              <img src={i5} alt="icon5" />
-            </div>
-          </div>
-          {/* Tabs */}
-          {/* <div className="d-flex justify-content-center gap-4 mt-4 mb-5">
-            {tabs.map((tab, idx) => (
-              <button
-                key={tab.id}
-                className={`circle-tab btn ${activeTab === idx ? 'active-tab' : ''}`}
-                onClick={() => setActiveTab(idx)}
+            {tabs.map((tab, index) => (
+              <div
+                key={index}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                className="badge"
+                title={tab.label}
               >
-                <span className="circle-label">{idx + 1}</span>
-              </button>
+                <img
+                  src={[i1, i2, i3, i4, i5][index]}
+                  alt={`icon${index + 1}`}
+                />
+              </div>
             ))}
-          </div> */}
+          </div>
 
           {/* Content Box */}
           <div className="d-flex justify-content-center align-items-center">
@@ -575,13 +422,9 @@ const Home = () => {
         <div id="process" className="py-5">
           <div className="container py-md-5">
             <div className="text-center mb-4">
-              <h2 className="fs-1 fw-500">A Team of Experts, Focused on You</h2>
+              <h2 className="fs-1 fw-500">{data.processSection.title}</h2>
               <p className="text-muted fw-500 mt-3 mb-5 fs-6">
-                Hair restoration <strong>isn’t a one-person job</strong>. At
-                QHT, a team of seasoned specialists — from surgeons to nurses —{" "}
-                <br />
-                works in sync to give you natural, lasting results with zero
-                compromise.
+                {data.processSection.description}
               </p>
             </div>
 
@@ -595,13 +438,13 @@ const Home = () => {
                 className="position-absolute translate-middle-x text-center"
                 style={{
                   top: "-10%",
-                  left: `${stages[stageIndex].percent}%`,
+                  left: `${data.processSection.stages[stageIndex].percent}%`,
                   transition: "left 0.5s ease-in-out",
                   zIndex: 2,
                 }}
               >
                 <div className="badge primary-bg p-2 px-3 fs-6 text-white fw-normal rounded-1 tag-box">
-                  {stages[stageIndex].label}
+                  {data.processSection.stages[stageIndex].label}
                 </div>
               </div>
 
@@ -620,7 +463,7 @@ const Home = () => {
                     className="progress-bar primary-bg primary-c"
                     role="progressbar"
                     style={{
-                      width: `${stages[stageIndex].percent}%`,
+                      width: `${data.processSection.stages[stageIndex].percent}%`,
                       transition: "width 0.5s ease-in-out",
                     }}
                   ></div>
@@ -632,13 +475,13 @@ const Home = () => {
                 className="position-absolute translate-middle-x text-center"
                 style={{
                   top: "55%",
-                  left: `${stages[stageIndex].percent}%`,
+                  left: `${data.processSection.stages[stageIndex].percent}%`,
                   transition: "left 0.5s ease-in-out",
                 }}
               >
                 <div className="text-af">|</div>
                 <div className="small fw-semibold text-af">
-                  {stages[stageIndex].percent}%
+                  {data.processSection.stages[stageIndex].percent}%
                 </div>
               </div>
             </div>
@@ -646,7 +489,7 @@ const Home = () => {
             {/* Image for Current Stage */}
             <div className="row g-4 justify-content-center">
               <img
-                src={stages[stageIndex].image}
+                src={data.processSection.stages[stageIndex].image}
                 alt="Stage"
                 className="img-fluid w-75"
               />
@@ -657,7 +500,11 @@ const Home = () => {
         {/* Img */}
         <div className="container-fluid p-0">
           <div className="row">
-            <img src={ban} className="w-100" alt="" />
+            <img
+              src={data.fullWidthImage.image}
+              className="w-100"
+              alt={data.fullWidthImage.altText}
+            />
           </div>
         </div>
 
@@ -667,31 +514,26 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="d-flex justify-content-between align-items-center border-bottom pb-4 mb-5">
-              <h2 className="p-head">Regrowth Gallery</h2>
+              <h2 className="p-head">{data.resultsGallery.title}</h2>
               <h6 className="border py-1 px-2 rounded text-secondary">3</h6>
             </div>
             <div className="col-md-4">
-              <h4 className="fs-2">
-                Every ‘before’ has an ‘after’ see how we bring hairlines (and
-                smiles) back.
-              </h4>
+              <h4 className="fs-2">{data.resultsGallery.description}</h4>
             </div>
-            <div className="col-md-4 mb-4 mb-md-0">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
+            {data.resultsGallery.beforeAfterPairs.map((pair, index) => (
+              <div className="col-md-4 mb-4 mb-md-0" key={index}>
+                <ReactCompareSlider
+                  style={{ borderRadius: "20px" }}
+                  itemOne={
+                    <ReactCompareSliderImage src={pair.before} alt="Before" />
+                  }
+                  itemTwo={
+                    <ReactCompareSliderImage src={pair.after} alt="After" />
+                  }
+                />
+              </div>
+            ))}
             <div className="text-md-end text-center my-5">
-              {/* Button trigger modal */}
               <button
                 type="button"
                 className="btn text-white rounded-pill px-4 py-2"
@@ -1053,27 +895,24 @@ const Home = () => {
               {/* Left side - Books Image */}
               <div className="col-md-6 text-center mb-4 mb-md-0">
                 <img
-                  src={book}
-                  alt="Hair Transplant Guide 1"
+                  src={data.bookSection.image}
+                  alt="Hair Transplant Guide"
                   className="animate-book w-100"
                 />
               </div>
 
               {/* Right side - Text + Form */}
               <div className="col-md-6 text-white">
-                <h2 className="fw-bold mb-4">
-                  Thinking About a Hair <br /> Transplant? Read This First.
-                </h2>
+                <h2 className="fw-bold mb-4">{data.bookSection.title}</h2>
                 <p className="mb-4" style={{ lineHeight: 1.6 }}>
-                  A free doctor-reviewed guide that answers all your questions
-                  about cost, results, pain, recovery, and more.
+                  {data.bookSection.description}
                 </p>
                 <ul className="list-unstyled mb-4">
-                  <li className="mb-2">• See real patient transformations</li>
-                  <li className="mb-2">• Know what to expect – step-by-step</li>
-                  <li className="mb-2">
-                    • Get expert tips to avoid bad results
-                  </li>
+                  {data.bookSection.benefits.map((benefit, index) => (
+                    <li key={index} className="mb-2">
+                      • {benefit}
+                    </li>
+                  ))}
                 </ul>
 
                 {/* Simple Form */}
@@ -1110,16 +949,16 @@ const Home = () => {
         {/* Actions */}
         <div id="action">
           <div className="container">
-            <h1 className="text-white fw-bold">Time To Take Action</h1>
+            <h1 className="text-white fw-bold">{data.actionSection.title}</h1>
             <h4 className="text-white text-center fw-normal mx-4 mt-3 mb-4">
-              It’s time to invest in yourself and your confidence. Take the
-              first step toward fuller, healthier hair with a treatment plan
-              tailored just for you. Your journey to transformation begins
-              today.
+              {data.actionSection.description}
             </h4>
-            <button className="btn rounded-pill bg-white px-4 py-3 fw-normal">
-              Get Started Now
-            </button>
+            <a
+              href={data.actionSection.cta.link}
+              className="btn rounded-pill bg-white px-4 py-3 fw-normal"
+            >
+              {data.actionSection.cta.text}
+            </a>
           </div>
         </div>
       </div>

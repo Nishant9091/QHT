@@ -1,5 +1,6 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "../about/AboutUs.css";
+import { Helmet } from "react-helmet";
 import Videos from "../../components/Videos";
 import Testimonials from "../../components/Testimonials";
 import Services from "../../components/Services";
@@ -26,142 +27,44 @@ import gal from "../../assets/gal.png";
 import bhadwe from "../../assets/bhadwe.png";
 import abouth1 from "../../assets/abouth1.png";
 
-const celebrityTestimonials = [
-  {
-    name: "Milind Gunaji",
-    title: "Actor, writer, model, television, presenter, author",
-    review:
-      "I am truly grateful to QHT Clinic for their exceptional hair transplant procedure.",
-    details:
-      "The entire hair transplant process was smooth, professional, reassuring — hair looks natural. Confidence restored.",
-    stars: 5,
-    image: milind,
-  },
-  {
-    name: "Celebrity Name 2",
-    title: "Profession or Designation",
-    review: "Amazing transformation and care throughout the journey.",
-    details:
-      "The team was skilled, compassionate, and ensured top-notch quality in every aspect of the procedure.",
-    stars: 5,
-    image: milind,
-  },
-];
-
-const features = [
-  {
-    title: "Cultural Heritage",
-    description:
-      "Haridwar is rich in India’s cultural heritage, known for being pollution-free, free from road congestion, and noise.",
-    icon: cultural,
-  },
-  {
-    title: "Luxurious & Cost-Effective",
-    description:
-      "The city offers high-level luxury at a cost-effective price. Many patients visit QHT Clinic with families.",
-    icon: luxurious,
-  },
-  {
-    title: "Professional Arrangements",
-    description:
-      "Patients from Tier 1 cities benefit from the QHT treatment arrangements during their stay.",
-    icon: professional,
-  },
-  {
-    title: "Celebrity Appeal",
-    description:
-      "Film actors choose QHT Clinic for its expertise and the positive energy it provides.",
-    icon: celeb,
-  },
-  {
-    title: "Hygienic Environment",
-    description:
-      "Ultra-hygienic clinic with the highest cleanliness, in a pollution-free city like Haridwar.",
-    icon: hygienic,
-  },
-  {
-    title: "Affordable",
-    description:
-      "Our goal is to provide the best possible results at an affordable price.",
-    icon: affordable,
-  },
-];
-
-const doctors = [
-  {
-    name: "Dr. Bhagirath Naik",
-    degree: "(MBBS, M.D.)",
-    spec: "Anesthetist & Critical Care Expert",
-    image: doctor,
-  },
-  {
-    name: "Dr. Himanshu Kumar",
-    degree: "(MBBS, M.D.)",
-    spec: "Dermatologist",
-    image: doctor,
-  },
-  {
-    name: "Dr. Mandakani",
-    degree: "(MBBS, M.D.)",
-    spec: "Anesthesiology",
-    image: doctor,
-  },
-  {
-    name: "Dr. Anand",
-    degree: "(MBBS)",
-    spec: "Hair Transplant Surgeon",
-    image: doctor,
-  },
-];
-
-const clinicData = {
-  Uttarakhand: [],
-  Hyderabad: [],
-  Delhi: [gal, gal, gal, gal, gal, gal],
-  Noida: [],
-};
-
-const timelineData = [
-  {
-    year: "1990",
-    title: "Established first hair transplant clinic in Haridwar",
-    desc: "Focused on innovation, patient care, and expanding our footprint as India’s most trusted name in hair restoration.",
-  },
-  {
-    year: "2000",
-    title: "10,000+ Lives Transformed",
-    desc: "Crossed 10,000 successful transplants, backed by a team of 120+ certified experts and trained staff.",
-  },
-  {
-    year: "2010",
-    title: "Opened Clinics in Metro Cities",
-    desc: "Expanded to Delhi, Noida, and Hyderabad—providing access to more patients nationwide.",
-  },
-  {
-    year: "2020",
-    title: "Recognized Internationally",
-    desc: "QHT became a destination clinic for international patients seeking natural and lasting results.",
-  },
-];
-
-const cities = Object.keys(clinicData);
-
 const AboutUs = () => {
   const [selectedCity, setSelectedCity] = useState("Delhi");
+  const [about, setAbout] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/about`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result.aboutPage);
+        setAbout(result);
+        console.log(result.aboutPage);
+        console.log(result);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // if (loading) return <div>Loading...</div>;
+  if (!data) return <div>Error loading data</div>;
 
   return (
     <>
       <div>
+        {/* SEO HEAD */}
+        <Helmet>
+          <title>{about.metaTitle}</title>
+          <meta name="description" content={about.metaDescription} />
+          <meta name="keywords" content={about.metaKeywords || ""} />
+        </Helmet>
+
         {/* Banner */}
         <div className="sec-bg pt-md-5 pt-0 sec-pad">
           <div className="container">
             <div className="row justify-content-center align-items-center">
-              <img src={abouth1} className="w-md-50 w-100 mb-4" alt="" />
-              <p className="text-center sec-c">
-                We are recognized for our world-class treatment, consistency,
-                eye for aesthetics, and <br className="d-none d-md-block" />{" "}
-                natural results. Our popularity is not limited to India alone.
-              </p>
+              <img src={data.banner} className="w-md-50 w-100 mb-4" alt={data.banner} />
+              <p className="text-center sec-c">{data.expertise.subtitle}</p>
 
               <div>
                 <img src={bhadwe} className="w-100 my-4" alt="" />
@@ -170,7 +73,7 @@ const AboutUs = () => {
               <div className="container">
                 <div className="marquee-container">
                   <div className="marquee-text">
-                    ✨ Wait! don’t miss these cost-saving secrets before you
+                    ✨ Wait! don't miss these cost-saving secrets before you
                     scroll to prices
                   </div>
                 </div>
@@ -185,71 +88,40 @@ const AboutUs = () => {
             <div className="row gy-5">
               {/* Left Text Block */}
               <div className="col-lg-7">
-                <h2 className="p-head">
-                  Establishing one of the high-end clinics in Haridwar,
-                  <br /> Uttarakhand, was driven by several reasons.
-                </h2>
+                <h2 className="p-head">{data.establishmentSection.title}</h2>
                 <p className="mt-4 sec-c">
-                  On the day of the treatment, the focus will be entirely on you
-                  and we will do everything we can to make the big day go as
-                  smoothly as possible. As well as the treatment itself, we can
-                  also address any other concerns you may have. If you need to
-                  arrange transport or stay overnight, we can take care of that.
-                  We are happy to go the extra mile to make sure the treatment
-                  day is as pleasant as possible for you. We at QHT Clinic
-                  provide the best hair treatment and considered as the Best
-                  Hair Transplant Clinic in India.
+                  {data.establishmentSection.description}
                 </p>
 
                 {/* Certifications */}
                 <p className="mt-4">Our Certifications</p>
                 <div className="d-flex gap-3 mt-3 flex-wrap flex-column">
-                  <div className="border rounded-4 p-4 d-flex align-items-center gap-3">
-                    <img src={fda} alt="FDA" width="40" />
-                    <div>
-                      <div className="fw-medium">
-                        US-FDA approved <br /> technology
+                  {data.establishmentSection.certifications.map(
+                    (cert, index) => (
+                      <div
+                        key={cert._id}
+                        className="border rounded-4 p-4 d-flex align-items-center gap-3"
+                      >
+                        <img
+                          src={cert.icon}
+                          alt={cert.text}
+                          width={cert.icon === "certified.png" ? "30" : "40"}
+                        />
+                        <div>
+                          <div className="fw-medium">{cert.text}</div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="border rounded-4 p-4 d-flex align-items-center gap-3">
-                    <img src={certified} alt="FDA" width="30" />
-                    <div>
-                      <div className="fw-medium">
-                        Certified Hair <br /> Transplant Surgeons
-                      </div>
-                    </div>
-                  </div>
+                    )
+                  )}
                 </div>
               </div>
 
               {/* Right List Block */}
               <div className="col-lg-5">
                 <div className="d-flex flex-column gap-4">
-                  {[
-                    {
-                      num: "01",
-                      title: "Affordable Quality Care",
-                      desc: "Best results delivered with affordability, quality, and reliability assured.",
-                    },
-                    {
-                      num: "02",
-                      title: "Spotless Serene Clinic",
-                      desc: "Ultra-clean, pollution-free clinic offering comfort in Haridwar.",
-                    },
-                    {
-                      num: "03",
-                      title: "Healing Adventure Connectivity",
-                      desc: "Rafting, bungee, Ganges, nature, and easy access nearby.",
-                    },
-                    {
-                      num: "04",
-                      title: "Tradition Tranquility Trust",
-                      desc: "Peaceful, cultural, clean, showcasing Haridwar’s global charm.",
-                    },
-                  ].map((item, idx) => (
+                  {data.establishmentSection.features.map((item) => (
                     <div
-                      key={idx}
+                      key={item._id}
                       className="d-flex border-top pt-5 pb-3 gap-3"
                     >
                       <div className="fw-medium fs-5 text-af">
@@ -271,11 +143,10 @@ const AboutUs = () => {
         <div className="sec-pad" id="timeline">
           <div className="container g-gradient px-5 pt-5 rounded-5">
             <h2 className="p-head pt-5 text-white text-start fw-normal mb-2">
-              The legacy of journey of QHT clinic.
+              {data.timeline.title}
             </h2>
             <p className="text-start text-white fw-light mb-5">
-              Most transplants fail — because no one tells you what really
-              matters.
+              {data.timeline.subtitle}
             </p>
 
             <Swiper
@@ -292,8 +163,8 @@ const AboutUs = () => {
                 disableOnInteraction: false,
               }}
             >
-              {timelineData.map((item, idx) => (
-                <SwiperSlide key={idx}>
+              {data.timeline.events.map((item) => (
+                <SwiperSlide key={item._id}>
                   <div className="p-5 pb-5 bg-transparent border position-relative border-white ms-5 me-2 rounded-5 h-300 h-sm-fit-content">
                     <span className="px-3 py-2 fs-5 position-absolute text-white fw-normal">
                       {item.year}
@@ -313,47 +184,50 @@ const AboutUs = () => {
             {/* Headline */}
             <div className="row mb-2 align-items-center">
               <div className="col-md-6">
-                <h2 className="p-head">
-                  With Worldwide Presence & Infrastructure
-                </h2>
+                <h2 className="p-head">{data.clinicLocations.title}</h2>
               </div>
               <div className="col-md-6">
                 <p className="sec-c w-md-75 w-100">
-                  QHT Clinic delivers advanced hair restoration solutions with
-                  global presence, expert care, and world-class infrastructure.
+                  {data.clinicLocations.description}
                 </p>
               </div>
             </div>
 
             {/* City Tabs */}
             <div className="mb-5 d-flex flex-wrap gap-2">
-              {cities.map((city) => (
+              {[
+                ...new Set(data.clinicLocations.cities.map((c) => c.branch)),
+              ].map((branch) => (
                 <button
-                  key={city}
+                  key={branch}
                   className={`btn rounded-pill ${
-                    selectedCity === city
+                    selectedCity === branch
                       ? "primary-btn px-4"
                       : "btn-outline-secondary px-4"
                   }`}
-                  onClick={() => setSelectedCity(city)}
+                  onClick={() => setSelectedCity(branch)}
                 >
-                  {city}
+                  {branch}
                 </button>
               ))}
             </div>
 
             {/* Image Grid */}
             <div className="row g-3">
-              {clinicData[selectedCity].length ? (
-                clinicData[selectedCity].map((img, index) => (
-                  <div className="col-md-4 col-6" key={index}>
-                    <img
-                      src={img}
-                      alt={`${selectedCity} ${index + 1}`}
-                      className="img-fluid rounded-4"
-                    />
-                  </div>
-                ))
+              {data.clinicLocations.cities.filter(
+                (c) => c.branch === selectedCity
+              ).length ? (
+                data.clinicLocations.cities
+                  .filter((c) => c.branch === selectedCity)
+                  .map((c, index) => (
+                    <div className="col-md-4 col-6" key={c._id}>
+                      <img
+                        src={c.image}
+                        alt={`${c.branch} ${index + 1}`}
+                        className="img-fluid rounded-4"
+                      />
+                    </div>
+                  ))
               ) : (
                 <div className="col-12 text-center text-muted py-5">
                   No data available for {selectedCity}
@@ -401,7 +275,7 @@ const AboutUs = () => {
                 <div className="text-end">
                   <h6 className="text-parot mt-3 mt-md-0">Our Vision</h6>
                   <h3 className="fw-normal mt-3">
-                    Hair transplantation combines “Hair Design” and “Art,”
+                    Hair transplantation combines "Hair Design" and "Art,"
                     creating not just results but a true work of art.
                   </h3>
                 </div>
@@ -458,8 +332,8 @@ const AboutUs = () => {
               disableOnInteraction: false,
             }}
           >
-            {doctors.map((doc, i) => (
-              <SwiperSlide key={i}>
+            {data.doctors.map((doc) => (
+              <SwiperSlide key={doc._id}>
                 <div className="card position-relative border-0">
                   <img
                     src={doc.image}
@@ -469,7 +343,7 @@ const AboutUs = () => {
                   <div className="card-body position-absolute rounded-3 px-4 py-4 bottom-0 text-start text-white in-card">
                     <h5 className="card-title">{doc.name}</h5>
                     <small className="fw-light">
-                      {doc.degree} - {doc.spec}
+                      {doc.degree} - {doc.specialization}
                     </small>
                   </div>
                 </div>
@@ -483,23 +357,16 @@ const AboutUs = () => {
           <div className="container border-top">
             <div className="row pt-5 mb-4 align-items-start">
               <div className="col-md-6 pt-5">
-                <h2 className="p-head">
-                  We Are A Team With <br />
-                  Expertise & Commitment
-                </h2>
+                <h2 className="p-head">{data.expertise.title}</h2>
               </div>
               <div className="col-md-6 pt-5">
-                <p className="sec-c">
-                  QHT Hair Clinic is one of the leading hair transplant clinics
-                  in India. We are recognized for our world-class treatment,
-                  consistency, eye for aesthetics, and natural results.
-                </p>
+                <p className="sec-c">{data.expertise.subtitle}</p>
               </div>
             </div>
 
             <div className="row g-4 mt-5">
-              {features.map((item, index) => (
-                <div className="col-md-4" key={index}>
+              {data.expertise.features.map((item) => (
+                <div className="col-md-4" key={item._id}>
                   <div className="card h-100 p-5 border-0 sec-bg rounded-4">
                     <div className="fs-2 mb-5">
                       <img
@@ -536,7 +403,7 @@ const AboutUs = () => {
           <div className="container text-center mb-4">
             <h2 className="p-head">Celebrities At QHT</h2>
             <p className="sec-c">
-              Real stories, real experiences—see how we’ve made a difference!
+              Real stories, real experiences—see how we've made a difference!
             </p>
 
             <div className="mt-5">
@@ -546,11 +413,13 @@ const AboutUs = () => {
                 slidesPerView={1}
                 loop={true}
               >
-                {celebrityTestimonials.map((item, index) => (
-                  <SwiperSlide key={index}>
+                {data.celebTestimonials.map((item) => (
+                  <SwiperSlide key={item._id}>
                     <div className="row px-5 flex-column-reverse flex-md-row align-items-center testimonial-box rounded-5 overflow-hidden">
                       <div className="col-md-6 rounded-left p-md-5 p-3 text-white text-start primary-bg h-600 h-sm-fit-content">
-                        <div className="display-1 mx-md-4 mx-0 mt-md-5 mt-0">❝</div>
+                        <div className="display-1 mx-md-4 mx-0 mt-md-5 mt-0">
+                          ❝
+                        </div>
                         <h3 className="fw-normal mb-3 mx-md-4 mx-0">
                           {item.review}
                         </h3>
@@ -561,7 +430,7 @@ const AboutUs = () => {
                           {"★".repeat(item.stars)}
                         </p>
                         <p className="mb-0 mx-md-4 mx-0 fs-5">
-                          – {item.name.split(" ")[0]}
+                          – {item.name.split(" ")[0]} &nbsp;
                           <strong>{item.name.split(" ")[1]}</strong>
                         </p>
                         <small className="text-white fw-lighter mx-md-4 mx-0">
@@ -595,13 +464,9 @@ const AboutUs = () => {
         {/* Different */}
         <div className="sec-pad" id="difference">
           <div className="container py-5">
-            <h2 className="p-head text-center">
-              How QHT Is Different from others
-            </h2>
+            <h2 className="p-head text-center">{data.comparisonTable.title}</h2>
             <p className="text-center sec-c mb-5">
-              QHT offers advanced hair transplant solutions with personalized
-              care, often preferred over <br className="d-none d-md-block" />{" "}
-              Delhi/Mumbai clinics for quality, technology, and results.
+              {data.comparisonTable.description}
             </p>
 
             <div className="table-responsive">
@@ -614,83 +479,17 @@ const AboutUs = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Technology Used</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Latest advanced
-                      tools (e.g., Sapphire FUE, DHT)
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Often use older or
-                      basic FUE techniques
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Surgeon Involvement</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Directly handled by
-                      experienced surgeons
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Technicians often
-                      perform major procedures
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Personalized Treatment Plan</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Customized for each
-                      individual
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Standard, one size
-                      fits all approach
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Natural Hairline Design</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Artistic,
-                      natural-looking hairlines
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Often look
-                      artificial or too dense
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Post-Procedure Care</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Dedicated follow-up
-                      and support
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Limited or no
-                      structured aftercare
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Transparency in Pricing</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Clear and honest
-                      pricing
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Hidden costs or
-                      upselling common
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Clinic Hygiene &amp; Safety</td>
-                    <td className="highlight-bg">
-                      <span className="check-icon">✔</span> Hospital-grade
-                      sterile environment
-                    </td>
-                    <td>
-                      <span className="cross-icon">✖</span> Varies greatly;
-                      sometimes below standard
-                    </td>
-                  </tr>
+                  {data.comparisonTable.rows.map((row) => (
+                    <tr key={row._id}>
+                      <td>{row.feature}</td>
+                      <td className="highlight-bg">
+                        <span className="check-icon">✔</span> {row.qht}
+                      </td>
+                      <td>
+                        <span className="cross-icon">✖</span> {row.others}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -704,13 +503,10 @@ const AboutUs = () => {
           <div className="container text-white py-md-5 py-0">
             <div className="row py-md-5 py-0">
               <h2 className="p-head w-100 w-md-50">
-                QHT Medical Tourism facilities to make your experience
-                extraordinary & Comfortable
+                {data.medicalTourism.title}
               </h2>
               <p className="w-md-75 w-100 mt-2">
-                We are providing facilities that are one of the most advanced &
-                well appointed with cutting edge latest machines & equipment to
-                certify unmatched levels of safety & hygiene.
+                {data.medicalTourism.description}
               </p>
               <div>
                 <button className="primary-btn px-4 mt-4">Explore More</button>

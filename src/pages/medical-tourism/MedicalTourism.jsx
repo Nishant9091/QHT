@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import "../medical-tourism/MedicalTourism.css";
 import Services from "../../components/Services";
 import Faqs from "../../components/Faqs";
@@ -82,6 +83,7 @@ const MedicalTourism = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [tourism, setTourism] = useState(null);
 
   useEffect(() => {
     const apiUrl = `${import.meta.env.VITE_API_URL}/medical-tourism`;
@@ -89,6 +91,7 @@ const MedicalTourism = () => {
       .then((res) => res.json())
       .then((result) => {
         setData(result.data);
+        setTourism(result);
         console.log(result.data);
       })
       .catch((err) => console.error(err));
@@ -115,6 +118,13 @@ const MedicalTourism = () => {
 
   return (
     <>
+      {/* SEO HEAD */}
+      <Helmet>
+        <title>{tourism.metaTitle}</title>
+        <meta name="description" content={tourism.metaDescription} />
+        <meta name="keywords" content={tourism.metaKeywords || ""} />
+      </Helmet>
+
       {/* Banner */}
       <div className="sec-pad Mbanner">
         <div className="container just-align-center h-100">

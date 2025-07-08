@@ -37,28 +37,6 @@ const ContactUs = () => {
   // if (loading) return <div>Loading...</div>;
   if (!data) return <div>Error loading data</div>;
 
-  // Helper function to get icon based on filename
-  const getIcon = (iconName) => {
-    switch (iconName) {
-      case "msgppl.png":
-        return msgppl;
-      case "callmsg.png":
-        return callmsg;
-      case "hosp.png":
-        return hosp;
-      case "delhi.png":
-        return delhi;
-      case "hydrabad.png":
-        return hydrabad;
-      case "haridwar.png":
-        return haridwar;
-      case "noida.png":
-        return noida;
-      default:
-        return msgppl;
-    }
-  };
-
   return (
     <>
       {/* Banner */}
