@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Modal } from "react-bootstrap";
+import { FaPlay } from "react-icons/fa";
 
 const Videos = () => {
   const [videos, setVideos] = useState([]);
@@ -16,8 +17,8 @@ const Videos = () => {
       .then((data) => setVideos(data));
   }, [pageSlug]);
 
-  const handleShow = (url) => {
-    setSelectedVideo(url);
+  const handleShow = (youtubeId) => {
+    setSelectedVideo(`https://www.youtube.com/embed/${youtubeId}`);
     setShow(true);
   };
 
@@ -37,13 +38,23 @@ const Videos = () => {
         <div className="row">
           {videos.map((video, index) => (
             <div className="col-md-4 mb-4" key={index}>
-              <img
-                src={video.thumbnail}
-                alt={video.title}
-                className="w-100"
+              <div
+                className="position-relative"
                 style={{ cursor: "pointer" }}
                 onClick={() => handleShow(video.videoUrl)}
-              />
+              >
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  className="w-100 rounded-3"
+                />
+                <div
+                  className="position-absolute top-50 start-50 translate-middle bg-white rounded-circle d-flex justify-content-center align-items-center"
+                  style={{ width: "50px", height: "50px" }}
+                >
+                  <FaPlay size={15} className="primary-c" />
+                </div>
+              </div>
             </div>
           ))}
         </div>
