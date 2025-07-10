@@ -184,7 +184,7 @@ const Testimonials = () => {
                         </div>
                       </div>
                       <h5>Exceptional Service & Results!</h5>
-                      <p className="text-muted">{testimonial.text}</p>
+                      <p className="text-muted h-100px overflow-y-scroll">{testimonial.text}</p>
                     </div>
                     <div className="d-flex align-items-center border-top pt-4 mt-4">
                       <img

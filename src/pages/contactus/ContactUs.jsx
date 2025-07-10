@@ -40,7 +40,16 @@ const ContactUs = () => {
   return (
     <>
       {/* Banner */}
-      <div className="sec-pad cbanner">
+      <div
+        className="sec-pad cbanner"
+        style={{
+          backgroundImage: ` 180deg,
+      rgba(0, 0, 0, 0) 18.21%,
+      rgba(0, 0, 0, 0.718652) 85.42%,
+      rgba(0, 0, 0, 0.9) 114.93%
+    ),url(${data.banner.bgImage})`,
+        }}
+      >
         <div className="container just-align-center h-100">
           <div className="row">
             <h1 className="text-white text-center display-3 fw-normal">

@@ -83,7 +83,7 @@ const Blogs = () => {
                     <img
                       src={post.thumbnail || "/default-blog.png"}
                       alt={post.title}
-                      className="card-img-top"
+                      className="card-img-top h-300 object-fit-cover"
                     />
                     <div className="card-body px-0">
                       <small className="sec-c">{post.date}</small>
