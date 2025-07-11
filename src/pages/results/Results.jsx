@@ -518,6 +518,7 @@ const Results = () => {
                       <div className="card-img-top">
                         <ReactCompareSlider
                           style={{ borderRadius: "20px" }}
+                          className="h-300"
                           itemOne={
                             <ReactCompareSliderImage
                               src={t.beforeImage}
