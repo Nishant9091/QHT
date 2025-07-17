@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Glogo from "../assets/glogo.png";
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
 } from "react-compare-slider";
-import after from "../assets/after.png";
 
 const Results = () => {
+  const [transformations, setTransformations] = useState([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/results`)
+      .then((res) => res.json())
+      .then(setTransformations);
+  }, []);
+
+  // Latest 6 transformations (assuming newest last)
+  const latestTransformations = transformations.slice(-6).reverse();
+
   return (
     <>
       {/* Results */}
@@ -29,48 +39,33 @@ const Results = () => {
           </div>
 
           <div className="row">
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
-            <div className="col-md-4 mb-4">
-              <ReactCompareSlider
-                style={{ borderRadius: "20px" }}
-                itemOne={<ReactCompareSliderImage src={after} alt="Before" />}
-                itemTwo={<ReactCompareSliderImage src={after} alt="After" />}
-              />
-            </div>
+            {latestTransformations.map((item, index) => (
+              <div className="col-md-4 mb-4" key={item._id || index}>
+                <ReactCompareSlider
+                  s
+                  style={{
+                    borderRadius: "20px",
+                    height: "300px",
+                  }}
+                  itemOne={
+                    <ReactCompareSliderImage
+                      src={item.beforeImage}
+                      alt="Before"
+                    />
+                  }
+                  itemTwo={
+                    <ReactCompareSliderImage
+                      src={item.afterImage}
+                      alt="After"
+                    />
+                  }
+                />
+              </div>
+            ))}
+
+            {latestTransformations.length === 0 && (
+              <p className="text-white">No results found.</p>
+            )}
           </div>
 
           <div className="row">

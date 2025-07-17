@@ -286,7 +286,7 @@ const Cost = () => {
     ));
 
   useEffect(() => {
-    const apiUrl = `${import.meta.env.VITE_API_URL}/cities/${slug}`;
+    const apiUrl = `${import.meta.env.VITE_API_URL}/cost/${slug}`;
     fetch(apiUrl)
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
@@ -320,9 +320,9 @@ const Cost = () => {
         <div className="sec-pad sec-bg">
           <div className="container just-align-center">
             <img
-              src={data.mapBanner.image}
+              src={data.costData.mapBanner.image}
               className="w-md-75 w-100"
-              alt={data.mapBanner.altText}
+              alt={data.costData.mapBanner.altText}
             />
           </div>
         </div>
@@ -332,73 +332,97 @@ const Cost = () => {
           <div className="container">
             <div className="marquee-container">
               <div className="marquee-text">
-                {data.marqueeAccordion.marqueeText}
+                {data.costData.marqueeAccordion.marqueeText}
               </div>
             </div>
           </div>
 
           <div className="container py-5">
             {/* Heading */}
-            <h2 className="p-head mb-3">{data.marqueeAccordion.heading}</h2>
+            <h2 className="p-head mb-3">
+              {data.costData.marqueeAccordion.heading}
+            </h2>
             <p className="sec-c w-75 mb-5">
-              {data.marqueeAccordion.description}
+              {data.costData.marqueeAccordion.description}
             </p>
 
             {/* Bootstrap Accordion */}
             <div className="accordion" id="savingTipsAccordion">
-              {data.marqueeAccordion.accordionItems.map((item, idx) => (
-                <div
-                  key={item._id}
-                  className="accordion-item border-y border-none border-lgrey py-2"
-                >
-                  <h2 className="accordion-header" id={`heading${idx}`}>
-                    <button
-                      className={`accordion-button ${
-                        idx !== 1 ? "collapsed" : ""
-                      } fw-semibold`}
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={`#collapse${idx}`}
-                      aria-expanded={idx === 1 ? "true" : "false"}
-                      aria-controls={`collapse${idx}`}
-                    >
-                      ▶ &nbsp;&nbsp;{item.title}
-                    </button>
-                  </h2>
+              {data.costData.marqueeAccordion.accordionItems.map(
+                (item, idx) => (
                   <div
-                    id={`collapse${idx}`}
-                    className={`accordion-collapse collapse ${
-                      idx === 1 ? "show" : ""
-                    }`}
-                    aria-labelledby={`heading${idx}`}
-                    data-bs-parent="#savingTipsAccordion"
+                    key={item._id}
+                    className="accordion-item border-y border-none border-lgrey py-2"
                   >
-                    <div className="accordion-body">
-                      {typeof item.content === "string" ? (
-                        <>{item.content}</>
-                      ) : (
-                        <div className="row text-center">
-                          {item.content.tips.map((tip, tipIdx) => (
-                            <div className="col-6 col-md-3 mb-4" key={tipIdx}>
-                              <div className="icon-box text-start">
-                                <img
-                                  src={tip.icon}
-                                  className="object-fit-contain mb-3"
-                                  width="50"
-                                  height="50"
-                                  alt=""
-                                />
-                                <h6 className="fw-semi-bold">{tip.title}</h6>
-                                <p className="small sec-c">{tip.description}</p>
+                    <h2 className="accordion-header" id={`heading${idx}`}>
+                      <button
+                        className={`accordion-button ${
+                          idx !== 1 ? "collapsed" : ""
+                        } fw-semibold`}
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse${idx}`}
+                        aria-expanded={idx === 1 ? "true" : "false"}
+                        aria-controls={`collapse${idx}`}
+                      >
+                        ▶ &nbsp;&nbsp;{item.title}
+                      </button>
+                    </h2>
+                    <div
+                      id={`collapse${idx}`}
+                      className={`accordion-collapse collapse ${
+                        idx === 1 ? "show" : ""
+                      }`}
+                      aria-labelledby={`heading${idx}`}
+                      data-bs-parent="#savingTipsAccordion"
+                    >
+                      <div className="accordion-body">
+                        {typeof item.content === "string" ? (
+                          <>{item.content}</>
+                        ) : (
+                          <>
+                            {/* Handle if it’s a known object shape */}
+                            {item.content.items &&
+                            Array.isArray(item.content.items) ? (
+                              <div className="row text-center">
+                                {item.content.items.map((tip, tipIdx) => (
+                                  <div
+                                    className="col-6 col-md-3 mb-4"
+                                    key={tipIdx}
+                                  >
+                                    <div className="icon-box text-start">
+                                      <img
+                                        src={tip.icon}
+                                        className="object-fit-contain mb-3"
+                                        width="50"
+                                        height="50"
+                                        alt=""
+                                      />
+                                      <h6 className="fw-semi-bold">
+                                        {tip.title}
+                                      </h6>
+                                      <p className="small sec-c">
+                                        {tip.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                            ) : (
+                              <div>
+                                {/* Fallback for unexpected object */}
+                                <pre>
+                                  {JSON.stringify(item.content, null, 2)}
+                                </pre>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </div>
@@ -422,7 +446,7 @@ const Cost = () => {
             </div>
 
             <div className="row g-4 pb-5">
-              {data.factors.map((factor) => (
+              {data.costData.factors.map((factor) => (
                 <div className="col-md-4" key={factor._id}>
                   <div className="px-4 py-5 sec-bg rounded-4 h-100">
                     <img
@@ -584,7 +608,7 @@ const Cost = () => {
                 <h4 className="p-head text-black">
                   FUE Hair Transplant Cost In India
                 </h4>
-                <p>{data.cost.fue.description}</p>
+                <p>{data.costData.cost.fue.description}</p>
                 <ul>
                   <li>
                     FUE hair transplant in India is generally a preferred method
@@ -622,7 +646,7 @@ const Cost = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data.cost.fue.pricingTable.map((row) => (
+                      {data.costData.cost.fue.pricingTable.map((row) => (
                         <tr key={row._id}>
                           <td className="p-3">{row.level}</td>
                           <td className="p-3">{row.grafts}</td>
@@ -655,7 +679,7 @@ const Cost = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data.cost.savaFue.pricingTable.map((row) => (
+                      {data.costData.cost.savaFue.pricingTable.map((row) => (
                         <tr key={row._id}>
                           <td className="p-3">{row.level}</td>
                           <td className="p-3">{row.grafts}</td>
@@ -668,7 +692,7 @@ const Cost = () => {
               </div>
               <div className="col-lg-5 sec-c">
                 <h5 className="p-head text-black">SAVA–FUE</h5>
-                <p>{data.cost.savaFue.description}</p>
+                <p>{data.costData.cost.savaFue.description}</p>
                 <ul>
                   <li>
                     In Dense Hair Implantation, the hair graft is implanted one
@@ -707,7 +731,7 @@ const Cost = () => {
                 <h4 className="p-head text-black">
                   QHT (Advance FUE) Cost in India
                 </h4>
-                <p>{data.cost.qht.description}</p>
+                <p>{data.costData.cost.qht.description}</p>
                 <ul>
                   <li>
                     FUE hair transplant in India is generally a preferred method
@@ -745,7 +769,7 @@ const Cost = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data.cost.qht.pricingTable.map((row) => (
+                      {data.costData.cost.qht.pricingTable.map((row) => (
                         <tr key={row._id}>
                           <td className="p-3">{row.level}</td>
                           <td className="p-3">{row.grafts}</td>
@@ -873,8 +897,12 @@ const Cost = () => {
         {/* QHT vs Delhi/Mumbai */}
         <div className="sec-pad pt-0">
           <div className="container border-top py-5 text-center">
-            <h2 className="p-head pt-5">{data.qhtVsDelhiMumbai.heading}</h2>
-            <p className="sec-c mb-5">{data.qhtVsDelhiMumbai.description}</p>
+            <h2 className="p-head pt-5">
+              {data.costData.qhtVsDelhiMumbai.heading}
+            </h2>
+            <p className="sec-c mb-5">
+              {data.costData.qhtVsDelhiMumbai.description}
+            </p>
 
             <div className="container">
               <div className="table-responsive">
@@ -890,44 +918,46 @@ const Cost = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.qhtVsDelhiMumbai.comparisonTable.map((row) => (
-                      <tr key={row._id}>
-                        <td className="p-4">{row.metric}</td>
-                        <td className="bg-success bg-opacity-10">
-                          {typeof row.qht === "boolean" ? (
-                            row.qht ? (
-                              <FaCheck className="text-success" />
+                    {data.costData.qhtVsDelhiMumbai.comparisonTable.map(
+                      (row) => (
+                        <tr key={row._id}>
+                          <td className="p-4">{row.metric}</td>
+                          <td className="bg-success bg-opacity-10">
+                            {typeof row.qht === "boolean" ? (
+                              row.qht ? (
+                                <FaCheck className="text-success" />
+                              ) : (
+                                <FaTimes className="text-danger" />
+                              )
                             ) : (
-                              <FaTimes className="text-danger" />
-                            )
-                          ) : (
-                            row.qht
-                          )}
-                        </td>
-                        <td className="p-4">
-                          {typeof row.delhi === "boolean" ? (
-                            row.delhi ? (
-                              <FaCheck className="text-success" />
+                              row.qht
+                            )}
+                          </td>
+                          <td className="p-4">
+                            {typeof row.delhi === "boolean" ? (
+                              row.delhi ? (
+                                <FaCheck className="text-success" />
+                              ) : (
+                                <FaTimes className="text-danger" />
+                              )
                             ) : (
-                              <FaTimes className="text-danger" />
-                            )
-                          ) : (
-                            row.delhi
-                          )}
-                        </td>
-                        <td className="p-4">
-                          {typeof row.mumbai === "boolean" ? (
-                            row.mumbai ? (
-                              <FaCheck className="text-success" />
+                              row.delhi
+                            )}
+                          </td>
+                          <td className="p-4">
+                            {typeof row.mumbai === "boolean" ? (
+                              row.mumbai ? (
+                                <FaCheck className="text-success" />
+                              ) : (
+                                <FaTimes className="text-danger" />
+                              )
                             ) : (
-                              <FaTimes className="text-danger" />
-                            )
-                          ) : (
-                            row.mumbai
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                              row.mumbai
+                            )}
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -938,8 +968,10 @@ const Cost = () => {
         {/* Cost Comparison */}
         <div className="sec-pad g-gradient">
           <div className="py-5 px-3 text-white text-center">
-            <h2 className="p-head mb-3">{data.costComparison.heading}</h2>
-            <p className="mb-5">{data.costComparison.description}</p>
+            <h2 className="p-head mb-3">
+              {data.costData.costComparison.heading}
+            </h2>
+            <p className="mb-5">{data.costData.costComparison.description}</p>
 
             <div className="container">
               <div className="table-responsive bg-white p-5 rounded-4">
@@ -964,7 +996,7 @@ const Cost = () => {
                     </tr>
                   </thead>
                   <tbody className="text-start px-3 py-2">
-                    {data.costComparison.comparisonTable.map((row) => (
+                    {data.costData.costComparison.comparisonTable.map((row) => (
                       <tr key={row._id}>
                         <td className="px-4 py-3">{row.level}</td>
                         <td className="px-4 py-3">{row.grafts}</td>
@@ -1220,7 +1252,7 @@ const Cost = () => {
                 disableOnInteraction: false,
               }}
             >
-              {data.solutions.map((item) => (
+              {data.costData.solutions.map((item) => (
                 <SwiperSlide key={item._id}>
                   <div className="bg-white h-300 text-dark p-4 rounded-3 text-start d-flex flex-column justify-content-between align-items-start">
                     <img
@@ -1249,13 +1281,13 @@ const Cost = () => {
             {/* Section 1 - City */}
             <div className="mb-5">
               <h2 className="p-head w-75 mb-3">
-                {data.exploreLocations.cities.heading}
+                {data.costData.exploreLocations.cities.heading}
               </h2>
               <p className="sec-c w-75 fs-5">
-                {data.exploreLocations.cities.description}
+                {data.costData.exploreLocations.cities.description}
               </p>
               <div className="row text-underline">
-                {data.exploreLocations.cities.list.map((item) => (
+                {data.costData.exploreLocations.cities.list.map((item) => (
                   <div className="col-md-3 mb-2" key={item._id}>
                     <a href={item.link} className="sec-c">
                       {item.name}
@@ -1270,13 +1302,13 @@ const Cost = () => {
             {/* Section 2 - Country */}
             <div>
               <h2 className="p-head w-75 mb-3">
-                {data.exploreLocations.countries.heading}
+                {data.costData.exploreLocations.countries.heading}
               </h2>
               <p className="sec-c w-75 fs-5">
-                {data.exploreLocations.countries.description}
+                {data.costData.exploreLocations.countries.description}
               </p>
               <div className="row text-underline">
-                {data.exploreLocations.countries.list.map((item) => (
+                {data.costData.exploreLocations.countries.list.map((item) => (
                   <div className="col-md-3 mb-2" key={item._id}>
                     <a href={item.link} className="sec-c">
                       {item.name}

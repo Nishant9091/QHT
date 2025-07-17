@@ -6,7 +6,6 @@ import Home from "./pages/home/Home.jsx";
 import Service from "./pages/service/Service.jsx"; // Create this component
 import Results from "./pages/results/Results.jsx";
 import Cost from "./pages/cost/Cost.jsx";
-import "./App.css";
 import Booknow from "./components/Booknow.jsx";
 import AboutUs from "./pages/about/AboutUs.jsx";
 import ContactUs from "./pages/contactus/ContactUs.jsx";
@@ -21,6 +20,7 @@ import Faqs from "./pages/Faqs.jsx";
 import MedicalTourism from "./pages/medical-tourism/MedicalTourism.jsx";
 import Country from "./pages/country/Country.jsx";
 import City from "./pages/city/City.jsx";
+import "./App.css";
 
 const App = () => {
   return (

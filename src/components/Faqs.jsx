@@ -6,7 +6,8 @@ const Faqs = () => {
   const location = useLocation();
 
   // Slug nikaal lo
-  const pageSlug = location.pathname.split("/")[1] || "general";
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const pageSlug = pathParts[pathParts.length - 1] || "general";
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/faqs`)
@@ -16,7 +17,8 @@ const Faqs = () => {
         // console.log("sare page ke",data)
         const filtered = data.filter((faq) => faq.page === pageSlug);
         setFaqs(filtered);
-        // console.log("iss page ke",filtered)
+        // console.log("iss page ke", filtered);
+        // console.log("Slug", pageSlug);
       });
   }, [pageSlug]);
 

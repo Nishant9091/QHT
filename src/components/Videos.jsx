@@ -9,7 +9,8 @@ const Videos = () => {
   const [selectedVideo, setSelectedVideo] = useState("");
   const location = useLocation();
 
-  const pageSlug = location.pathname.split("/")[1] || "home";
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const pageSlug = pathParts[pathParts.length - 1] || "home";
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/videos?page=${pageSlug}`)
@@ -46,7 +47,7 @@ const Videos = () => {
                 <img
                   src={video.thumbnail}
                   alt={video.title}
-                  className="w-100 rounded-3"
+                  className="w-100 h-250 object-fit-cover rounded-3"
                 />
                 <div
                   className="position-absolute top-50 start-50 translate-middle bg-white rounded-circle d-flex justify-content-center align-items-center"
