@@ -53,7 +53,10 @@ const Faqs = () => {
                   className="accordion-collapse collapse"
                   data-bs-parent="#faqAccordion"
                 >
-                  <div className="accordion-body">{faq.answer}</div>
+                  <div
+                    className="accordion-body"
+                    dangerouslySetInnerHTML={{ __html: faq.answer }}
+                  ></div>
                 </div>
               </div>
             ))}
